@@ -13,10 +13,38 @@
     <div class="bg-white">
         <div class="container main">
 
-            <div class="card">
+            <div class="card mb-2">
                 <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <h5 class="card-title">Example Blog Title</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores cumque distinctio, doloremque eligendi ipsum minus molestiae quos soluta tenetur. Consequatur est eveniet optio pariatur reprehenderit saepe voluptas...</p>
+                </div>
+            </div>
+
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">Example Blog Title</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores cumque distinctio, doloremque eligendi ipsum minus molestiae quos soluta tenetur. Consequatur est eveniet optio pariatur reprehenderit saepe voluptas...</p>
+                </div>
+            </div>
+
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">Example Blog Title</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores cumque distinctio, doloremque eligendi ipsum minus molestiae quos soluta tenetur. Consequatur est eveniet optio pariatur reprehenderit saepe voluptas...</p>
+                </div>
+            </div>
+
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">Example Blog Title</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores cumque distinctio, doloremque eligendi ipsum minus molestiae quos soluta tenetur. Consequatur est eveniet optio pariatur reprehenderit saepe voluptas...</p>
+                </div>
+            </div>
+
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">Example Blog Title</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores cumque distinctio, doloremque eligendi ipsum minus molestiae quos soluta tenetur. Consequatur est eveniet optio pariatur reprehenderit saepe voluptas...</p>
                 </div>
             </div>
 
