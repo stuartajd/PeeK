@@ -1,10 +1,22 @@
 <?php
 
+/**
+ * Main Site
+ */
+Route::prefix('/')->group(function(){
+    Route::get('/', function () {
+        return view('main-site.main');
+    });
 
+    Route::get('pricing', function () {
+        return view('main-site.pricing');
+    })->name('pricing');
 
-Route::get('/', function () {
-    return view('main-site.main');
+    Route::get('about', function () {
+        return view('main-site.about');
+    })->name('about');
 });
+
 
 /**
  * Dashboard Routes
