@@ -15,6 +15,14 @@ Route::get('/', function () {
     return view('main-site.main');
 });
 
-Auth::routes();
+/**
+ * Dashboard Routes
+ */
+Route::prefix('dashboard')->group(function(){
+    Route::get('/', 'HomeController@index')->name('home');
+});
 
-Route::get('/home', 'HomeController@index')->name('home');
+/**
+ * Auth Routes
+ */
+Route::Auth();
