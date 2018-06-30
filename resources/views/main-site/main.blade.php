@@ -6,7 +6,9 @@
     <div class="col-md-md-12 my-auto text-center text-white">
         <h2>Take control of your workflow</h2>
         <p>with PeeK Project Management</p>
-        <p><a href="{{ route('login') }}" class="btn btn-outline-light">Login</a> <a href="{{ route('register') }}" class="btn btn-light">Register</a></p>
+        <div class="mt-3">
+            <p><a href="{{ route('login') }}" class="btn btn-outline-light">Login</a> <a href="{{ route('register') }}" class="btn btn-light">Register</a></p>
+        </div>
     </div>
 </div>
 
