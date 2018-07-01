@@ -7,7 +7,7 @@
         <h2>Take control of your workflow</h2>
         <p>with PeeK Project Management</p>
         <div class="mt-5">
-            <p><a href="{{ route('plans') }}" class="btn btn-outline-light">See Our Plans</a></p>
+            <p><a href="{{ route('main.plans') }}" class="btn btn-outline-light">See Our Plans</a></p>
         </div>
     </div>
 </div>
