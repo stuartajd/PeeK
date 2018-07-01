@@ -3,14 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
+
 
 class BlogController extends Controller
 {
     public function index(){
-        return view('main-site.blog');
+        $posts = Post::all();
+
+        return view('main-site.blog')->with(['posts'=>$posts]);
     }
 
-    public function read($slug){
-        return view('main-site.blog-read');
+    public function read($id, $slug){
+        $post = Post::where('slug', $slug)->first();
+        return view('main-site.blog-read')->with(['post'=>$post]);
     }
 }

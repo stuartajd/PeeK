@@ -30,7 +30,7 @@ Route::prefix('dashboard')->group(function(){
  */
 Route::prefix('blog')->group(function(){
     Route::get('/', 'BlogController@index')->name('blog');
-    Route::get('/{slug}', 'BlogController@read');
+    Route::get('/{id}/{slug}', 'BlogController@read')->name('post');
 });
 
 /**
