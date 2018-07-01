@@ -37,7 +37,7 @@
             .main-banner {
                 min-height: 35em;
                 background-color: #2196f3;
-                background: url('img/main-header.jpg') center center no-repeat;
+                background: url({{asset('img/main-header.jpg')}}) center center no-repeat;
                 background-size: cover;
             }
 
@@ -75,12 +75,12 @@
             }
 
             #blog {
-                background-image: url('img/blog-header.jpg');
+                background-image: url({{asset('img/blog-header.jpg')}});
             }
             .page-header {
                 padding: 4em 0;
                 background-color: #2196f3;
-                background: url('img/main-header.jpg') center center no-repeat;
+                background: url({{asset('img/main-header.jpg')}}) center center no-repeat;
                 background-size: cover;
             }
             .main {
@@ -134,6 +134,16 @@
                 border-bottom: 3px solid transparent;
                 border-top: 3px solid #0C73A7;
             }
+
+            .breadcrumb{
+                font-size: 15px!important;
+                padding: 8px 14px!important;
+            }
+
+            html{
+                overflow-y: scroll;
+
+            }
         </style>
     </head>
     <body>
@@ -149,13 +159,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('about') }}">{{ __('About') }}</a>
+                            <a class="nav-link" href="{{ route('main.about') }}">{{ __('About') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('blog') }}">{{ __('Blog') }}</a>
                         </li>
                         {{--<li class="nav-item">--}}
-                            {{--<a class="nav-link" href="{{ route('plans') }}">{{ __('Plans') }}</a>--}}
+                            {{--<a class="nav-link" href="{{ route('main.plans') }}">{{ __('Plans') }}</a>--}}
                         {{--</li>--}}
                     </ul>
 
