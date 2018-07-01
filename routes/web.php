@@ -8,9 +8,9 @@ Route::prefix('/')->group(function(){
         return view('main-site.main');
     });
 
-    Route::get('pricing', function () {
-        return view('main-site.pricing');
-    })->name('pricing');
+    Route::get('plans', function () {
+        return view('main-site.plans');
+    })->name('plans');
 
     Route::get('about', function () {
         return view('main-site.about');

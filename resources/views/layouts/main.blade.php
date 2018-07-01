@@ -41,10 +41,6 @@
                 background-size: cover;
             }
 
-            .btn {
-                min-width: 10em;
-            }
-
             .main-banner p {
                 font-size: 22px;
             }
@@ -55,7 +51,11 @@
     
             .block-wrapper:nth-child(even) {
                 border: 1px solid #e6e6e6;
+                -webkit-box-shadow: 0px 0px 13px -1px rgba(138,138,138,1);
+                -moz-box-shadow: 0px 0px 13px -1px rgba(138,138,138,1);
+                box-shadow: 0px 0px 13px -1px rgba(138,138,138,1);;
                 background-color: white;
+                z-index:999;
             }
 
             .block-wrapper:nth-child(odd){
@@ -87,6 +87,53 @@
                 padding-top: 2em;
                 padding-bottom: 2em;
             }
+
+            .ribbon {
+                position: absolute;
+                right: -5px; top: -5px;
+                z-index: 1;
+                overflow: hidden;
+                width: 75px; height: 75px;
+                text-align: right;
+            }
+
+            .ribbon span {
+                font-size: 10px;
+                font-weight: bold;
+                color: #FFF;
+                text-transform: uppercase;
+                text-align: center;
+                line-height: 20px;
+                transform: rotate(45deg);
+                -webkit-transform: rotate(45deg);
+                width: 100px;
+                display: block;
+                background: #79A70A;
+                background: linear-gradient(#14B1C9 0%, #0C73A7 100%);
+                box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+                position: absolute;
+                top: 19px; right: -21px;
+            }
+
+            .ribbon span::before {
+                content: "";
+                position: absolute; left: 0px; top: 100%;
+                z-index: -1;
+                border-left: 3px solid #0C73A7;
+                border-right: 3px solid transparent;
+                border-bottom: 3px solid transparent;
+                border-top: 3px solid #0C73A7;
+            }
+
+            .ribbon span::after {
+                content: "";
+                position: absolute; right: 0px; top: 100%;
+                z-index: -1;
+                border-left: 3px solid transparent;
+                border-right: 3px solid #0C73A7;
+                border-bottom: 3px solid transparent;
+                border-top: 3px solid #0C73A7;
+            }
         </style>
     </head>
     <body>
@@ -107,18 +154,15 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('blog') }}">{{ __('Blog') }}</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('pricing') }}">{{ __('Pricing') }}</a>
-                        </li>
+                        {{--<li class="nav-item">--}}
+                            {{--<a class="nav-link" href="{{ route('plans') }}">{{ __('Plans') }}</a>--}}
+                        {{--</li>--}}
                     </ul>
 
                     <ul class="navbar-nav ml-auto">
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                             </li>
                         @else
                             <li class="nav-item dropdown">
@@ -171,11 +215,11 @@
             <div class="lower text-muted text-uppercase py-5">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-md-6">
                              &copy; 2018 - PeeK. All rights reserved.
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-6 text-right">
                             <p><strong>STATUS</strong>: <i class="fa fa-circle text-success"></i> All services online.</p>
                         </div>
                     </div>
