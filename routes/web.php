@@ -6,15 +6,15 @@
 Route::prefix('/')->group(function(){
     Route::get('/', function () {
         return view('main-site.main');
-    });
+    })->name('main');
 
     Route::get('plans', function () {
         return view('main-site.plans');
-    })->name('plans');
+    })->name('main.plans');
 
     Route::get('about', function () {
         return view('main-site.about');
-    })->name('about');
+    })->name('main.about');
 });
 
 
