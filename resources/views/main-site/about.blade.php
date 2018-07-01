@@ -12,7 +12,12 @@
 
     <div class="bg-white">
         <div class="container main">
-
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{route('main')}}">Home</a></li>
+                    <li class="breadcrumb-item active">About</li>
+                </ol>
+            </nav>
             <div class="row">
                 <div class="col-md-8">
                     <div class="row">

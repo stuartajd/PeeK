@@ -11,3 +11,16 @@
 *{
   border-radius: 0!important;
 }
+
+html{
+  overflow-y: scroll;
+}
+
+.dropdown-menu {
+    min-width: 15rem;
+}
+
+.breadcrumb{
+  font-size: 15px!important;
+  padding: 8px 14px!important;
+}

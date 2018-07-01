@@ -13,40 +13,50 @@
     <div class="bg-white">
         <div class="container main">
 
-            <div class="card mb-2">
-                <div class="card-body">
-                    <h5 class="card-title">Example Blog Title</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores cumque distinctio, doloremque eligendi ipsum minus molestiae quos soluta tenetur. Consequatur est eveniet optio pariatur reprehenderit saepe voluptas...</p>
-                </div>
-            </div>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item" aria-current="page"><a href="{{route('main')}}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Blog</li>
+                </ol>
+            </nav>
 
-            <div class="card mb-2">
-                <div class="card-body">
-                    <h5 class="card-title">Example Blog Title</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores cumque distinctio, doloremque eligendi ipsum minus molestiae quos soluta tenetur. Consequatur est eveniet optio pariatur reprehenderit saepe voluptas...</p>
+            @if (count($posts) === 0)
+                <div class="my-5 text-center">
+                    <h4>There is nothing just yet!</h4>
                 </div>
-            </div>
+            @else
+                <div class="row">
 
-            <div class="card mb-2">
-                <div class="card-body">
-                    <h5 class="card-title">Example Blog Title</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores cumque distinctio, doloremque eligendi ipsum minus molestiae quos soluta tenetur. Consequatur est eveniet optio pariatur reprehenderit saepe voluptas...</p>
-                </div>
-            </div>
+                @foreach ($posts as $post)
+                    <div class="col-md-6">
+                        <div class="card mb-2 px-0">
+                            <div class="card-body py-1">
+                                <div class="text-uppercase text-right mb-1">
+                                    @if(($post->type) === "updates")
+                                        <span class="badge badge-info"><small>{{$post->type}}</small></span>
+                                    @else
+                                        <span class="badge badge-secondary"><small>{{$post->type}}</small></span>
+                                    @endif
+                                </div>
 
-            <div class="card mb-2">
-                <div class="card-body">
-                    <h5 class="card-title">Example Blog Title</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores cumque distinctio, doloremque eligendi ipsum minus molestiae quos soluta tenetur. Consequatur est eveniet optio pariatur reprehenderit saepe voluptas...</p>
-                </div>
-            </div>
+                                <h5 class="card-title">{{$post->title}}</h5>
+                            </div>
+                            <div class="card-footer text-muted">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        {{ \Carbon\Carbon::parse($post->created_at)->format('d/m/Y')}}
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a href="{{route('post', ['id'=>$post->id, 'slug'=>$post->slug])}}" class="d-block btn btn-info">Read</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
 
-            <div class="card mb-2">
-                <div class="card-body">
-                    <h5 class="card-title">Example Blog Title</h5>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores cumque distinctio, doloremque eligendi ipsum minus molestiae quos soluta tenetur. Consequatur est eveniet optio pariatur reprehenderit saepe voluptas...</p>
                 </div>
-            </div>
+            @endif
 
         </div>
     </div>
