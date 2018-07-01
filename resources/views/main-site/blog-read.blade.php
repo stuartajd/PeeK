@@ -23,14 +23,22 @@
             <div class="row">
                 <div class="col-md-9">
                     <div class="card">
-                        <div class="card-header text-right text-white text-uppercase font-weight-bold bg-dark">Posted by: XXX - {{ \Carbon\Carbon::parse($post->created_at)->format('d/m/Y')}}</div>
-
                         <div class="card-body">
-                            {{$post->post}}
+                            {!! $post->post !!}
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
+
+                    <div class="card mb-2">
+                        <div class="card-header text-right text-white font-weight-bold bg-dark">ABOUT</div>
+
+                        <div class="card-body">
+                            <p>Posted by: {{$post->user->name}}</p>
+                            <p>Date: {{ \Carbon\Carbon::parse($post->created_at)->format('d/m/Y')}}</p>
+                        </div>
+                    </div>
+
                     <div class="card">
                         <div class="card-header text-right text-white text-uppercase font-weight-bold bg-dark">SHARE</div>
 

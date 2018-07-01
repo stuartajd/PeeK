@@ -23,7 +23,7 @@
                     <div class="row">
                         <div class="col-md-12 mb-3">
                             <div class="card">
-                                <div class="card-header text-muted text-uppercase font-weight-bold bg-dark">ABOUT</div>
+                                <div class="card-header text-white text-uppercase font-weight-bold bg-dark">ABOUT</div>
 
                                 <div class="card-body">
                                     <p>PeeK is the QA and Project Management tool built for any type of business. Take complete control over your workflow within your business.</p>
@@ -33,7 +33,7 @@
 
                         <div class="col-md-12 mb-3">
                             <div class="card">
-                                <div class="card-header text-muted text-uppercase font-weight-bold bg-dark">SUPPORT</div>
+                                <div class="card-header text-white text-uppercase font-weight-bold bg-dark">SUPPORT</div>
 
                                 <div class="card-body">
                                     <p>We have multiple channels of support for PeeK.</p>
@@ -47,7 +47,7 @@
 
                         <div class="col-md-12">
                             <div class="card">
-                                <div class="card-header text-muted text-uppercase font-weight-bold bg-dark">STATUS</div>
+                                <div class="card-header text-white text-uppercase font-weight-bold bg-dark">STATUS</div>
 
                                 <div class="card-body">
                                     <p>We use exana.io to monitor our infrastructure. Please use the link below to access our system status page.</p>
@@ -56,13 +56,11 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
 
                 <div class="col-md-4">
                     <div class="card">
-                        <div class="card-header text-muted text-uppercase font-weight-bold bg-dark">SOCIAL CHANNELS</div>
+                        <div class="card-header text-white text-uppercase font-weight-bold bg-dark">SOCIAL CHANNELS</div>
 
                         <div class="card-body">
 

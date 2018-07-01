@@ -19,6 +19,11 @@ class CreatePostsTable extends Migration
             $table->string('slug', 100);
             $table->longText('post');
             $table->enum('type', ['news', 'updates']);
+            $table->integer('author')->nullable()->unsigned();
+
+            $table->foreign('author')
+                  ->references('id')->on('users');
+
             $table->softDeletes();
             $table->timestamps();
         });
