@@ -45,6 +45,12 @@
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                         @else
+                            @if (Auth::user()->staff)
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('system') }}"><i class="fa fa-user-secret"></i> {{ __('System')}}</a>
+                                </li>
+                            @endif
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     <i class="fa fa-user-o"></i> {{ Auth::user()->name }} <span class="caret"></span>
@@ -56,8 +62,6 @@
                                     </div>
 
                                     <hr class="mt-2 mb-0" />
-
-
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -78,6 +82,42 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <footer>
+            <div class="upper">
+                <div class="container py-5">
+                    <div class="row text-muted">
+                        <div class="col-md-3 text-justify">
+                            <strong>ABOUT PEEK</strong>
+                            <p>PeeK is the QA and Project Management tool built for any type of business. Take complete control over your workflow within your business.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <strong>RECENT BLOG POSTS</strong>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque architecto eligendi quia necessitatibus incidunt modi cum quos ut inventore consequuntur expedita, voluptatum pariatur nemo illum, nihil maxime tempore itaque earum.</p>
+                        </div>
+                        <div class="col-md-3">
+                            <strong>TERMS</strong>
+                            <p>Terms and Conditions<br />Privacy Policy</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lower text-muted text-uppercase py-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            &copy; 2018 - PeeK. All rights reserved.
+                        </div>
+
+                        <div class="col-md-6 text-right">
+                            <p><strong>STATUS</strong>: <i class="fa fa-circle text-success"></i> All services online.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
     </div>
 </body>
 </html>

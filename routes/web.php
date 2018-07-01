@@ -21,8 +21,20 @@ Route::prefix('/')->group(function(){
 /**
  * Dashboard Routes
  */
-Route::prefix('dashboard')->group(function(){
+Route::prefix('dashboard')->middleware(['auth'])->group(function(){
     Route::get('/', 'HomeController@index')->name('home');
+});
+
+Route::prefix('system')->middleware(['auth', 'checkstaff'])->group(function(){
+    Route::get('/', "SystemController@index")->name("system");
+
+    Route::prefix('blog')->middleware('checkstaff:permission_blog')->group(function(){
+        Route::get('/', 'SystemController@blog_view')->name('system.blog.view');
+        Route::put('/{id}', 'SystemController@blog_update')->name('system.blog.update');
+        Route::delete('/{id}', 'SystemController@blog_delete')->name('system.blog.delete');
+        Route::get('/create', 'SystemController@blog_create_view')->name('system.blog.create');
+        Route::post('/create', 'SystemController@blog_create')->name('system.blog.create.post');
+    });
 });
 
 /**

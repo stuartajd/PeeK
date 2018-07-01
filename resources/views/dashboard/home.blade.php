@@ -25,7 +25,7 @@
 
         <div class="col-md-3">
             <div class="card">
-                <div class="card-header text-white text-uppercase font-weight-bold bg-dark">Completed Tasks <small>This Week</small></div>
+                <div class="card-header text-white text-uppercase font-weight-bold bg-dark">Completed Tasks</div>
 
                 <div class="card-body text-center">
                     <h1>0</h1>
