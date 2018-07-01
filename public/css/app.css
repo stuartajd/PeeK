@@ -10415,3 +10415,7 @@ a.text-dark:focus {
   border-radius: 0 !important;
 }
 
+.dropdown-menu {
+  min-width: 15rem;
+}
+
