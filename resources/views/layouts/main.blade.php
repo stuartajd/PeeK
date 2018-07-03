@@ -11,143 +11,23 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
+        @if (env('APP_ENV')=='production')
+            <script src="{{ secure_asset('js/app.js') }}" defer></script>
+            <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+        @else
+            <script src="{{ asset('js/app.js') }}" defer></script>
+            <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        @endif
+
         <style>
-            body{
-                background-color: #eeeeee;
-                font-family: "Raleway", sans-serif;
+            .main-banner{
+                background: #203047 url({{asset('img/main-header.jpg')}}) center center no-repeat;
             }
 
-            *{
-                border-radius: 0!important;
-            }
-
-            p{
-                margin: 0;
-            }
-
-            h1,h2,h3,h4,h5,h6 {
-                font-family: "Nunito", Arial, sans-serif;
-                margin: 0;
-            }
-
-            h2 {
-                font-size: 45px;
-            }
-
-            .main-banner {
-                min-height: 35em;
-                background-color: #2196f3;
-                background: url({{asset('img/main-header.jpg')}}) center center no-repeat;
-                background-size: cover;
-            }
-
-            .main-banner p {
-                font-size: 22px;
-            }
-            
-            .block-wrapper {
-                padding: 2em 0;
-            }
-    
-            .block-wrapper:nth-child(even) {
-                border: 1px solid #e6e6e6;
-                -webkit-box-shadow: 0px 0px 13px -1px rgba(138,138,138,1);
-                -moz-box-shadow: 0px 0px 13px -1px rgba(138,138,138,1);
-                box-shadow: 0px 0px 13px -1px rgba(138,138,138,1);;
-                background-color: white;
-                z-index:999;
-            }
-
-            .block-wrapper:nth-child(odd){
-                background-color: #2196f3;
-                color: white!important;
-            }
-
-            .block-wrapper .card{
-                border: 0;
-            }
-
-            .upper {
-                background-color: #303133;
-            }
-            .lower {
-                background-color: #262626;
-            }
-
-            #blog {
-                background-image: url({{asset('img/blog-header.jpg')}});
-            }
-            .page-header {
-                padding: 4em 0;
-                background-color: #2196f3;
-                background: url({{asset('img/main-header.jpg')}}) center center no-repeat;
-                background-size: cover;
-            }
-            .main {
-                padding-top: 2em;
-                padding-bottom: 2em;
-            }
-
-            .ribbon {
-                position: absolute;
-                right: -5px; top: -5px;
-                z-index: 1;
-                overflow: hidden;
-                width: 75px; height: 75px;
-                text-align: right;
-            }
-
-            .ribbon span {
-                font-size: 10px;
-                font-weight: bold;
-                color: #FFF;
-                text-transform: uppercase;
-                text-align: center;
-                line-height: 20px;
-                transform: rotate(45deg);
-                -webkit-transform: rotate(45deg);
-                width: 100px;
-                display: block;
-                background: #79A70A;
-                background: linear-gradient(#14B1C9 0%, #0C73A7 100%);
-                box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
-                position: absolute;
-                top: 19px; right: -21px;
-            }
-
-            .ribbon span::before {
-                content: "";
-                position: absolute; left: 0px; top: 100%;
-                z-index: -1;
-                border-left: 3px solid #0C73A7;
-                border-right: 3px solid transparent;
-                border-bottom: 3px solid transparent;
-                border-top: 3px solid #0C73A7;
-            }
-
-            .ribbon span::after {
-                content: "";
-                position: absolute; right: 0px; top: 100%;
-                z-index: -1;
-                border-left: 3px solid transparent;
-                border-right: 3px solid #0C73A7;
-                border-bottom: 3px solid transparent;
-                border-top: 3px solid #0C73A7;
-            }
-
-            .breadcrumb{
-                font-size: 15px!important;
-                padding: 8px 14px!important;
-            }
-
-            html{
-                overflow-y: scroll;
-
-            }
         </style>
     </head>
     <body>
-        <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-md navbar-overlay navbar-dark position-absolute w-100">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'PeeK') }}
