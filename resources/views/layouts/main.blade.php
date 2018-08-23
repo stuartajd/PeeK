@@ -19,15 +19,9 @@
             <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         @endif
 
-        <style>
-            .main-banner{
-                background: #203047 url({{asset('img/main-header.jpg')}}) center center no-repeat;
-            }
-
-        </style>
     </head>
     <body>
-        <nav class="navbar navbar-expand-md navbar-overlay navbar-dark position-absolute w-100">
+        <nav class="navbar navbar-expand-md fixed-top w-100 navbar-dark text-white">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'PeeK') }}
