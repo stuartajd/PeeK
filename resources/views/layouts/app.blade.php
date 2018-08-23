@@ -80,6 +80,7 @@
             </div>
         </nav>
 
+        @auth
         <div class="bg-dark navigation">
             <div class="container text-center text-white">
                 <div class="row">
@@ -102,6 +103,7 @@
                 </div>
             </div>
         </div>
+        @endauth
 
 
 
@@ -109,6 +111,7 @@
             @yield('content')
         </main>
 
+        @auth
         <footer>
             <div class="upper">
                 <div class="container py-5">
@@ -144,6 +147,7 @@
             </div>
 
         </footer>
+    @endauth
     </div>
 </body>
 </html>
