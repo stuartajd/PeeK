@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'opted-in'
+        'name', 'email', 'password',
     ];
 
     /**
@@ -26,16 +26,4 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    public function staff(){
-        return $this->hasOne("App\Staff","user_id", "id");
-    }
-
-    public function hasRole($role){
-        $user = $this->staff;
-        if($user[$role]){
-            return true;
-        }
-        return false;
-    }
 }

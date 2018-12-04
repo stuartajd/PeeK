@@ -1,66 +1,50 @@
-
-// Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-
-// Variables
-@import "variables";
-@import "main-page";
-@import "trumbowyg";
-
-// Bootstrap
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import 'variables';
 @import '~bootstrap/scss/bootstrap';
+@import 'svg-icon';
 
-*{
-  border-radius: 0!important;
+body {
+    background-color: #fafafa;
 }
 
-html{
-  overflow-y: scroll;
+.bg-brand, .btn-brand {
+    background-color: #a91a1a;
 }
 
-body{
-  background-color: #eeeeee;
-  font-family: "Raleway", sans-serif;
+a {
+    transition: all .3s ease;
 }
 
-.navigation{
-    a {
-      text-decoration: none!important;
-      font-size: 18px;
-      border-bottom: 4px solid #212529;
+.bottom-shadow {
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.1)!important;
+}
+
+.page-title {
+    text-transform: uppercase;
+    color: #6c757d;
+    margin-bottom: 10px;
+}
+
+.btn-brand {
+    color: white!important;
+
+    &:hover{
+        background-color: #c51e1e;
     }
-    a:hover {
-      border-bottom: 4px solid white;
+}
+
+.card {
+    border: 0;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.1)!important;
+}
+
+.alert {
+    background-color: white;
+    color: #6c757d;
+
+    &.alert-danger {
+        border-color: #c51e1e;
+        border-bottom: 4px solid #c51e1e;
     }
 }
-
-h1,h2,h3,h4,h5,h6 {
-  font-family: "Nunito", Arial, sans-serif;
-  margin: 0;
-}
-
-p{
-  margin: 0;
-}
-
-.text-no-underline {
-  text-decoration: none!important;
-}
-
-.upper {
-  background-color: #303133;
-}
-.lower {
-  background-color: #262626;
-}
-
-.dropdown-menu {
-    min-width: 15rem;
-}
-
-.breadcrumb{
-  font-size: 15px!important;
-  padding: 8px 14px!important;
-}
-
 
