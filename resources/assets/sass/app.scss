@@ -1,14 +1,21 @@
-
-// Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
-
-// Variables
 @import 'variables';
-
-// Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import 'svg-icon';
 
-.navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+* {
+    border-radius: 0 !important;
+}
+
+body {
+    background-color: #f8f9fa;
+}
+
+.bg-brand {
+    background-color: #a91a1a;
+}
+
+.card {
+    border: 0;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.1)!important;
 }
