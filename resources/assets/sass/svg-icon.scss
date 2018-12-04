@@ -2,12 +2,18 @@
 /* vue-svgicon */
 .svg-icon {
   display: inline-block;
-  width: 24px;
-  height: 24px;
+  width: 16px;
+  height: 16px;
   color: inherit;
-  vertical-align: text-top;
+  vertical-align: middle;
   fill: none;
   stroke: currentColor;
+  margin-top: -4px;
+
+  &.large {
+    width: 24px;
+    height: 24px;
+  }
 }
 
 .svg-fill {
@@ -30,3 +36,16 @@
 .svg-left {
   transform: rotate(-90deg);
 }
+
+.spin {
+  animation:  spin 1s 0s infinite linear;
+}
+
+@keyframes spin {
+   0% {
+     transform: rotate(0deg);
+   }
+   100% {
+     transform: rotate(360deg);
+   }
+ }

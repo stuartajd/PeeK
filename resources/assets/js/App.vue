@@ -1,8 +1,14 @@
 <template>
     <div id="app">
-        <navigation class="mb-3" />
+        <navigation class="mb-4" />
 
-        <router-view></router-view>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <router-view></router-view>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 

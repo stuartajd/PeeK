@@ -20,8 +20,9 @@ function importError(error){
 let routes = [
     { path: '/', redirect: '/overview' },
     { path:'/overview', component: () => import('./pages/overview').catch(importError) },
-
-    { path: "*", component: () => import('./pages/404').catch(importError) }
+	{ path: "/error/not-available", component: () => import('./pages/errors/server').catch(importError) },
+	{ path: "/error/not-found", component: () => import('./pages/errors/not-found').catch(importError) },
+	{ path: "*", redirect: '/error/not-found' }
 ];
 
 let router =  new VueRouter({

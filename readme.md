@@ -1,3 +1,3 @@
 # PeeK
 #### Commands:
-`valet serve` <  
+`valet share` <  Shares the local across IP

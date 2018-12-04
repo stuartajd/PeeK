@@ -1,21 +1,50 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 @import 'variables';
 @import '~bootstrap/scss/bootstrap';
 @import 'svg-icon';
 
-* {
-    border-radius: 0 !important;
-}
-
 body {
-    background-color: #f8f9fa;
+    background-color: #fafafa;
 }
 
-.bg-brand {
+.bg-brand, .btn-brand {
     background-color: #a91a1a;
+}
+
+a {
+    transition: all .3s ease;
+}
+
+.bottom-shadow {
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.1)!important;
+}
+
+.page-title {
+    text-transform: uppercase;
+    color: #6c757d;
+    margin-bottom: 10px;
+}
+
+.btn-brand {
+    color: white!important;
+
+    &:hover{
+        background-color: #c51e1e;
+    }
 }
 
 .card {
     border: 0;
     box-shadow: 0 .125rem .25rem rgba(0,0,0,.1)!important;
 }
+
+.alert {
+    background-color: white;
+    color: #6c757d;
+
+    &.alert-danger {
+        border-color: #c51e1e;
+        border-bottom: 4px solid #c51e1e;
+    }
+}
+
