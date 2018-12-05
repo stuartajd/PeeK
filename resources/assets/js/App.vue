@@ -17,6 +17,17 @@
 
     export default {
         name: "App",
-        components: { navigation }
+        components: { navigation },
+        data(){
+            return {
+            	state: []
+            }
+        },
+        mounted(){
+			axios.get('api/state')
+				.then(response => {
+					this.state = response.data;
+				});
+        }
     }
 </script>

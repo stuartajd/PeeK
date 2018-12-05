@@ -23,6 +23,7 @@
         "vue-svgicon": "^3.2.1"
     },
     "dependencies": {
-        "babel-plugin-transform-object-rest-spread": "^6.26.0"
+        "babel-plugin-transform-object-rest-spread": "^6.26.0",
+        "vuex": "^3.0.1"
     }
 }

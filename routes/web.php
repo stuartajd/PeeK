@@ -12,7 +12,9 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::group(['prefix' => 'api', 'middleware' => 'auth'], function(){
+    Route::get('state', 'StateController@getState');
 
+    Route::get('tasks', 'TaskController@getTasks');
 });
 
 Route::group(['middleware' => 'auth'], function() {
