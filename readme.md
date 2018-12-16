@@ -1,3 +1,7 @@
+<p align="center">
+    <img src="https://u.stuartd.co.uk/images/YzJkOGE0ZjA2NjA.jpeg" width="300px">
+</p>
+
 <h1 align="center">PeeK - Project Management</h1>
 
 <p align="center">
