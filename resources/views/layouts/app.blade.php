@@ -10,6 +10,10 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="bg-light mt-5">
+    <div class="text-center font-weight-bold">
+        <h3><img src="{{ asset('logo.svg') }}" alt="PeeK Logo"> PeeK</h3>
+    </div>
+
     @yield('content')
 </body>
 </html>

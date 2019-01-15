@@ -5,6 +5,7 @@
 
 body {
     background-color: #fafafa;
+    overflow-y: scroll !important;
 }
 
 .bg-brand, .btn-brand {
@@ -13,6 +14,7 @@ body {
 
 a {
     transition: all .3s ease;
+    text-decoration-style: dotted!important;
 }
 
 .bottom-shadow {
@@ -23,6 +25,7 @@ a {
     text-transform: uppercase;
     color: #6c757d;
     margin-bottom: 10px;
+    font-weight: 600;
 }
 
 .btn-brand {
@@ -33,9 +36,30 @@ a {
     }
 }
 
+a.no-style {
+    text-decoration: none!important;
+    color: inherit !important;
+}
+
 .card {
     border: 0;
     box-shadow: 0 .125rem .25rem rgba(0,0,0,.1)!important;
+
+    &.hoverable {
+        cursor: pointer;
+
+        &:hover {
+            transform: scale(1.005);
+            transition: transform 0.25s ease;
+        }
+    }
+}
+
+.inset-text{
+    padding: 10px;
+    border: 1px solid grey;
+    background-color: #eaeaea;
+    border-radius: 4px;
 }
 
 .alert {

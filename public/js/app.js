@@ -29,7 +29,7 @@
 /******/
 /******/ 	// objects to store loaded and loading chunks
 /******/ 	var installedChunks = {
-/******/ 		3: 0
+/******/ 		5: 0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -14601,6 +14601,7 @@ __webpack_require__(16);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vue_svgicon___default.a, {
   tagName: 'icon'
 });
+$('[data-toggle="tooltip"]').tooltip();
 window.Vue = __WEBPACK_IMPORTED_MODULE_0_vue___default.a;
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 
@@ -14615,17 +14616,28 @@ var routes = [{
 }, {
   path: '/overview',
   component: function component() {
-    return __webpack_require__.e/* import() */(0).then(__webpack_require__.bind(null, 55)).catch(importError);
+    return __webpack_require__.e/* import() */(2).then(__webpack_require__.bind(null, 55)).catch(importError);
   }
 }, {
-  path: "/error/not-available",
+  path: '/tasks',
   component: function component() {
     return __webpack_require__.e/* import() */(1).then(__webpack_require__.bind(null, 56)).catch(importError);
   }
 }, {
+  path: '/tasks/:tid',
+  component: function component() {
+    return __webpack_require__.e/* import() */(0).then(__webpack_require__.bind(null, 57)).catch(importError);
+  }
+}, {
+  path: '/tasks/create',
+  component: function component() {
+    return __webpack_require__.e/* import() */(4).then(__webpack_require__.bind(null, 58)).catch(importError);
+  }
+}, {
+  name: '404',
   path: "/error/not-found",
   component: function component() {
-    return __webpack_require__.e/* import() */(2).then(__webpack_require__.bind(null, 57)).catch(importError);
+    return __webpack_require__.e/* import() */(3).then(__webpack_require__.bind(null, 59)).catch(importError);
   }
 }, {
   path: "*",
@@ -50585,6 +50597,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
@@ -50595,6 +50611,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       state: []
     };
+  },
+  computed: {
+    getYear: function getYear() {
+      return new Date().getFullYear();
+    }
   },
   mounted: function mounted() {
     var _this = this;
@@ -50668,11 +50689,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__icons_list___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__icons_list__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__icons_verified__ = __webpack_require__(50);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__icons_verified___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__icons_verified__);
-//
-//
-//
-//
-//
 //
 //
 //
@@ -50861,23 +50877,6 @@ var render = function() {
                       )
                     ],
                     1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    { staticClass: "nav-item" },
-                    [
-                      _c(
-                        "router-link",
-                        { staticClass: "nav-link", attrs: { to: "/qa" } },
-                        [
-                          _c("icon", { attrs: { name: "list" } }),
-                          _vm._v("   Testing")
-                        ],
-                        1
-                      )
-                    ],
-                    1
                   )
                 ]),
                 _vm._v(" "),
@@ -50974,10 +50973,12 @@ var render = function() {
                             staticClass: "dropdown-item",
                             attrs: { to: "/user/settings" }
                           },
-                          [_vm._v("Settings")]
+                          [
+                            _c("icon", { attrs: { name: "cog" } }),
+                            _vm._v(" Settings")
+                          ],
+                          1
                         ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "dropdown-divider" }),
                         _vm._v(" "),
                         _c(
                           "a",
@@ -51047,7 +51048,22 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "container-fluid" }, [
         _c("div", { staticClass: "row justify-content-center" }, [
-          _c("div", { staticClass: "col-md-10" }, [_c("router-view")], 1)
+          _c(
+            "div",
+            { staticClass: "col-md-10" },
+            [
+              _c("router-view"),
+              _vm._v(" "),
+              _c("div", { staticClass: "text-center mt-3 mb-5 text-muted" }, [
+                _c("small", [
+                  _vm._v(
+                    "© " + _vm._s(_vm.getYear) + " PeeK • Project Management"
+                  )
+                ])
+              ])
+            ],
+            1
+          )
         ])
       ])
     ],
@@ -51069,6 +51085,88 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
 
 /***/ })
 /******/ ]);

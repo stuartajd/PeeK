@@ -10540,6 +10540,7 @@ a.text-dark:focus {
 
 body {
   background-color: #fafafa;
+  overflow-y: scroll !important;
 }
 
 .bg-brand,
@@ -10550,6 +10551,8 @@ body {
 a {
   -webkit-transition: all .3s ease;
   transition: all .3s ease;
+  -webkit-text-decoration-style: dotted !important;
+          text-decoration-style: dotted !important;
 }
 
 .bottom-shadow {
@@ -10561,6 +10564,7 @@ a {
   text-transform: uppercase;
   color: #6c757d;
   margin-bottom: 10px;
+  font-weight: 600;
 }
 
 .btn-brand {
@@ -10571,10 +10575,35 @@ a {
   background-color: #c51e1e;
 }
 
+a.no-style {
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
 .card {
   border: 0;
   -webkit-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1) !important;
           box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1) !important;
+}
+
+.card.hoverable {
+  cursor: pointer;
+}
+
+.card.hoverable:hover {
+  -webkit-transform: scale(1.005);
+          transform: scale(1.005);
+  -webkit-transition: -webkit-transform 0.25s ease;
+  transition: -webkit-transform 0.25s ease;
+  transition: transform 0.25s ease;
+  transition: transform 0.25s ease, -webkit-transform 0.25s ease;
+}
+
+.inset-text {
+  padding: 10px;
+  border: 1px solid grey;
+  background-color: #eaeaea;
+  border-radius: 4px;
 }
 
 .alert {

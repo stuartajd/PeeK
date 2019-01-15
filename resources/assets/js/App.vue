@@ -6,6 +6,10 @@
             <div class="row justify-content-center">
                 <div class="col-md-10">
                     <router-view></router-view>
+
+                    <div class="text-center mt-3 mb-5 text-muted">
+                        <small>&copy; {{getYear}} PeeK &bull; Project Management</small>
+                    </div>
                 </div>
             </div>
         </div>
@@ -21,6 +25,11 @@
         data(){
             return {
             	state: []
+            }
+        },
+        computed: {
+            getYear(){
+            	return new Date().getFullYear();
             }
         },
         mounted(){

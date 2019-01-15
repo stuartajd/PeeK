@@ -14,7 +14,8 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::group(['prefix' => 'api', 'middleware' => 'auth'], function(){
     Route::get('state', 'StateController@getState');
 
-    Route::get('tasks', 'TaskController@getTasks');
+    Route::get('tasks', 'TaskController@getUserTasks');
+    Route::get('tasks/{tid}', 'TaskController@getTask');
 });
 
 Route::group(['middleware' => 'auth'], function() {

@@ -18,10 +18,6 @@
                             <li class="nav-item">
                                 <router-link to="/tasks" class="nav-link"><icon name="list"/> &nbsp; Tasks</router-link>
                             </li>
-
-                            <li class="nav-item">
-                                <router-link to="/qa" class="nav-link"><icon name="list"/> &nbsp; Testing</router-link>
-                            </li>
                         </ul>
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown">
@@ -38,8 +34,7 @@
                                     <icon name="cog" />&nbsp; Settings
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <router-link to="/user/settings" class="dropdown-item">Settings</router-link>
-                                    <div class="dropdown-divider"></div>
+                                    <router-link to="/user/settings" class="dropdown-item"><icon name="cog" />&nbsp;Settings</router-link>
                                     <a class="dropdown-item" href="/logout">Logout</a>
                                 </div>
                             </li>

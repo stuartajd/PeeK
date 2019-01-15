@@ -17,7 +17,11 @@ class CreateTasksTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->longText('description');
-            $table->foreign('author');
+            $table->enum('priority', ['urgent', 'normal', 'low'])->default('normal');
+            $table->date('due_date');
+            $table->unsignedInteger('created_by');
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
