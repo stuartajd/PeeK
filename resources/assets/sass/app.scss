@@ -12,6 +12,21 @@ body {
     background-color: #a91a1a;
 }
 
+.btn-social {
+    &.btn-facebook{
+        background-color: #3B5998;
+        color: white;
+    }
+    &.btn-microsoft {
+        background-color: #2672EC;
+        color: white;
+    }
+    &.btn-google {
+        background-color: #DD4B39;
+        color: white;
+    }
+}
+
 a {
     transition: all .3s ease;
     text-decoration-style: dotted!important;

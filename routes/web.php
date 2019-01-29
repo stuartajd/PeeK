@@ -2,6 +2,9 @@
 
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
+Route::get('login/{provider}', 'SocialController@redirect');
+Route::get('login/{provider}/callback','SocialController@Callback');
+Route::get('no-account', function() { return view('auth.missing'); });
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('logout', 'Auth\LoginController@logout');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');

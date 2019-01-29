@@ -10548,6 +10548,21 @@ body {
   background-color: #a91a1a;
 }
 
+.btn-social.btn-facebook {
+  background-color: #3B5998;
+  color: white;
+}
+
+.btn-social.btn-microsoft {
+  background-color: #2672EC;
+  color: white;
+}
+
+.btn-social.btn-google {
+  background-color: #DD4B39;
+  color: white;
+}
+
 a {
   -webkit-transition: all .3s ease;
   transition: all .3s ease;

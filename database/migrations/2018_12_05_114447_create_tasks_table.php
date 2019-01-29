@@ -33,6 +33,10 @@ class CreateTasksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tasks');
+		Schema::table('tasks', function (Blueprint $table) {
+			$table->dropForeign('tasks_account_id_foreign');
+		});
+
+		Schema::dropIfExists('tasks');
     }
 }
