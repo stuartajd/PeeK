@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTasksUsersTable extends Migration
+class AddStatusToTasks extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateTasksUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('tasks_users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('task_id');
+        Schema::table('tasks', function (Blueprint $table) {
+			$table->enum('status', ['awaiting', 'assigned', 'progress', 'quality', 'complete'])->default('awaiting');
         });
     }
 
@@ -27,6 +25,8 @@ class CreateTasksUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tasks_users');
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->dropColumn('status');
+        });
     }
 }

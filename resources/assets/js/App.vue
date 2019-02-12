@@ -13,6 +13,8 @@
                 </div>
             </div>
         </div>
+
+        <notifications class="mt-3 mr-2" />
     </div>
 </template>
 

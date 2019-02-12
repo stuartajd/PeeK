@@ -10563,6 +10563,10 @@ body {
   color: white;
 }
 
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
 a {
   -webkit-transition: all .3s ease;
   transition: all .3s ease;
@@ -10573,6 +10577,20 @@ a {
 .bottom-shadow {
   -webkit-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1) !important;
           box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1) !important;
+}
+
+.notifications {
+  width: 400px !important;
+}
+
+.notifications .vue-notification {
+  padding: 10px 15px !important;
+  font-size: 1rem !important;
+  border: 0 !important;
+}
+
+.notifications .notification-content {
+  font-size: 14px !important;
 }
 
 .page-title {
@@ -10629,5 +10647,39 @@ a.no-style {
 .alert.alert-danger {
   border-color: #c51e1e;
   border-bottom: 4px solid #c51e1e;
+}
+
+.hoverable {
+  -webkit-transition: all ease-in-out 80ms;
+  transition: all ease-in-out 80ms;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.hoverable:hover {
+  text-decoration: none;
+  -webkit-transform: translateY(-2px);
+          transform: translateY(-2px);
+}
+
+.select-card {
+  background-color: white;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-size: 15px;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  text-align: center;
+  -webkit-box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+  -webkit-transition: all ease-in-out 80ms;
+  transition: all ease-in-out 80ms;
+}
+
+.select-card:hover {
+  background-color: #f2f2f2;
 }
 

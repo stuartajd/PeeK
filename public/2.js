@@ -89,13 +89,13 @@ function toComment(sourceMap) {
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(69)
+  __webpack_require__(71)
 }
 var normalizeComponent = __webpack_require__(4)
 /* script */
-var __vue_script__ = __webpack_require__(71)
+var __vue_script__ = __webpack_require__(73)
 /* template */
-var __vue_template__ = __webpack_require__(72)
+var __vue_template__ = __webpack_require__(74)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -135,7 +135,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 60:
+/***/ 62:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -154,7 +154,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(61)
+var listToStyles = __webpack_require__(63)
 
 /*
 type StyleObject = {
@@ -364,7 +364,7 @@ function applyToTag (styleElement, obj) {
 
 /***/ }),
 
-/***/ 61:
+/***/ 63:
 /***/ (function(module, exports) {
 
 /**
@@ -398,15 +398,15 @@ module.exports = function listToStyles (parentId, list) {
 
 /***/ }),
 
-/***/ 62:
+/***/ 64:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(4)
 /* script */
-var __vue_script__ = __webpack_require__(63)
+var __vue_script__ = __webpack_require__(65)
 /* template */
-var __vue_template__ = __webpack_require__(64)
+var __vue_template__ = __webpack_require__(66)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -446,11 +446,13 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 63:
+/***/ 65:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__parts_loading__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__parts_loading___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__parts_loading__);
 //
 //
 //
@@ -463,14 +465,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "card",
-  props: ['title', 'subtitle']
+  components: {
+    loading: __WEBPACK_IMPORTED_MODULE_0__parts_loading___default.a
+  },
+  props: ['title', 'subtitle', 'loading', 'loadingText']
 });
 
 /***/ }),
 
-/***/ 64:
+/***/ 66:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -479,17 +490,23 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
     _c("div", { staticClass: "card-body" }, [
-      _vm.title
-        ? _c("h5", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.title))])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.subtitle
-        ? _c("h6", { staticClass: "card-subtitle mb-2 text-muted" }, [
-            _vm._v(_vm._s(_vm.subtitle))
+      _vm.loading
+        ? _c("div", [_c("loading", [_vm._v(_vm._s(_vm.loadingText))])], 1)
+        : _c("div", [
+            _vm.title
+              ? _c("h5", { staticClass: "card-title" }, [
+                  _vm._v(_vm._s(_vm.title))
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.subtitle
+              ? _c("h6", { staticClass: "card-subtitle mb-2 text-muted" }, [
+                  _vm._v(_vm._s(_vm.subtitle))
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", [_vm._t("default")], 2)
           ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c("div", [_vm._t("default")], 2)
     ])
   ])
 }
@@ -505,15 +522,15 @@ if (false) {
 
 /***/ }),
 
-/***/ 65:
+/***/ 67:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(4)
 /* script */
-var __vue_script__ = __webpack_require__(66)
+var __vue_script__ = __webpack_require__(68)
 /* template */
-var __vue_template__ = __webpack_require__(67)
+var __vue_template__ = __webpack_require__(69)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -553,7 +570,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 66:
+/***/ 68:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -574,7 +591,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 67:
+/***/ 69:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -605,17 +622,17 @@ if (false) {
 
 /***/ }),
 
-/***/ 69:
+/***/ 71:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(70);
+var content = __webpack_require__(72);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(60)("3d7f0775", content, false, {});
+var update = __webpack_require__(62)("3d7f0775", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -632,7 +649,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 70:
+/***/ 72:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(54)(false);
@@ -640,22 +657,23 @@ exports = module.exports = __webpack_require__(54)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 71:
+/***/ 73:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__parts_card__ = __webpack_require__(62);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__parts_card__ = __webpack_require__(64);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__parts_card___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__parts_card__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__parts_loading__ = __webpack_require__(65);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__parts_loading__ = __webpack_require__(67);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__parts_loading___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__parts_loading__);
+//
 //
 //
 //
@@ -736,19 +754,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     };
   },
+  computed: {
+    completedTasks: function completedTasks() {
+      return this.tasks.data.filter(function (el) {
+        return el.status == 'completed';
+      });
+    },
+    incompleteTasks: function incompleteTasks() {
+      return this.tasks.data.filter(function (el) {
+        return el.status !== 'completed';
+      });
+    },
+    awaitingTasks: function awaitingTasks() {
+      return this.tasks.data.filter(function (el) {
+        return el.status == 'awaiting';
+      });
+    }
+  },
   mounted: function mounted() {
     var _this = this;
 
     axios.get('api/tasks').then(function (response) {
       _this.tasks.loaded = true;
       _this.tasks.data = response.data.tasks;
+
+      _this.$notify({
+        title: 'Important message',
+        text: 'Hello user! This is a notification!'
+      });
     });
   }
 });
 
 /***/ }),
 
-/***/ 72:
+/***/ 74:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -768,14 +808,24 @@ var render = function() {
               "div",
               { staticClass: "col-md-4" },
               [
-                _c("card", { staticClass: "text-center" }, [
-                  _c("h1", [_vm._v("3")]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "text-muted" }, [
-                    _vm._v("Incomplete Tasks "),
-                    _c("small", [_vm._v("this week")])
-                  ])
-                ])
+                _c(
+                  "card",
+                  {
+                    staticClass: "text-center",
+                    attrs: {
+                      loading: !_vm.tasks.loaded,
+                      loadingText: "Loading tasks"
+                    }
+                  },
+                  [
+                    _c("h1", [_vm._v(_vm._s(_vm.incompleteTasks.length))]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "text-muted" }, [
+                      _vm._v("Incomplete Tasks "),
+                      _c("small", [_vm._v("this week")])
+                    ])
+                  ]
+                )
               ],
               1
             ),
@@ -784,14 +834,24 @@ var render = function() {
               "div",
               { staticClass: "col-md-4" },
               [
-                _c("card", { staticClass: "text-center" }, [
-                  _c("h1", [_vm._v("3")]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "text-muted" }, [
-                    _vm._v("Awaiting Testing Tasks "),
-                    _c("small", [_vm._v("this week")])
-                  ])
-                ])
+                _c(
+                  "card",
+                  {
+                    staticClass: "text-center",
+                    attrs: {
+                      loading: !_vm.tasks.loaded,
+                      loadingText: "Loading tasks"
+                    }
+                  },
+                  [
+                    _c("h1", [_vm._v(_vm._s(_vm.awaitingTasks.length))]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "text-muted" }, [
+                      _vm._v("Awaiting Testing Tasks "),
+                      _c("small", [_vm._v("this week")])
+                    ])
+                  ]
+                )
               ],
               1
             ),
@@ -800,14 +860,24 @@ var render = function() {
               "div",
               { staticClass: "col-md-4" },
               [
-                _c("card", { staticClass: "text-center" }, [
-                  _c("h1", [_vm._v("3")]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "text-muted" }, [
-                    _vm._v("Completed Tasks "),
-                    _c("small", [_vm._v("this week")])
-                  ])
-                ])
+                _c(
+                  "card",
+                  {
+                    staticClass: "text-center",
+                    attrs: {
+                      loading: !_vm.tasks.loaded,
+                      loadingText: "Loading tasks"
+                    }
+                  },
+                  [
+                    _c("h1", [_vm._v(_vm._s(_vm.completedTasks.length))]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "text-muted" }, [
+                      _vm._v("Completed Tasks "),
+                      _c("small", [_vm._v("this week")])
+                    ])
+                  ]
+                )
               ],
               1
             )
@@ -858,26 +928,28 @@ var render = function() {
               [
                 _c("loading", { attrs: { loading: _vm.tasks.loaded } }),
                 _vm._v(" "),
-                _vm._l(_vm.tasks.data, function(task) {
-                  return _c(
-                    "div",
-                    {
-                      attrs: {
-                        "data-toggle": "tooltip",
-                        "data-placement": "bottom",
-                        title: "Tooltip on bottom"
-                      }
-                    },
-                    [
-                      _c(
-                        "router-link",
-                        { attrs: { to: "/tasks/" + task.id } },
-                        [_vm._v(_vm._s(task.title))]
+                !_vm.tasks.data.length
+                  ? _c("div", [_vm._v("You have no outstanding tasks")])
+                  : _vm._l(_vm.tasks.data, function(task) {
+                      return _c(
+                        "div",
+                        {
+                          attrs: {
+                            "data-toggle": "tooltip",
+                            "data-placement": "bottom",
+                            title: "Tooltip on bottom"
+                          }
+                        },
+                        [
+                          _c(
+                            "router-link",
+                            { attrs: { to: "/tasks/" + task.id } },
+                            [_vm._v(_vm._s(task.title))]
+                          )
+                        ],
+                        1
                       )
-                    ],
-                    1
-                  )
-                })
+                    })
               ],
               2
             )
@@ -890,14 +962,23 @@ var render = function() {
           { staticClass: "mb-3" },
           [
             _c("div", { staticClass: "page-title text-right" }, [
-              _vm._v("Overview Actions")
+              _vm._v("Your Actions")
             ]),
             _vm._v(" "),
             _c(
               "router-link",
               {
+                staticClass: "btn btn-info text-white d-block mb-3",
+                attrs: { to: "/tasks" }
+              },
+              [_vm._v("View Your Tasks")]
+            ),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              {
                 staticClass: "btn btn-success d-block",
-                attrs: { to: "tasks/create" }
+                attrs: { to: "/tasks/create" }
               },
               [_vm._v("Create Task")]
             )

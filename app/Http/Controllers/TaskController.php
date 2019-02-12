@@ -20,6 +20,7 @@ class TaskController extends Controller
     function getTask($tid){
         $user = $this->user();
         $tasks = $user->tasks()->where('task_id', '=', $tid)->with(['creator', 'users'])->get();
+
         return response()->json([
             'tasks' => $tasks
         ]);

@@ -16,7 +16,6 @@ class AddAccountIdToTasks extends Migration
         //
 		Schema::table('tasks', function (Blueprint $table) {
 			$table->unsignedInteger('account_id');
-			$table->foreign('account_id')->references('id')->on('accounts');
 		});
     }
 

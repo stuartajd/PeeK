@@ -55,7 +55,7 @@
                     <hr>
 
                     <div class="text-left">
-                        <a href="{{ url('/login/facebook') }}" class="btn btn-block text-left btn-social btn-facebook"> Sign in with Facebook</a>
+                        {{--<a href="{{ url('/login/facebook') }}" class="btn btn-block text-left btn-social btn-facebook"> Sign in with Facebook</a>--}}
                         <a href="{{ url('/login/microsoft') }}" class="btn btn-block text-left btn-social btn-microsoft"> Sign in with Microsoft</a>
                         <a href="{{ url('/login/google') }}" class="btn btn-block text-left btn-social btn-google"> Sign in with Google</a>
                     </div>

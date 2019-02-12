@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTasksTable extends Migration
+class CreateAuditTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateTasksTable extends Migration
      */
     public function up()
     {
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('audit', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->longText('description');
-            $table->enum('priority', ['urgent', 'normal', 'low'])->default('normal');
-            $table->date('due_date');
-            $table->unsignedInteger('created_by');
-            $table->softDeletes();
+            $table->text('type');
+            $table->longText('action');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class CreateTasksTable extends Migration
      */
     public function down()
     {
-		Schema::dropIfExists('tasks');
+        Schema::dropIfExists('audit');
     }
 }

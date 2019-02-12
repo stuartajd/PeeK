@@ -25,7 +25,12 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <h6 class="page-title">Project Details</h6>
+                    <h6 class="page-title text-right">Project Actions</h6>
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-brand btn-sm btn-block">Open Actions</button>
+                    </div>
+
+                    <h6 class="page-title text-right">Project Details</h6>
                     <card class="mb-3">
                         <h6 class="page-title">Due Date</h6>
                         <div>{{task.data.due_date}}</div>
@@ -34,15 +39,7 @@
                     <card class="mb-3">
                         <h6 class="page-title">Priority</h6>
                         <div>
-                            <span v-if="task.data.priority == 'urgent'" class="text-danger">
-                                <icon name="priority_high"/> Urgent
-                            </span>
-                            <span v-if="task.data.priority == 'normal'" class="text-info">
-                                <icon name="priority_normal" /> Normal
-                            </span>
-                            <span v-if="task.data.priority == 'low'" class="text-success">
-                                <icon name="priority_low" /> Low
-                            </span>
+                            <priority :priority="task.data.priority"></priority>
                         </div>
                     </card>
 
@@ -71,17 +68,13 @@
 <script>
 	import card from '../parts/card';
 	import loading from '../parts/loading';
-
-	import '../icons/priority_low';
-	import '../icons/priority_low';
-	import '../icons/priority_normal';
-	import '../icons/priority_high';
+	import priority from '../parts/priority';
 
 	import '../variables';
 
 	export default {
 		name: "task",
-		components: { card, loading },
+		components: { card, loading, priority },
 		data() {
 			return {
 				task: {

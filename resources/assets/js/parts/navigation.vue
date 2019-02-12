@@ -20,21 +20,16 @@
                             </li>
                         </ul>
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <icon name="verified" />&nbsp; Manage
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <router-link to="/admin/tasks" class="dropdown-item"><icon name="list"/> &nbsp; Tasks</router-link>
-                                    <router-link to="/admin/users" class="dropdown-item"><icon name="list"/> &nbsp; Users</router-link>
-                                </div>
+                            <li class="nav-item">
+                                <router-link to="/admin" class="nav-link"><icon name="verified"/> &nbsp; Manage</router-link>
                             </li>
+
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <icon name="cog" />&nbsp; Settings
+                                    <icon name="cog" />
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <router-link to="/user/settings" class="dropdown-item"><icon name="cog" />&nbsp;Settings</router-link>
+                                    <router-link to="/user/settings" class="dropdown-item">Settings</router-link>
                                     <a class="dropdown-item" href="/logout">Logout</a>
                                 </div>
                             </li>
