@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid sticky-top">
+    <div class="container-fluid sticky-top navigation">
         <div class="row justify-content-center bg-brand">
             <div class="col-md-10">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-brand">
@@ -10,32 +10,36 @@
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <router-link to="/overview" class="nav-link"><icon name="dashboard"/> &nbsp; Dashboard</router-link>
-                            </li>
-
-                            <li class="nav-item">
-                                <router-link to="/tasks" class="nav-link"><icon name="list"/> &nbsp; Tasks</router-link>
-                            </li>
-                        </ul>
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item">
-                                <router-link to="/admin" class="nav-link"><icon name="verified"/> &nbsp; Manage</router-link>
-                            </li>
-
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <icon name="cog" />
+                                    Logged in as: {{state.user.name || unknown}}
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <router-link to="/user/settings" class="dropdown-item">Settings</router-link>
-                                    <a class="dropdown-item" href="/logout">Logout</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Logout</a>
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </nav>
+            </div>
+        </div>
+        <div class="row bg-white navigation-subbar">
+            <div class="col-md-12">
+                <div class="row justify-content-center">
+                    <div class="col-md-10 align-items-center">
+                        <div class="container-fluid py-2 text-muted">
+                            <ul class="list-inline mb-0">
+                                <li class="list-inline-item">
+                                    <router-link to="/overview"><icon name="dashboard" />&nbsp;Dashboard</router-link>
+                                </li>
+                                <li class="list-inline-item">
+                                    <router-link to="/tasks"><icon name="tasks" />&nbsp;Tasks</router-link>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -49,6 +53,7 @@
 	import '../icons/verified';
 
 	export default {
+		props: ['state'],
         data(){
             return {}
         },

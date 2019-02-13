@@ -19,4 +19,28 @@ let varPriority = {
 	}
 };
 
-export { varPriority }
+let varStatus = {
+	"awaiting": {
+		title: 'Awaiting Assignment',
+		name: 'awaiting'
+	},
+	"assigned": {
+		title: 'Assigned',
+		name: 'assigned'
+	},
+	"progress": {
+		title: 'In Progress',
+		name: 'progress'
+	},
+	"quality": {
+		title: 'Quality Assurance',
+		name: 'quality'
+	},
+	"complete": {
+		title: 'Complete',
+		name: 'complete'
+	}
+};
+
+
+export { varPriority, varStatus }

@@ -47,7 +47,7 @@
                     <card title="Outstanding Tasks">
                         <loading :loading="tasks.loaded" />
                         <div v-if="!tasks.data.length">You have no outstanding tasks</div>
-                        <div v-else v-for="task in tasks.data" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom"><router-link :to="`/tasks/${task.id}`">{{task.title}}</router-link></div>
+                        <list-group :list="tasks.data" scroll="true" linked="true" linkRoute="tasks/view" linkKey="id"></list-group>
                     </card>
                 </div>
 
@@ -66,10 +66,11 @@
 <script>
     import card from '../parts/card';
 	import loading from '../parts/loading';
+    import listGroup from '../parts/list-group';
 
     export default {
         name: "overview",
-        components: { card, loading },
+        components: { card, loading, listGroup },
         data() {
 			return {
 				tasks: {
@@ -94,11 +95,6 @@
 				.then(response => {
 					this.tasks.loaded = true;
 					this.tasks.data = response.data.tasks;
-
-					this.$notify({
-						title: 'Important message',
-						text: 'Hello user! This is a notification!'
-					});
                 });
         }
     }

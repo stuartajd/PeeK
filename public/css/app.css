@@ -10567,6 +10567,13 @@ body {
   cursor: pointer !important;
 }
 
+.not-selectable {
+  -webkit-user-select: none !important;
+     -moz-user-select: none !important;
+      -ms-user-select: none !important;
+          user-select: none !important;
+}
+
 a {
   -webkit-transition: all .3s ease;
   transition: all .3s ease;
@@ -10681,5 +10688,33 @@ a.no-style {
 
 .select-card:hover {
   background-color: #f2f2f2;
+}
+
+.scroll-group {
+  max-height: 260px;
+  overflow-y: scroll;
+}
+
+.navigation-subbar a,
+.navigation-subbar a:visited {
+  color: #6c757d !important;
+  -webkit-transition: all ease-in-out 100ms;
+  transition: all ease-in-out 100ms;
+}
+
+.navigation-subbar a:hover,
+.navigation-subbar a:focus {
+  color: #25282b !important;
+  text-decoration: none;
+}
+
+.btn-secondary {
+  background-color: #e9ecef !important;
+  border-color: #e9ecef !important;
+  color: grey;
+}
+
+.btn-secondary:hover {
+  background-color: #aeb9c4 !important;
 }
 

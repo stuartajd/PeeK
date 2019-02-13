@@ -1,15 +1,15 @@
 <template>
     <div class="container-fluid">
-        <h5 class="page-title">Manage Users</h5>
+        <h5 class="page-title">Manage Tasks</h5>
 
         <card>
-            <p>Click on a user to see their account and update all the information.</p>
+            <p>View all tasks, update and edit any of the outstanding tasks</p>
 
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Username</th>
+                        <th>TAsk</th>
                         <th>Role</th>
                     </tr>
                 </thead>

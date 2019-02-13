@@ -17,8 +17,18 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::group(['prefix' => 'api', 'middleware' => 'auth'], function(){
     Route::get('state', 'StateController@getState');
 
-    Route::get('tasks', 'TaskController@getUserTasks');
-    Route::get('tasks/{tid}', 'TaskController@getTask');
+    /** Task Routes */
+    Route::group(['prefix'=>'tasks'], function(){
+		Route::get('/', 'TaskController@getUserTasks');
+		Route::get('/{tid}', 'TaskController@getTask');
+
+		Route::put('/{tid}', 'TaskController@updateTask');
+	});
+
+	/** Task Routes */
+	Route::group(['prefix'=>'users'], function(){
+		Route::get('/getAllUsers', 'UserController@getAllUsers');
+	});
 });
 
 Route::group(['middleware' => 'auth'], function() {

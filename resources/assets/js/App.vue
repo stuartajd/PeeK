@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <navigation class="mb-4" />
+        <navigation class="mb-4" :state="state"/>
 
         <div class="container-fluid">
             <div class="row justify-content-center">

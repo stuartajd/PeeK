@@ -17,6 +17,16 @@ class Task extends Model
     }
 
     public function account(){
-    	return $this->hasOne(Account::class);
+    	return $this->belongsTo(Account::class);
 	}
+
+	/**
+	 * Get all audit logs that are available on this task
+	 * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+	 */
+	public function audit(){
+    	return $this->morphMany(Audit::class, 'auditable');
+	}
+
+
 }

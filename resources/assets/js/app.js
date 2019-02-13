@@ -25,14 +25,19 @@ function importError(error){
 let routes = [
     { path: '/', redirect: '/overview' },
     { path:'/overview', component: () => import('./pages/overview').catch(importError) },
+    { path:'/example', component: () => import('./pages/example').catch(importError) },
+
+
     { path:'/tasks', component: () => import('./pages/tasks').catch(importError) },
-    { path:'/tasks/:tid', component: () => import('./pages/task').catch(importError) },
     { path:'/tasks/create', component: () => import('./pages/task-create').catch(importError) },
+    { path:'/tasks/view/:tid', component: () => import('./pages/task').catch(importError) },
 
     { path:'/admin', component: () => import('./pages/admin').catch(importError) },
     { path:'/admin/users', component: () => import('./pages/admin-users').catch(importError) },
+	{ path:'/admin/tasks', component: () => import('./pages/admin-tasks').catch(importError) },
+	{ path:'/admin/settings', component: () => import('./pages/admin-settings').catch(importError) },
 
-    { name: '404', path: "/error/not-found", component: () => import('./pages/errors/not-found').catch(importError) },
+	{ name: '404', path: "/error/not-found", component: () => import('./pages/errors/not-found').catch(importError) },
     { path: "*", redirect: '/error/not-found' }
 ];
 

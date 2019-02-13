@@ -31,6 +31,10 @@ body {
   cursor: pointer!important;
 }
 
+.not-selectable {
+    user-select: none!important;
+}
+
 a {
     transition: all .3s ease;
     text-decoration-style: dotted!important;
@@ -130,5 +134,33 @@ a.no-style {
     transition: all ease-in-out 80ms;
     &:hover {
         background-color: darken(white, 5%);
+    }
+}
+
+.scroll-group {
+    max-height: 260px;
+    overflow-y: scroll;
+}
+
+.navigation-subbar {
+    $textColour: #6c757d;
+    a, a:visited{
+        color: $textColour!important;
+        transition: all ease-in-out 100ms;
+    }
+    a:hover, a:focus {
+        color: darken($textColour, 30%)!important;
+        text-decoration: none;
+    }
+}
+
+.btn-secondary {
+    $bgcolour: #e9ecef;
+    background-color: $bgcolour!important;
+    border-color: $bgcolour!important;
+    color: grey;
+
+    &:hover {
+        background-color: darken($bgcolour, 20%)!important;
     }
 }
