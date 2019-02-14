@@ -1,7 +1,5 @@
 <template>
     <div class="container-fluid">
-        <h5 class="page-title">Task <span v-if="task.loaded && task.data">#{{task.data.id}}</span></h5>
-
         <loading :loading="task.loaded" message="Loading Task Details.." />
 
         <div v-if="task.loaded && task.data">

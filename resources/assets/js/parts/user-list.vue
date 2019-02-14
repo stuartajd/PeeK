@@ -11,8 +11,8 @@
                     </div>
                 </div>
             </div>
-
         </div>
+        <div v-if="!selected.length">No users have been selected</div>
         <hr>
         <div>
             <p v-if="remainingUsers.length" class="text-right"><strong>Select Users</strong></p>

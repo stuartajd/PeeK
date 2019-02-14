@@ -34,7 +34,7 @@
                                     <router-link to="/overview"><icon name="dashboard" />&nbsp;Dashboard</router-link>
                                 </li>
                                 <li class="list-inline-item">
-                                    <router-link to="/tasks"><icon name="tasks" />&nbsp;Tasks</router-link>
+                                    <router-link to="/tasks"><icon name="list" />&nbsp;Tasks</router-link>
                                 </li>
                             </ul>
                         </div>
