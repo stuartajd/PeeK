@@ -9,6 +9,14 @@ Vue.use(SvgIcon, {
     tagName: 'icon'
 });
 
+import Raven from 'raven-js';
+import RavenVue from 'raven-js/plugins/vue';
+
+Raven
+    .config('https://36d4c44df36f4ce6b82be17a5b8724ae@sentry.io/1352158')
+    .addPlugin(RavenVue, Vue)
+    .install();
+
 import Notifications from 'vue-notification'
 Vue.use(Notifications);
 
