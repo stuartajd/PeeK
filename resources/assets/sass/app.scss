@@ -5,24 +5,63 @@
 
 body {
     background-color: #fafafa;
+    overflow-y: scroll !important;
 }
 
 .bg-brand, .btn-brand {
     background-color: #a91a1a;
 }
 
+.btn-social {
+    &.btn-facebook{
+        background-color: #3B5998;
+        color: white;
+    }
+    &.btn-microsoft {
+        background-color: #2672EC;
+        color: white;
+    }
+    &.btn-google {
+        background-color: #DD4B39;
+        color: white;
+    }
+}
+
+.cursor-pointer {
+  cursor: pointer!important;
+}
+
+.not-selectable {
+    user-select: none!important;
+}
+
 a {
     transition: all .3s ease;
+    text-decoration-style: dotted!important;
 }
 
 .bottom-shadow {
     box-shadow: 0 .125rem .25rem rgba(0,0,0,.1)!important;
 }
 
+.notifications {
+    width: 400px!important;
+
+    .vue-notification {
+        padding: 10px 15px!important;
+        font-size: 1rem!important;
+        border: 0!important;
+    }
+    .notification-content {
+        font-size: 14px!important;
+    }
+}
+
 .page-title {
     text-transform: uppercase;
     color: #6c757d;
     margin-bottom: 10px;
+    font-weight: 600;
 }
 
 .btn-brand {
@@ -33,9 +72,30 @@ a {
     }
 }
 
+a.no-style {
+    text-decoration: none!important;
+    color: inherit !important;
+}
+
 .card {
     border: 0;
     box-shadow: 0 .125rem .25rem rgba(0,0,0,.1)!important;
+
+    &.hoverable {
+        cursor: pointer;
+
+        &:hover {
+            transform: scale(1.005);
+            transition: transform 0.25s ease;
+        }
+    }
+}
+
+.inset-text{
+    padding: 10px;
+    border: 1px solid grey;
+    background-color: #eaeaea;
+    border-radius: 4px;
 }
 
 .alert {
@@ -48,3 +108,59 @@ a {
     }
 }
 
+.hoverable {
+    transition: all ease-in-out 80ms;
+    backface-visibility: hidden;
+    &:hover {
+        text-decoration: none;
+        transform: translateY(-2px);
+    }
+}
+
+.select-card {
+    background-color: white;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    text-align: center;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+
+    transition: all ease-in-out 80ms;
+    &:hover {
+        background-color: darken(white, 5%);
+    }
+}
+
+.scroll-group {
+    max-height: 260px;
+    overflow-y: scroll;
+}
+
+.navigation-subbar {
+    $textColour: #6c757d;
+    a, a:visited{
+        color: $textColour!important;
+        transition: all ease-in-out 100ms;
+    }
+    a:hover, a:focus {
+        color: darken($textColour, 30%)!important;
+        text-decoration: none;
+    }
+}
+
+.btn-secondary {
+    $bgcolour: #e9ecef;
+    background-color: $bgcolour!important;
+    border-color: $bgcolour!important;
+    color: grey;
+
+    &:hover {
+        background-color: darken($bgcolour, 20%)!important;
+    }
+}

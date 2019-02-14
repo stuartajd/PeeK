@@ -1,0 +1,4 @@
+2019/02/05 14:27:49 [error] 6568#6568: *1 FastCGI sent in stderr: "PHP message: PHP Parse error:  syntax error, unexpected '?' in /var/www/peekpm.com/vendor/symfony/http-foundation/Response.php on line 501
+PHP message: PHP Fatal error:  Exception thrown without a stack frame in Unknown on line 0
+PHP message: PHP Parse error:  syntax error, unexpected '?' in /var/www/peekpm.com/vendor/symfony/http-foundation/Response.php on line 501
+PHP message: PHP Fatal error:  Exception thrown without a stack frame in Unknown on line 0" while reading response header from upstream, client: 162.158.34.28, server: *.peekpm.com, request: "GET / HTTP/1.1", upstream: "fastcgi://unix:/var/run/php/php7.0-fpm.sock:", host: "www.peekpm.com"

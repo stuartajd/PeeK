@@ -13,7 +13,7 @@
                         @csrf
 
                         <div class="form-group">
-                            <label for="email" class="text-muted">{{ __('E-Mail Address') }}</label>
+                            <label for="email" class="text-muted">{{ __('Email Address') }}</label>
                             <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
 
                             @if ($errors->has('email'))
@@ -51,6 +51,14 @@
                             </div>
                         </div>
                     </form>
+
+                    <hr>
+
+                    <div class="text-left">
+                        {{--<a href="{{ url('/login/facebook') }}" class="btn btn-block text-left btn-social btn-facebook"> Sign in with Facebook</a>--}}
+                        <a href="{{ url('/login/microsoft') }}" class="btn btn-block text-left btn-social btn-microsoft"> Sign in with Microsoft</a>
+                        <a href="{{ url('/login/google') }}" class="btn btn-block text-left btn-social btn-google"> Sign in with Google</a>
+                    </div>
                 </div>
             </div>
             <div class="my-3 text-center">

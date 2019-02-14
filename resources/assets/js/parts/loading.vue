@@ -1,6 +1,6 @@
 <template>
     <span v-cloak v-if="!loading" class="text-muted" :class="classes">
-        <icon name="cog" class="spin" /> Loading..
+        <icon name="cog" class="spin" /> {{ message || 'Loading..' }}
     </span>
 </template>
 
@@ -9,6 +9,6 @@
 
 	export default {
 		name: "loading",
-        props: ['loading', 'classes']
+        props: ['loading', 'classes', 'message']
 	}
 </script>

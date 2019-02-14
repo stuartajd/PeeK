@@ -1,0 +1,80 @@
+<template>
+    <div class="container-fluid">
+
+        <h5 class="page-title">Create Task</h5>
+
+        <div class="row">
+            <div class="col-md-8">
+                <card title="Task Details">
+                    <div class="form-group">
+                        <label for="taskName">Task Name</label>
+                        <input type="text" class="form-control" id="taskName" v-model='task.title' placeholder="Task Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="taskDescription">Task Description</label>
+                        <textarea class="form-control" id="taskDescription" placeholder="Task Description" v-model='task.description' rows="10"></textarea>
+                    </div>
+                </card>
+            </div>
+            <div class="col-md-4">
+                <card title="Task Options" class="mb-3">
+                    <div class="form-group">
+                        <label for="taskName">Task Priority</label>
+                        <select name="" id="" class="form-control" v-model="task.priority">
+                            <option value="" disabled>Select Priority</option>
+                            <option value="low">Low Priority</option>
+                            <option value="normal">Normal Priority</option>
+                            <option value="urgent">Urgent Priority</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="taskDescription">Task Due Date</label>
+                        <datepicker input-class="form-control" v-model="task.due_date"></datepicker>
+                    </div>
+                </card>
+
+                <card title="Task Users" class="mb-3">
+                    <user-list></user-list>
+                </card>
+
+                <div>
+                    <button class="btn btn-success btn-block btn-sm">Create Task</button>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</template>
+
+<script>
+    import card from '../parts/card';
+    import userList from '../parts/user-list';
+	import Datepicker from 'vuejs-datepicker';
+
+	export default {
+		name: "task-create",
+		components: { card, Datepicker, userList },
+        data() {
+			return {
+				task: {
+					title: "",
+                    description: "",
+                    priority: "",
+                    due_date: "",
+                    created_by: "",
+                    account_id: "",
+                    users: []
+                }
+            }
+        },
+		mounted() {
+
+		}
+	}
+</script>
+
+<style>
+
+</style>
