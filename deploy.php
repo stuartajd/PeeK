@@ -25,6 +25,7 @@ add('writable_dirs', []);
 
 host('68.183.35.202')
     ->user('deployer')
+    ->set('branch', 'master')
     ->identityFile('~/.ssh/deployerkey')
     ->set('deploy_path', '/var/www/html');
 

@@ -9,6 +9,8 @@ Vue.use(SvgIcon, {
     tagName: 'icon'
 });
 
+Vue.use(require('vue-moment'));
+
 import Raven from 'raven-js';
 import RavenVue from 'raven-js/plugins/vue';
 
@@ -34,7 +36,6 @@ let routes = [
     { path: '/', redirect: '/overview' },
     { path:'/overview', component: () => import('./pages/overview').catch(importError) },
     { path:'/example', component: () => import('./pages/example').catch(importError) },
-
 
     { path:'/tasks', component: () => import('./pages/tasks').catch(importError) },
     { path:'/tasks/create', component: () => import('./pages/task-create').catch(importError) },

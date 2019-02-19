@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Task;
 
-
 class TaskController extends Controller
 {
     //
@@ -36,5 +35,25 @@ class TaskController extends Controller
 		return response()->json([
 			'tasks' => $tasks
 		]);
+	}
+
+	/**
+	 * Create a new task
+	 *
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
+	public function createTask(Request $request){
+		$request->validate([
+			'account_id' => 'required',
+			'title' => 'required',
+			'description' => 'required',
+			'due_date' => 'required',
+			'priority' => 'required',
+			'users' => 'required'
+		]);
+
+    	$task = Task::create($request->all());
+    	return response()->json($task);
 	}
 }
