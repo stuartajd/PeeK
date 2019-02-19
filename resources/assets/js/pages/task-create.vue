@@ -31,14 +31,21 @@
                         <label for="taskDescription">Task Due Date</label>
                         <datepicker input-class="form-control" v-model="task.due_date"></datepicker>
                     </div>
+                    <div class="form-group">
+                        <label for="taskDescription">Account</label>
+                        <select name="" id="" class="form-control" v-model="task.account_id">
+                            <option value="" disabled>Select Account</option>
+                            <option value="1">Test</option>
+                        </select>
+                    </div>
                 </card>
 
                 <card title="Task Users" class="mb-3">
-                    <user-list></user-list>
+                    <user-list @updateUsers="updateUsers"></user-list>
                 </card>
 
                 <div>
-                    <button class="btn btn-success btn-block btn-sm">Create Task</button>
+                    <button class="btn btn-success btn-block btn-sm" @click.prevent="createTask()">Create Task</button>
                 </div>
             </div>
         </div>
@@ -67,6 +74,26 @@
                     account_id: "",
                     users: []
                 }
+            }
+        },
+        methods: {
+			updateUsers(users){
+			    this.task.users = users;
+            },
+		    createTask(){
+				this.task.due_date = moment(this.task.due_date, "YYYY-MM-DD");
+
+		    	axios.post('/api/tasks/', this.task)
+                    .then(response => {
+                    	console.log('Submitted');
+                    	this.$notify({
+                            title: 'Task Created',
+                            type: 'success'
+                        });
+                    })
+                    .catch(error => {
+                    	console.log(error);
+                    })
             }
         },
 		mounted() {

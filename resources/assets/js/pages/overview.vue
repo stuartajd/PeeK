@@ -95,6 +95,9 @@
 				.then(response => {
 					this.tasks.loaded = true;
 					this.tasks.data = response.data.tasks;
+                })
+                .catch(error => {
+                	console.log(error);
                 });
         }
     }

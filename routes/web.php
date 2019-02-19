@@ -23,6 +23,7 @@ Route::group(['prefix' => 'api', 'middleware' => 'auth'], function(){
 		Route::get('/{tid}', 'TaskController@getTask');
 
 		Route::put('/{tid}', 'TaskController@updateTask');
+		Route::post('/', 'TaskController@createTask');
 	});
 
 	/** Task Routes */

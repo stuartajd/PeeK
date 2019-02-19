@@ -7,9 +7,9 @@
         <div class="row">
             <div class="col-md-12" v-if="!tasks.data.length"><card>There are no tasks to display.</card></div>
 
-            <div class="col-md-12 mb-3">
+            <div class="col-md-12 mb-3" v-if="tasks.data.length">
                 <div class="row align-items-center">
-                    <div class="col-md-8" v-if="tasks.data.length">
+                    <div class="col-md-8">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Search</span>

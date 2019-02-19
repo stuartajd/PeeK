@@ -44,7 +44,6 @@
             axios.get('/api/users/getAllUsers')
                 .then(response => {
                 	this.users = response.data;
-
                 })
                 .catch(error => {
                 	this.$notify({
@@ -57,11 +56,13 @@
             selectUser(user){
             	if(this.selected.indexOf(user) !== -1) return;
             	this.selected.push(user);
+            	this.$emit('updateUsers', this.selected);
             },
             removeUser(user){
 				var index = this.selected.indexOf(user);
 				if(index === -1) return;
 				this.selected.splice(index, 1);
+				this.$emit('updateUsers', this.selected);
             }
         }
 	}
