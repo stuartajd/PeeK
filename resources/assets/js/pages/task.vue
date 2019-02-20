@@ -27,7 +27,7 @@
                 <div class="col-md-3">
                     <h6 class="page-title text-right">Project Actions</h6>
                     <div class="mb-3">
-                        <button type="button" class="btn btn-brand btn-sm btn-block mb-3">Open Actions</button>
+                        <button type="button" @click.prevent="$router.push(`/tasks/actions/${task.id}`)" class="btn btn-brand btn-sm btn-block mb-3">Open Actions</button>
 
                         <div class="btn-group d-block" role="group">
                             <button id="btnGroupDrop1" type="button" class="btn btn-secondary btn-sm btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

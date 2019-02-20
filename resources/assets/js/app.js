@@ -22,6 +22,9 @@ Raven
 import Notifications from 'vue-notification'
 Vue.use(Notifications);
 
+import card from './parts/card';
+Vue.component(card);
+
 $('[data-toggle="tooltip"]').tooltip();
 
 window.Vue = Vue;
@@ -40,6 +43,7 @@ let routes = [
     { path:'/tasks', component: () => import('./pages/tasks').catch(importError) },
     { path:'/tasks/create', component: () => import('./pages/task-create').catch(importError) },
     { path:'/tasks/view/:tid', component: () => import('./pages/task').catch(importError) },
+    { path:'/tasks/actions/:tid', component: () => import('./pages/task-action').catch(importError) },
 
     { path:'/admin', component: () => import('./pages/admin').catch(importError) },
     { path:'/admin/users', component: () => import('./pages/admin-users').catch(importError) },
