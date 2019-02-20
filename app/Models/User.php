@@ -25,4 +25,12 @@ class User extends Authenticatable
     public function tasks(){
         return $this->belongsToMany('App\Models\Task', 'tasks_users');
     }
+
+	/**
+	* Returns the company that the user is linked too
+	* @return \Illuminate\Database\Eloquent\Relations\belongsTo
+	*/
+	public function company(){
+		return $this->belongsTo(Company::class);
+	}
 }

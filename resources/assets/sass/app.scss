@@ -142,6 +142,13 @@ a.no-style {
     overflow-y: scroll;
 }
 
+.card.dropzone {
+    background-color: #ecebeb;
+    .droparea{
+        min-height: 300px;
+    }
+}
+
 .navigation-subbar {
     $textColour: #6c757d;
     a, a:visited{

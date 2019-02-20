@@ -4,38 +4,38 @@
         <h5 class="page-title">Task Actions</h5>
 
         <div class="row">
-            <div class="col-md-3">
-                <card title="Awaiting">
+            <div class="col-md-3 ">
+                <card title="Awaiting" class="dropzone">
                     <div class="list-group">
-                        <draggable v-model="actions" :options="{group:'draggable'}" @start="drag=true" @end="drag=false">
-                            <div v-for="element in actions" class="list-group-item" :key="element.id">{{element.name}}</div>
+                        <draggable class="droparea" v-model="actions" :options="{group:'draggable'}" @start="drag=true" @end="drag=false">
+                            <card v-for="element in actions" class="mb-3" :key="element.id">{{element.name}}</card>
                         </draggable>
                     </div>
                 </card>
             </div>
-            <div class="col-md-3">
-                <card title="In Progress">
+            <div class="col-md-3 ">
+                <card title="In Progress" class="dropzone">
                     <div class="list-group">
-                        <draggable v-model="actions2" :options="{group:'draggable'}" @start="drag=true" @end="drag=false">
+                        <draggable class='droparea' v-model="actions2" :options="{group:'draggable'}" @start="drag=true" @end="drag=false">
                             <div v-for="element in actions2" class="list-group-item" :key="element.id">{{element.name}}</div>
                         </draggable>
                     </div>
                 </card>
 
             </div>
-            <div class="col-md-3">
-                <card title="Something else">
+            <div class="col-md-3 ">
+                <card title="Something else" class="dropzone">
                     <div class="list-group">
-                        <draggable v-model="actions3" :options="{group:'draggable'}" @start="drag=true" @end="drag=false">
+                        <draggable class='droparea' v-model="actions3" :options="{group:'draggable'}" @start="drag=true" @end="drag=false">
                             <div v-for="element in actions3" class="list-group-item" :key="element.id">{{element.name}}</div>
                         </draggable>
                     </div>
                 </card>
             </div>
-            <div class="col-md-3">
-                <card title="Complete">
+            <div class="col-md-3 ">
+                <card title="Complete" class="dropzone">
                     <div class="list-group">
-                        <draggable v-model="actions4" :options="{group:'draggable'}" @start="drag=true" @end="drag=false">
+                        <draggable class='droparea' v-model="actions4" :options="{group:'draggable'}" @start="drag=true" @end="drag=false">
                             <div v-for="element in actions4" class="list-group-item" :key="element.id">{{element.name}}</div>
                         </draggable>
                     </div>
