@@ -10,7 +10,7 @@ Route::get('logout', 'Auth\LoginController@logout');
 Route::get('register-18f8f39c9c', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('register-18f8f39c9c', 'Auth\RegisterController@register');
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 

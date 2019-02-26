@@ -10,8 +10,8 @@
     <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="bg-light mt-5">
-    <div class="text-center font-weight-bold">
-        <h3><img src="{{ secure_asset('logo.svg') }}" alt="PeeK Logo"> PeeK</h3>
+    <div class="text-center mb-3 font-weight-bold">
+        <h1><img src="{{ secure_asset('logo.svg') }}" alt="PeeK Logo"> PeeK</h1>
     </div>
 
     @yield('content')
