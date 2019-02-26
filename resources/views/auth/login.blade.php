@@ -61,10 +61,6 @@
                     </div>
                 </div>
             </div>
-            <div class="my-3 text-center">
-                <a href="{{ route('register') }}" class="text-muted">{{ __('Don\'t have an account? Sign Up') }}</a>
-            </div>
-
         </div>
     </div>
 </div>
