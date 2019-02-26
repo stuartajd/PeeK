@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -12,7 +13,7 @@ class UserController extends Controller
 	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function getAllUsers(){
-		$users = User::all();
+		$users = User::where('company_id', Auth::user()->company_id)->with(['role'])->get();
 		return response()->json($users);
 	}
 }

@@ -10,12 +10,12 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password', 'provider', 'provider_id'
+        'name', 'email', 'password', 'provider', 'provider_id', 'company_id'
     ];
 
 
     protected $hidden = [
-    	'email', 'provider', 'provider_id', 'password', 'remember_token'
+    	'provider', 'provider_id', 'password', 'remember_token', 'role_id'
     ];
 
 	/**
@@ -23,7 +23,7 @@ class User extends Authenticatable
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
     public function tasks(){
-        return $this->belongsToMany('App\Models\Task', 'tasks_users');
+        return $this->belongsToMany(Task::class, 'tasks_users');
     }
 
 	/**
@@ -32,5 +32,13 @@ class User extends Authenticatable
 	*/
 	public function company(){
 		return $this->belongsTo(Company::class);
+	}
+
+	/**
+	 * Returns the role information for the specific user
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function role(){
+		return $this->belongsTo(Role::class);
 	}
 }

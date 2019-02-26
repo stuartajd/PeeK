@@ -14,13 +14,13 @@ class SocialController extends Controller
 		return Socialite::driver($provider)->redirect();
 	}
 
-	public function Callback($provider)
+	public function callback($provider)
 	{
 		$userSocial = Socialite::driver($provider)->stateless()->user();
-		$users = User::where(['email' => $userSocial->getEmail()])->first();
-		if ($users) {
-			Auth::login($users);
-			return redirect('/');
+		$user = User::where(['email' => $userSocial->getEmail()])->first();
+		if ($user) {
+			Auth::login($user);
+			return redirect('/overview');
 		} else {
 			// User doesn't exist, don't create them here.
 //			$user = User::create([
