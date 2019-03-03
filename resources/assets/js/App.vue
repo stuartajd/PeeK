@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <navigation class="mb-4" :state="state"/>
+        <navigation class="mb-4"/>
 
         <div class="container-fluid">
             <div class="row justify-content-center">
@@ -24,11 +24,6 @@
     export default {
         name: "App",
         components: { navigation },
-        data(){
-            return {
-            	state: []
-            }
-        },
         computed: {
             getYear(){
             	return new Date().getFullYear();
@@ -37,7 +32,7 @@
         mounted(){
 			axios.get('api/state')
 				.then(response => {
-					this.state = response.data;
+                    this.$store.commit( 'setUser', response.data.user);
 				});
         }
     }

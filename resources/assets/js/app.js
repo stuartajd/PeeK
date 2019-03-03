@@ -23,10 +23,10 @@ import Notifications from 'vue-notification'
 Vue.use(Notifications);
 
 import card from './parts/card';
-Vue.component(card);
+Vue.component('card', card);
 
 import loading from './parts/loading';
-Vue.component(loading);
+Vue.component('loading', loading);
 
 import SvgIcon from 'vue-svgicon'
 Vue.use(SvgIcon, {
@@ -36,28 +36,20 @@ Vue.use(SvgIcon, {
 Vue.use(require('vue-moment'));
 
 /** Routes **/
-let routes = [
-    { path: '/', redirect: '/overview' },
-    { path:'/overview', component: require('./pages/overview') },
-    { path:'/example', component: require('./pages/example') },
-
-    { path:'/tasks', component: require('./pages/tasks')},
-    { path:'/tasks/create', component: require('./pages/task-create')},
-    { path:'/tasks/view/:tid', component: require('./pages/task')},
-    { path:'/tasks/actions/:tid', component: require('./pages/task-action') },
-
-    { path:'/admin', component: require('./pages/admin')},
-    { path:'/admin/users', component: require('./pages/admin-users')},
-    { path:'/admin/tasks', component: require('./pages/admin-tasks')},
-    { path:'/admin/settings', component: require('./pages/admin-settings')},
-
-    { name: '404', path: "/error/not-found", component: require('./pages/errors/not-found')},
-    { path: "*", redirect: '/error/not-found' }
-];
+import {routes} from './routes';
 
 let router =  new VueRouter({
     routes : routes,
-    mode : 'history'
+    mode : 'history',
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) {
+            return savedPosition;
+        }
+        if (to.hash) {
+            return { selector: to.hash };
+        }
+        return { x: 0, y: 0 };
+    }
 });
 
 /** Vue Instance **/

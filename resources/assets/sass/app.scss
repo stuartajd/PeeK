@@ -171,3 +171,16 @@ a.no-style {
         background-color: darken($bgcolour, 20%)!important;
     }
 }
+
+.list-group-navigation {
+
+    .list-group-item{
+        background-color: transparent;
+        border: 0;
+        padding: 0;
+
+        a {
+
+        }
+    }
+}
