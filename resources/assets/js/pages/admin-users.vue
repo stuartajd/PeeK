@@ -9,7 +9,7 @@
                     Here you are able to create a new user account. blah blah blah
 
                     <div>
-                    <button>Create User</button></div>
+                    <button type="button" class="btn btn-success btn-block">Create User</button></div>
                 </card>
             </div>
             <div class="col-md-9">

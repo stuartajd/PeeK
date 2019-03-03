@@ -1,16 +1,15 @@
 require('./bootstrap');
 
 import Vue from 'vue';
+window.Vue = Vue;
+
 import VueRouter from 'vue-router';
-import App from './App.vue';
+Vue.use(VueRouter);
 
-import SvgIcon from 'vue-svgicon'
-Vue.use(SvgIcon, {
-    tagName: 'icon'
-});
+import axios from 'axios';
+Vue.prototype.$http = axios;
 
-Vue.use(require('vue-moment'));
-
+/** Sentry Debug Code **/
 import Raven from 'raven-js';
 import RavenVue from 'raven-js/plugins/vue';
 
@@ -19,38 +18,40 @@ Raven
     .addPlugin(RavenVue, Vue)
     .install();
 
+/** Global Components **/
 import Notifications from 'vue-notification'
 Vue.use(Notifications);
 
 import card from './parts/card';
 Vue.component(card);
 
-$('[data-toggle="tooltip"]').tooltip();
+import loading from './parts/loading';
+Vue.component(loading);
 
-window.Vue = Vue;
-Vue.use(VueRouter);
+import SvgIcon from 'vue-svgicon'
+Vue.use(SvgIcon, {
+    tagName: 'icon'
+});
 
-function importError(error){
-    console.error(error);
-    window.location.reload();
-}
+Vue.use(require('vue-moment'));
 
+/** Routes **/
 let routes = [
     { path: '/', redirect: '/overview' },
-    { path:'/overview', component: () => import('./pages/overview').catch(importError) },
-    { path:'/example', component: () => import('./pages/example').catch(importError) },
+    { path:'/overview', component: require('./pages/overview') },
+    { path:'/example', component: require('./pages/example') },
 
-    { path:'/tasks', component: () => import('./pages/tasks').catch(importError) },
-    { path:'/tasks/create', component: () => import('./pages/task-create').catch(importError) },
-    { path:'/tasks/view/:tid', component: () => import('./pages/task').catch(importError) },
-    { path:'/tasks/actions/:tid', component: () => import('./pages/task-action').catch(importError) },
+    { path:'/tasks', component: require('./pages/tasks')},
+    { path:'/tasks/create', component: require('./pages/task-create')},
+    { path:'/tasks/view/:tid', component: require('./pages/task')},
+    { path:'/tasks/actions/:tid', component: require('./pages/task-action') },
 
-    { path:'/admin', component: () => import('./pages/admin').catch(importError) },
-    { path:'/admin/users', component: () => import('./pages/admin-users').catch(importError) },
-	{ path:'/admin/tasks', component: () => import('./pages/admin-tasks').catch(importError) },
-	{ path:'/admin/settings', component: () => import('./pages/admin-settings').catch(importError) },
+    { path:'/admin', component: require('./pages/admin')},
+    { path:'/admin/users', component: require('./pages/admin-users')},
+    { path:'/admin/tasks', component: require('./pages/admin-tasks')},
+    { path:'/admin/settings', component: require('./pages/admin-settings')},
 
-	{ name: '404', path: "/error/not-found", component: () => import('./pages/errors/not-found').catch(importError) },
+    { name: '404', path: "/error/not-found", component: require('./pages/errors/not-found')},
     { path: "*", redirect: '/error/not-found' }
 ];
 
@@ -59,8 +60,13 @@ let router =  new VueRouter({
     mode : 'history'
 });
 
+/** Vue Instance **/
+import App from './App.vue';
+import { store } from './store';
+
 const app = new Vue({
     el: '#app',
     router,
+    store,
     render: h => h(App)
 });
