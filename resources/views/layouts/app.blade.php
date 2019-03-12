@@ -11,7 +11,7 @@
 </head>
 <body class="bg-light mt-5">
     <div class="text-center mb-3 font-weight-bold">
-        <h1><img src="{{ secure_asset('logo.svg') }}" alt="PeeK Logo"> PeeK</h1>
+        <h1><img src="{{ secure_asset('PeeK.svg') }}" style="width: 60px" alt="PeeK Logo"> PeeK</h1>
     </div>
 
     @yield('content')

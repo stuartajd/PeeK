@@ -4,11 +4,8 @@
             <p class="text-right"><strong>Selected Users</strong></p>
 
             <div class="row">
-                <div class="col-md-4 cursor-pointer" v-for="user in selected" @click.prevent="removeUser(user)">
-                    <div class="row align-items-center">
-                        <div class="col-md-6 text-right"><img :src="user.profile_picture" :alt="user.name" class="rounded img-fluid"></div>
-                        <div class="col-md-6">{{user.name}}</div>
-                    </div>
+                <div class="col-md-6 cursor-pointer" v-for="user in selected" @click.prevent="removeUser(user)">
+                    <img :src="user.profile_picture" :alt="user.name" class="rounded img-fluid" style="max-width: 36px;">&nbsp;&nbsp;{{user.name}}
                 </div>
             </div>
         </div>
@@ -16,8 +13,10 @@
         <hr>
         <div>
             <p v-if="remainingUsers.length" class="text-right"><strong>Select Users</strong></p>
-            <div class="list-group scroll-group" v-if="remainingUsers.length">
-                <div class="list-group-item list-group-item-action cursor-pointer not-selectable" v-for="user in remainingUsers" @click.prevent="selectUser(user)">{{user.name}}</div>
+            <div class="row scroll-group" v-if="remainingUsers.length">
+                <div class="col-md-6 cursor-pointer" v-for="user in remainingUsers" @click.prevent="selectUser(user)">
+                    <img :src="user.profile_picture" :alt="user.name" class="rounded img-fluid" style="max-width: 36px;">&nbsp;&nbsp;{{user.name}}
+                </div>
             </div>
             <div v-if="!remainingUsers.length" class="text-center">There are no users to select</div>
         </div>

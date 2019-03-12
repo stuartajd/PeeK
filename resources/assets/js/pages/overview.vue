@@ -6,26 +6,15 @@
                 <h5 class="page-title">Dashboard</h5>
 
                 <div class="row mb-3">
-                    <div class="col-md-4">
-                        <card class="text-center" :loading="!tasks.loaded" loadingText="Loading tasks">
-                            <h1>{{incompleteTasks.length}}</h1>
-                            <span class="text-muted">Incomplete Tasks <small>this week</small></span>
-                        </card>
+
+
+                    <div class="col-md-12">
+                        <div class="page-title text-right">Your Actions</div>
+                        <router-link to='/tasks' class="btn btn-info text-white d-block mb-3">View Your Tasks</router-link>
+
+                        <router-link to='/tasks/create' class="btn btn-success d-block">Create Task</router-link>
                     </div>
 
-                    <div class="col-md-4">
-                        <card class="text-center" :loading="!tasks.loaded" loadingText="Loading tasks">
-                            <h1>{{awaitingTasks.length}}</h1>
-                            <span class="text-muted">Awaiting Testing Tasks <small>this week</small></span>
-                        </card>
-                    </div>
-
-                    <div class="col-md-4">
-                        <card class="text-center" :loading="!tasks.loaded" loadingText="Loading tasks">
-                            <h1>{{completedTasks.length}}</h1>
-                            <span class="text-muted">Completed Tasks <small>this week</small></span>
-                        </card>
-                    </div>
                 </div>
 
                 <card title="Component Title" subtitle="Component Subtitle">
@@ -44,7 +33,7 @@
                 <div class="mb-3">
                     <div class="page-title text-right">Task Activity</div>
 
-                    <card title="Outstanding Tasks">
+                    <card title="Outstanding Tasks" bodyclass="px-0">
                         <loading :loading="tasks.loaded" />
                         <div v-if="!tasks.data.length">You have no outstanding tasks</div>
                         <list-group :list="tasks.data" scroll="true" linked="true" linkRoute="tasks/view" linkKey="id"></list-group>
@@ -52,10 +41,20 @@
                 </div>
 
                 <div class="mb-3">
-                    <div class="page-title text-right">Your Actions</div>
-                    <router-link to='/tasks' class="btn btn-info text-white d-block mb-3">View Your Tasks</router-link>
+                    <card class="text-center mb-3" :loading="!tasks.loaded" loadingText="Loading tasks">
+                        <h1>{{incompleteTasks.length}}</h1>
+                        <span class="text-muted">Incomplete Tasks <small>this week</small></span>
+                    </card>
 
-                    <router-link to='/tasks/create' class="btn btn-success d-block">Create Task</router-link>
+                    <card class="text-center mb-3" :loading="!tasks.loaded" loadingText="Loading tasks">
+                        <h1>{{awaitingTasks.length}}</h1>
+                        <span class="text-muted">Awaiting Testing Tasks <small>this week</small></span>
+                    </card>
+
+                    <card class="text-center mb-3" :loading="!tasks.loaded" loadingText="Loading tasks">
+                        <h1>{{completedTasks.length}}</h1>
+                        <span class="text-muted">Completed Tasks <small>this week</small></span>
+                    </card>
                 </div>
             </div>
         </div>

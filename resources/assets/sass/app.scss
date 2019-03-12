@@ -172,15 +172,13 @@ a.no-style {
     }
 }
 
-.list-group-navigation {
-
-    .list-group-item{
-        background-color: transparent;
-        border: 0;
-        padding: 0;
+.navigation-link {
+    li{
+        cursor: pointer;
 
         a {
-
+            color: black!important;
+            text-decoration: none!important;
         }
     }
 }
