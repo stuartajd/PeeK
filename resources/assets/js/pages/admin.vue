@@ -4,41 +4,27 @@
 
         <div class="row mb-3">
             <div class="col-md-4">
-                <router-link to="/admin/users" class='no-style'>
-                    <select-card background="">
-                        <div>Manage Users</div>
-                    </select-card>
-                </router-link>
-            </div>
-            <div class="col-md-4">
-                <router-link to="/admin/tasks" class='no-style'>
-                    <select-card background="">
-                        <div>Manage Tasks</div>
-                    </select-card>
-                </router-link>
-            </div>
-            <div class="col-md-4">
-                <router-link to="/admin/settings" class='no-style'>
-                    <select-card background="">
-                        <div>Settings</div>
-                    </select-card>
-                </router-link>
-            </div>
-        </div>
-
-        <div>
-            <h5 class="page-title">Reporting</h5>
-            <card>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis fugit nesciunt ratione similique. Aliquid assumenda autem eligendi error est explicabo, facere, fugit ipsa, non odit officia quae sunt voluptate voluptatum?</p>
-                <ul>
-                    <li>Outstanding Tasks count</li>
-                    <li>Current Tasks count</li>
-                    <li>Pie chart showing all tasks at statuses</li>
+                <ul class="side-bar-list">
+                    <li><router-link to="#users">Users</router-link></li>
+                    <li><router-link to="#integrations">Integrations</router-link></li>
+                    <li><router-link to="#settings">Settings</router-link></li>
                 </ul>
-            </card>
+            </div>
+            <div class="col-md-8">
+                <card id="users" title="Manage Users" class="mb-3">
+                    // Table of users
+                </card>
 
+                <card id="integrations" title="Manage Integrations" class="mb-3">
+                    Slack: <span class="text-success">Connected</span><br />
+                    Email: <span class="text-danger">Disconnected</span>
+                </card>
+
+                <card id="settings" title="Manage Settings" class="mb-3">
+                    // Form for settings
+                </card>
+            </div>
         </div>
-
     </div>
 </template>
 

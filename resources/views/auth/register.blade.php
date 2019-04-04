@@ -11,12 +11,11 @@
                 <div class="card-body">
                     <p>You are not able to sign up for an account on PeeK. You must be registered through a Company.</p>
 
-                        <div class="form-group  mb-0">
-                            <div class="mt-3">
-                                <a href="{{ route('login') }}" class="text-muted">{{ __('Already have an account?') }}</a>
-                            </div>
+                    <div class="form-group  mb-0">
+                        <div class="mt-3">
+                            <a href="{{ route('login') }}" class="text-muted">{{ __('Already have an account?') }}</a>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -6,8 +6,6 @@
                 <h5 class="page-title">Dashboard</h5>
 
                 <div class="row mb-3">
-
-
                     <div class="col-md-12">
                         <div class="page-title text-right">Your Actions</div>
                         <router-link to='/tasks' class="btn btn-info text-white d-block mb-3">View Your Tasks</router-link>
