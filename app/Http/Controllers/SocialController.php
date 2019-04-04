@@ -22,14 +22,6 @@ class SocialController extends Controller
 			Auth::login($user);
 			return redirect('/overview');
 		} else {
-			// User doesn't exist, don't create them here.
-//			$user = User::create([
-//				'name' => $userSocial->getName(),
-//				'email' => $userSocial->getEmail(),
-//				'image' => $userSocial->getAvatar(),
-//				'provider_id' => $userSocial->getId(),
-//				'provider' => $provider,
-//			]);
 			return redirect('/no-account');
 		}
 	}
