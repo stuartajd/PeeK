@@ -17,7 +17,7 @@
                 <card title="In Progress" class="dropzone">
                     <div class="list-group">
                         <draggable class='droparea' v-model="actions2" :options="{group:'draggable'}" @start="drag=true" @end="drag=false">
-                            <div v-for="element in actions2" class="list-group-item" :key="element.id">{{element.name}}</div>
+                            <card v-for="element in actions2" class="mb-3" :key="element.id">{{element.name}}</card>
                         </draggable>
                     </div>
                 </card>
@@ -27,7 +27,7 @@
                 <card title="Something else" class="dropzone">
                     <div class="list-group">
                         <draggable class='droparea' v-model="actions3" :options="{group:'draggable'}" @start="drag=true" @end="drag=false">
-                            <div v-for="element in actions3" class="list-group-item" :key="element.id">{{element.name}}</div>
+                            <card v-for="element in actions3" class="mb-3" :key="element.id">{{element.name}}</card>
                         </draggable>
                     </div>
                 </card>
@@ -36,7 +36,7 @@
                 <card title="Complete" class="dropzone">
                     <div class="list-group">
                         <draggable class='droparea' v-model="actions4" :options="{group:'draggable'}" @start="drag=true" @end="drag=false">
-                            <div v-for="element in actions4" class="list-group-item" :key="element.id">{{element.name}}</div>
+                            <card v-for="element in actions4" class="mb-3" :key="element.id">{{element.name}}</card>
                         </draggable>
                     </div>
                 </card>

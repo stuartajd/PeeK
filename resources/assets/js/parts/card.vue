@@ -5,8 +5,8 @@
                 <loading>{{loadingText}}</loading>
             </div>
             <div v-else>
-                <h5 v-if='title' class="card-title">{{title}}</h5>
-                <h6 v-if='subtitle' class="card-subtitle mb-2 text-muted">{{subtitle}}</h6>
+                <h5 v-if='title' class="card-title not-selectable">{{title}}</h5>
+                <h6 v-if='subtitle' class="card-subtitle mb-2 not-selectable text-muted">{{subtitle}}</h6>
                 <div>
                     <slot />
                 </div>

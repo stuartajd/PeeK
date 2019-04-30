@@ -10890,6 +10890,18 @@ a.no-style {
   padding-left: 0;
 }
 
+.side-bar-list li a {
+  color: #a91a1a;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  transition: all ease-in-out 100ms;
+}
+
+.side-bar-list li a:hover {
+  text-decoration: none !important;
+  color: #e34646 !important;
+}
+
 /**
 Navigation
  */
