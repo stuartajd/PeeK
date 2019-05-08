@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid">
 
-        <h5 class="page-title">Task Actions</h5>
+        <h5 class="page-title">Task Breakdown</h5>
 
         <div class="row">
             <div class="col-md-3 ">
@@ -24,7 +24,7 @@
 
             </div>
             <div class="col-md-3 ">
-                <card title="Something else" class="dropzone">
+                <card title="Ready for Testing" class="dropzone">
                     <div class="list-group">
                         <draggable class='droparea' v-model="actions3" :options="{group:'draggable'}" @start="drag=true" @end="drag=false">
                             <card v-for="element in actions3" class="mb-3" :key="element.id">{{element.name}}</card>
@@ -55,13 +55,22 @@
         data() {
 			return {
                 actions: [
-                	{id: 1, name:'test', description: 'test'},
-                    {id: 2, name:'test2', description: 'test'},
-                    {id: 3, name:'test3', description: 'test'},
-                    {id: 4, name:'test4', description: 'test'}
+                	{id: 1, name:'Email Build', description: 'test'},
+                    {id: 2, name:'Landing Page Build', description: 'test'},
+                    {id: 3, name:'Mail Build ', description: 'test'},
+                    {id: 4, name:'Page Build ', description: 'test'},
+                    {id: 3, name:'Big Page Build ', description: 'test'},
+                    {id: 4, name:'Next Build ', description: 'test'},
+                    {id: 3, name:'Mail Build ', description: 'test'},
+                    {id: 4, name:'Page Build ', description: 'test'},
+                    {id: 3, name:'Big Page Build ', description: 'test'},
+                    {id: 4, name:'Next Build ', description: 'test'}
                 ],
-                actions2: [],
-                actions3: [],
+                actions2: [
+                
+                ],
+                actions3: [
+                ],
                 actions4: []
             }
         },

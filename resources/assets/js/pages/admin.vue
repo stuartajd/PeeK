@@ -41,9 +41,28 @@
                     </form>
                 </card>
 
-                <card id="integrations" title="Manage Integrations" class="mb-3">
-                    Slack: <span class="text-success">Connected</span><br />
-                    Email: <span class="text-danger">Disconnected</span>
+                <card id="integrations" title="Manage Integrations" rightText="Add Integration" rightLink="addIntegration" class="mb-3">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item list-group-item-action">
+                            <div class="media align-items-center">
+                                <img src="/images/Slack_Mark.svg" class="mr-3"  style="max-width: 75px;"  alt="">
+                                <div class="media-body">
+                                    <h5 class="mt-0">Slack</h5>
+                                    <span class="text-danger font-weight-bold">Disconnected</span><br />
+                                    <span class="text-muted">Click this action to begin the integration.</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-action">
+                            <div class="media align-items-center">
+                                <img src="/images/Mail_Mark.png" class="mr-3" style="height: 45px;margin-right: 30px!important;" alt="">
+                                <div class="media-body">
+                                    <h5 class="mt-0">Email</h5>
+                                    <span class="text-success font-weight-bold">Connected</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </card>
 
                 <card id="settings" title="Manage Settings" class="mb-3">
