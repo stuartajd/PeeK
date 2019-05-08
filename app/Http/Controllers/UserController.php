@@ -33,19 +33,22 @@ class UserController extends Controller
 
 		$message = 'This is an example ';
 
-		Mail::send('emails.template', ['title' => 'Account Verification', 'message' => $message, 'email' => $request->get('email')], function ($message) use ($request)
-		{
-			$message->subject('Account Verification');
-			$message->to($request->get('email'));
-		});
+Mail::send('emails.template', [
+	'title' => 'Account Verification',
+	'message' => $message,
+	'email' => $request->get('email')
+], function ($message) use ($request) {
+	$message->subject('Account Verification');
+	$message->to($request->get('email'));
+});
 
-		$user = User::create([
-			'name' => $request->get('name'),
-			'email' => $request->get('email'),
-			'provider_id' => '',
-			'provider' => 'registration',
-			'company_id' => $id
-		]);
+$user = User::create([
+	'name' => $request->get('name'),
+	'email' => $request->get('email'),
+	'provider_id' => '',
+	'provider' => 'registration',
+	'company_id' => $id
+]);
 
 		return response()->json($user);
 	}
