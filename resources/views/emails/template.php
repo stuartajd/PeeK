@@ -23,12 +23,12 @@
         <td align="center">
             <table width="600" cellspacing="0" cellpadding="0" class="full-width">
                 <tr>
-                    <td>
+                    <td style="padding-top: 10px;">
                         <table width="100%" style="background-color: #a91a1a;color:white;text-align: center;font-family: 'Arial';" bgcolor="a91a1a">
                             <tr>
                                 <td align="center" style="color:white;">
                                     <span style="font-size: 20px;color: white;">PeeK</span>
-									<br /><span style="color: white;">{{ $title }}</span>
+									<br /><span style="color: white;">{{ title }}</span>
                                 </td>
                             </tr>
                         </table>
@@ -36,11 +36,11 @@
                 </tr>
                 <tr>
                     <td style="padding: 20px;background-color: white;">
-                        <p>{{ $message }}</p>
+                        <p>{{ message }}</p>
                     </td>
                 </tr>
                 <tr>
-                    <td style="color: grey;text-align:center;padding-top: 20px;font-size:12px;">This email was sent to {{ $email }}.</td>
+                    <td style="color: grey;text-align:center;padding-top: 20px;font-size:12px;">This email was sent to {{ email }}.</td>
                 </tr>
             </table>
         </td>

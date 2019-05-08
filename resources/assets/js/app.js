@@ -28,6 +28,12 @@ Vue.component('card', card);
 import loading from './parts/loading';
 Vue.component('loading', loading);
 
+import modal from './parts/modal';
+Vue.component('modal', modal);
+
+import PortalVue from 'portal-vue'
+Vue.use(PortalVue)
+
 import SvgIcon from 'vue-svgicon'
 Vue.use(SvgIcon, {
     tagName: 'icon'

@@ -13,6 +13,8 @@ Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm'
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+Route::get('/set-password/{token}', 'UserController@getSetPassword');
+Route::post('/set-password/{token}', 'UserController@setPassword');
 
 Route::group(['prefix' => 'api', 'middleware' => ['auth']], function(){
     Route::get('state', 'StateController@getState');
@@ -29,7 +31,7 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function(){
 	/** Task Routes */
 	Route::group(['prefix'=>'users'], function(){
 		Route::get('/getAllUsers', 'UserController@getAllUsers');
-		Route::post('/create/{id}', 'UserController@createUser');
+		Route::post('/create', 'UserController@createUser');
 	});
 });
 
@@ -43,3 +45,4 @@ Route::group(['middleware' => 'auth'], function() {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+

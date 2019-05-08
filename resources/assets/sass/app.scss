@@ -248,3 +248,60 @@ body {
 .lh-100 { line-height: 1; }
 .lh-125 { line-height: 1.25; }
 .lh-150 { line-height: 1.5; }
+
+.bg-overlay-darken {
+    background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1040;
+}
+.modal-popup{
+    z-index: 1050;
+    position: fixed;
+    width: 75vw;
+    height: 75vh;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 0.25rem!important;
+    overflow: hidden;
+
+    .wrapper{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow: hidden;
+
+        .header {
+            flex: min-content;
+            padding: 1em;
+            border-bottom: 1px solid #e9ecef;
+
+            h5, h3{
+                margin-bottom:0;
+            }
+            h5 {
+                padding-top: 5px;
+            }
+        }
+
+        .content {
+            overflow-y: scroll;
+            overflow-x: hidden;
+            height: 100%;
+            position: relative;
+            flex: max-content;
+        }
+
+        .footer {
+            flex: min-content;
+            padding: 1em;
+            border-top: 1px solid #e9ecef;
+        }
+    }
+}

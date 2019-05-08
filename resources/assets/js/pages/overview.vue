@@ -7,10 +7,7 @@
 
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <div class="page-title text-right">Your Actions</div>
-                        <router-link to='/tasks' class="btn btn-info text-white d-block mb-3">View Your Tasks</router-link>
 
-                        <router-link to='/tasks/create' class="btn btn-success d-block">Create Task</router-link>
                     </div>
 
                 </div>
@@ -28,6 +25,13 @@
 
             </div>
             <div class="col-md-3">
+                <div class="mb-3">
+                    <div class="page-title text-right">Your Actions</div>
+                    <router-link to='/tasks' class="btn btn-info text-white d-block mb-3">View Your Tasks</router-link>
+
+                    <router-link to='/tasks/create' class="btn btn-success d-block">Create Task</router-link>
+                </div>
+
                 <div class="mb-3">
                     <div class="page-title text-right">Task Activity</div>
 

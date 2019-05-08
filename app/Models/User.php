@@ -11,7 +11,7 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password', 'provider', 'provider_id', 'company_id'
+        'name', 'email', 'password', 'provider', 'provider_id', 'company_id', 'password_set_token'
     ];
 
 
@@ -32,7 +32,7 @@ class User extends Authenticatable
 	* @return \Illuminate\Database\Eloquent\Relations\belongsTo
 	*/
 	public function company(){
-		return $this->belongsTo(Company::class);
+		return $this->belongsTo(Company::class ,'company_id', 'id');
 	}
 
 	/**

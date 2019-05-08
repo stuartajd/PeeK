@@ -16,7 +16,7 @@
     @if(app()->environment() === 'production')
         <script src="{{ secure_asset('js/app.js') }}?v={{ time() }}" defer></script>
     @else
-        <script src="{{ mix('js/app.js') }}"></script>
+        <script src="{{ mix('js/app.js') }}?v={{ time() }}"></script>
     @endif
 </body>
 </html>

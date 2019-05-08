@@ -1,24 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
+    <div class="container m-auto">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header bg-brand">
+                        <div class="text-white text-uppercase text-center">{{ __('Set Password') }}</div>
+                    </div>
+                    <div class="card-body">
+                        <p>Welcome {{$name}}, your account has been created on PeeK.</p>
 
-                <div class="card-body">
-                    @if (session('resent'))
-                        <div class="alert alert-success" role="alert">
-                            {{ __('A fresh verification link has been sent to your email address.') }}
-                        </div>
-                    @endif
+                        <p>Please set a password below to continue.</p>
 
-                    {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }}, <a href="{{ route('verification.resend') }}">{{ __('click here to request another') }}</a>.
+                        <form method="POST" action="{{ url('/set-password/'. $password_set_token) }}">
+                            @csrf
+                            <div class="form-group">
+                                <input type="password" name="password" class="form-control">
+                            </div>
+
+                            <button type="submit" class="btn btn-brand btn-block">{{ __('Set Password') }}</a>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection

@@ -14,11 +14,9 @@
 
                             <div class="text-center">
                                 <h5>Project Management</h5>
-                                    <p>Enter your details to access the PeeK platform.</p>
+                                <p>Enter your details to access the PeeK platform.</p>
                             </div>
-
-                            <div class="alert alert-danger">The PeeK platform is currently in development and is not complete, some features may not work as expected.</div>
-                        </div>
+                       </div>
                         <div class="col-md-6">
                             <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
                                 @csrf

@@ -1,5 +1,5 @@
 <template>
-    <span v-cloak v-if="!loading" class="text-muted" :class="classes">
+    <span v-cloak v-if="!loading" class="text-muted text-center" :class="classes">
         <icon name="cog" class="spin" /> {{ message || 'Loading..' }}
     </span>
 </template>

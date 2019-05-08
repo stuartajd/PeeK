@@ -12,33 +12,80 @@
             </div>
             <div class="col-md-8">
                 <card id="users" title="Manage Users" class="mb-3">
-                    // Table of users
+                    <p>Select a user to update their details.</p>
+
+                    <table class="table table-hover cursor-pointer">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-if="!user.loaded">
+                                <td colspan="3">
+                                    <loading message="Loading Existing Users.."></loading>
+                                </td>
+                            </tr>
+                            <tr v-for="user in user.users" @click="editUser(user)">
+                                <td>{{user.name}}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.role}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </card>
-    
-                <card id="users-create" title="Create a User" class="mb-3">
+
+                <card id="users-edit" title="Update User" class="mb-3" v-if="user.editing">
                     <form>
                         <div class="form-group">
                             <label for="userName">Name</label>
-                            <input type="text" class="form-control" v-model="create.username" name="userName" id="userName" placeholder="User Name">
+                            <input type="text" class="form-control" v-model="user.edit.name" name="userName" id="userName" placeholder="User Name">
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" v-model="create.email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                            <small id="emailHelp" class="form-text text-muted">The user will be asked to enter their password after the account has been activated.</small>
+                            <input type="email" class="form-control" v-model="user.edit.email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="role">User Role</label>
-                            <select v-model="create.role" class="form-control" id="role">
+                            <select v-model="user.edit.role" class="form-control" id="role">
                                 <option>Developer</option>
                                 <option>Quality Assurance</option>
                                 <option>Manager</option>
                                 <option>System Administrator</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-outline-success">Create User</button>
+                        <button type="submit" class="btn btn-outline-success">Update User</button>
                     </form>
+                </card>
+
+                <card id="users-create" title="Create a User" class="mb-3">
+                    <div>
+                        <div class="form-group">
+                            <label for="userName">Name</label>
+                            <input type="text" class="form-control" v-model="user.create.name" name="userName" id="userName" placeholder="User Name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" v-model="user.create.email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                            <small id="emailHelp" class="form-text text-muted">The user will be asked to enter their password after the account has been activated.</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="role">User Role</label>
+                            <select v-model="user.create.role" class="form-control" id="role">
+                                <option>Developer</option>
+                                <option>Quality Assurance</option>
+                                <option>Manager</option>
+                                <option>System Administrator</option>
+                            </select>
+                        </div>
+                        <button type="button" @click="createUser()" class="btn btn-outline-success">Create User</button>
+                    </div>
                 </card>
 
                 <card id="integrations" title="Manage Integrations" rightText="Add Integration" rightLink="addIntegration" class="mb-3">
@@ -49,7 +96,6 @@
                                 <div class="media-body">
                                     <h5 class="mt-0">Slack</h5>
                                     <span class="text-danger font-weight-bold">Disconnected</span><br />
-                                    <span class="text-muted">Click this action to begin the integration.</span>
                                 </div>
                             </div>
                         </li>
@@ -82,10 +128,52 @@
         components: { selectCard, card },
         data() {
 		    return {
-		        create: {
-		            username: "",
-                    email: "",
-                    role: ""
+		        user: {
+		            loaded: false,
+                    users: [],
+                    create: {
+                        name: "",
+                        email: "",
+                        role: ""
+                    },
+                    editing: false,
+                    edit: {
+                        name: "",
+                        email: "",
+                        role: ""
+                    },
+                }
+            }
+        },
+        mounted(){
+		    // Select users
+		    this.$http.get('/api/users/getAllUsers')
+                .then(resp => {
+                    this.user.users = resp.data;
+                    this.user.loaded = true;
+                });
+        },
+        methods: {
+		    createUser(){
+		          this.$http.post('/api/users/create', this.user.create)
+                      .then(resp => {
+                          this.$notify({
+                              type: 'success',
+                              text: 'User account has been registered successfully'
+                          })
+                      })
+                      .catch(err => {
+                        this.$notify({
+                              type: 'error',
+                              text: 'User account could not be created'
+                          })
+                      })
+            },
+		    editUser(user, submit){
+		        this.user.editing = true;
+
+		        if(!submit){
+                    this.user.edit = user;
                 }
             }
         }

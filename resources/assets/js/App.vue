@@ -55,6 +55,8 @@
             </div>
         </div>
 
+        <portal-target name="portal"></portal-target>
+
         <div class="container pt-3 px-0">
             <router-view></router-view>
 

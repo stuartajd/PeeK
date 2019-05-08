@@ -6,6 +6,8 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Mail;
+use Illuminate\Support\Str;
+use App\Notifications\SetPassword;
 
 class UserController extends Controller
 {
@@ -14,7 +16,7 @@ class UserController extends Controller
 	 * @return \Illuminate\Http\JsonResponse
 	 */
 	public function getAllUsers(){
-		$users = User::where('company_id', Auth::user()->company_id)->with(['role'])->get();
+		$users = User::where('company_id', $this->user()->company_id)->with(['role'])->get();
 		return response()->json($users);
 	}
 
@@ -25,31 +27,39 @@ class UserController extends Controller
 	 * @return \Illuminate\Http\JsonResponse
 	 * @throws \Illuminate\Validation\ValidationException
 	 */
-	public function createUser(Request $request, $id){
+	public function createUser(Request $request){
 		$this->validate($request, [
 			'name' => 'required|string|max:255',
 			'email' => 'required|string|email|max:255|unique:users'
 		]);
 
-		$message = 'This is an example ';
+		$passwordSetToken = Str::random(40);
 
-Mail::send('emails.template', [
-	'title' => 'Account Verification',
-	'message' => $message,
-	'email' => $request->get('email')
-], function ($message) use ($request) {
-	$message->subject('Account Verification');
-	$message->to($request->get('email'));
-});
+		$user = User::create([
+			'name' => $request->get('name'),
+			'email' => $request->get('email'),
+			'provider_id' => '',
+			'provider' => 'registration',
+			'company_id' => $this->user()->company_id,
+			'password_set_token' => $passwordSetToken
+		]);
 
-$user = User::create([
-	'name' => $request->get('name'),
-	'email' => $request->get('email'),
-	'provider_id' => '',
-	'provider' => 'registration',
-	'company_id' => $id
-]);
+		$user->notify(new SetPassword($user));
 
 		return response()->json($user);
 	}
+
+	public function getSetPassword(Request $request, $token){
+		$user = User::where('password_set_token', $token)->with('company')->first();
+		return view('auth.verify', $user);
+	}
+
+	public function setPassword(Request $request, $token){
+		$user = User::where('password_set_token', $token)->with('company')->first();
+		$user->password = bcrypt($request->get('password'));
+		$user->save();
+
+		return redirect('login');
+	}
+
 }
