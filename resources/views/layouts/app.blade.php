@@ -9,11 +9,7 @@
     <title>{{ config('app.name', 'PeeK') }}</title>
     <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="bg-light mt-5">
-    <div class="text-center font-weight-bold">
-        <h3><img src="{{ secure_asset('logo.svg') }}" alt="PeeK Logo"> PeeK</h3>
-    </div>
-
+<body class="bg-brand" style="height: 100vh;padding-top: 0!important;overflow-y: hidden!important;background-color: #620f0f;">
     @yield('content')
 </body>
 </html>

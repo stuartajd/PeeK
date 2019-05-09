@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1f77022e0142b2554b6bb98de847f1d8",
+    "content-hash": "8b0f72950a6adc8ef3b00e334bbdedb5",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -949,24 +949,24 @@
         },
         {
             "name": "laravel/socialite",
-            "version": "v4.0.1",
+            "version": "v4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/socialite.git",
-                "reference": "ad71c2691b04d843e24608ca13d9e004a34907d0"
+                "reference": "7581c57a60742f423a68362c79d507028f989bd7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/socialite/zipball/ad71c2691b04d843e24608ca13d9e004a34907d0",
-                "reference": "ad71c2691b04d843e24608ca13d9e004a34907d0",
+                "url": "https://api.github.com/repos/laravel/socialite/zipball/7581c57a60742f423a68362c79d507028f989bd7",
+                "reference": "7581c57a60742f423a68362c79d507028f989bd7",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "guzzlehttp/guzzle": "~6.0",
-                "illuminate/contracts": "~5.7",
-                "illuminate/http": "~5.7",
-                "illuminate/support": "~5.7",
+                "illuminate/contracts": "~5.7.0|~5.8.0",
+                "illuminate/http": "~5.7.0|~5.8.0",
+                "illuminate/support": "~5.7.0|~5.8.0",
                 "league/oauth1-client": "~1.0",
                 "php": "^7.1.3"
             },
@@ -1009,7 +1009,7 @@
                 "laravel",
                 "oauth"
             ],
-            "time": "2018-12-20T11:14:43+00:00"
+            "time": "2019-02-14T16:57:39+00:00"
         },
         {
             "name": "laravel/tinker",

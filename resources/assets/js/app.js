@@ -1,16 +1,15 @@
 require('./bootstrap');
 
 import Vue from 'vue';
+window.Vue = Vue;
+
 import VueRouter from 'vue-router';
-import App from './App.vue';
+Vue.use(VueRouter);
 
-import SvgIcon from 'vue-svgicon'
-Vue.use(SvgIcon, {
-    tagName: 'icon'
-});
+import axios from 'axios';
+Vue.prototype.$http = axios;
 
-Vue.use(require('vue-moment'));
-
+/** Sentry Debug Code **/
 import Raven from 'raven-js';
 import RavenVue from 'raven-js/plugins/vue';
 
@@ -19,44 +18,53 @@ Raven
     .addPlugin(RavenVue, Vue)
     .install();
 
+/** Global Components **/
 import Notifications from 'vue-notification'
 Vue.use(Notifications);
 
-$('[data-toggle="tooltip"]').tooltip();
+import card from './parts/card';
+Vue.component('card', card);
 
-window.Vue = Vue;
-Vue.use(VueRouter);
+import loading from './parts/loading';
+Vue.component('loading', loading);
 
-function importError(error){
-    console.error(error);
-    window.location.reload();
-}
+import modal from './parts/modal';
+Vue.component('modal', modal);
 
-let routes = [
-    { path: '/', redirect: '/overview' },
-    { path:'/overview', component: () => import('./pages/overview').catch(importError) },
-    { path:'/example', component: () => import('./pages/example').catch(importError) },
+import PortalVue from 'portal-vue'
+Vue.use(PortalVue)
 
-    { path:'/tasks', component: () => import('./pages/tasks').catch(importError) },
-    { path:'/tasks/create', component: () => import('./pages/task-create').catch(importError) },
-    { path:'/tasks/view/:tid', component: () => import('./pages/task').catch(importError) },
+import SvgIcon from 'vue-svgicon'
+Vue.use(SvgIcon, {
+    tagName: 'icon'
+});
 
-    { path:'/admin', component: () => import('./pages/admin').catch(importError) },
-    { path:'/admin/users', component: () => import('./pages/admin-users').catch(importError) },
-	{ path:'/admin/tasks', component: () => import('./pages/admin-tasks').catch(importError) },
-	{ path:'/admin/settings', component: () => import('./pages/admin-settings').catch(importError) },
+Vue.use(require('vue-moment'));
 
-	{ name: '404', path: "/error/not-found", component: () => import('./pages/errors/not-found').catch(importError) },
-    { path: "*", redirect: '/error/not-found' }
-];
+/** Routes **/
+import {routes} from './routes';
 
 let router =  new VueRouter({
     routes : routes,
-    mode : 'history'
+    mode : 'history',
+    scrollBehavior(to, from, savedPosition) {
+        if (savedPosition) {
+            return savedPosition;
+        }
+        if (to.hash) {
+            return { selector: to.hash };
+        }
+        return { x: 0, y: 0 };
+    }
 });
+
+/** Vue Instance **/
+import App from './App.vue';
+import { store } from './store';
 
 const app = new Vue({
     el: '#app',
     router,
+    store,
     render: h => h(App)
 });

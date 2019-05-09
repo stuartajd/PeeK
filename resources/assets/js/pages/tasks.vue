@@ -52,7 +52,7 @@
                                     <li class="list-inline-item">
                                         <div class="cursor-pointer">
                                             <span @click.prevent="sortFiltered('due_date', 'asc')" v-if="sort.type != 'due_date'">
-                                                Due Date <icon name="arrow_sort"/>
+                                                Due Date <icon name="arrow_right"/>
                                             </span>
                                             <span
                                                 @click.prevent="sortFiltered('due_date', 'desc')"
@@ -68,7 +68,7 @@
                                     <li class="list-inline-item">
                                         <div class="cursor-pointer">
                                             <span @click.prevent="sortFiltered('status', 'asc')" v-if="sort.type != 'status'">
-                                                Status <icon name="arrow_sort"/>
+                                                Status <icon name="arrow_right"/>
                                             </span>
                                             <span
                                                     @click.prevent="sortFiltered('status', 'desc')"
@@ -84,7 +84,7 @@
                                     <li class="list-inline-item">
                                         <div class="cursor-pointer">
                                             <span @click.prevent="sortFiltered('priority', 'asc')" v-if="sort.type != 'priority'">
-                                                Priority <icon name="arrow_sort"/>
+                                                Priority <icon name="arrow_right"/>
                                             </span>
                                             <span
                                                     @click.prevent="sortFiltered('priority', 'desc')"
@@ -137,7 +137,7 @@
 
 	import '../icons/arrow_down';
 	import '../icons/arrow_up';
-	import '../icons/arrow_sort';
+	import '../icons/arrow_right';
 
 	export default {
 		name: "tasks",
@@ -199,7 +199,7 @@
             }
         },
 		mounted() {
-			axios.get('api/tasks')
+			this.$http.get('api/tasks')
 				.then(response => {
 					this.tasks.loaded = true;
 					this.tasks.data = response.data.tasks;

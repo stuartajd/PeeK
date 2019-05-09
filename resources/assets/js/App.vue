@@ -1,16 +1,67 @@
 <template>
     <div id="app">
-        <navigation class="mb-4" :state="state"/>
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-brand">
+            <div class="container">
+                <a class="navbar-brand" href="/"><icon name="logo" class="large"/>&nbsp; PeeK</a>
+                <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-md-10">
-                    <router-view></router-view>
-
-                    <div class="text-center mt-3 mb-5 text-muted">
-                        <small>&copy; {{getYear}} PeeK &bull; Project Management</small>
-                    </div>
+                <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <router-link to="/overview" class="nav-link">
+                                <icon name="dashboard" />&nbsp;Dashboard
+                            </router-link>
+                        </li>
+                        <li class="nav-item">
+                            <router-link to="/search" class="nav-link">
+                                <icon name="list" />&nbsp;Search
+                            </router-link>
+                        </li>
+                        <li class="nav-item">
+                            <router-link to="/tasks" class="nav-link">
+                                <icon name="list" />&nbsp;Tasks
+                            </router-link>
+                        </li>
+                        <li class="nav-item">
+                            <router-link to="/admin" class="nav-link">
+                                <icon name="cog" />&nbsp;Settings
+                            </router-link>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Logged in as: {{this.$store.getters.user.name}}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <router-link class="dropdown-item" to="profile">Profile</router-link>
+                                <a class="dropdown-item" href="/logout">Logout</a>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
+            </div>
+        </nav>
+
+        <div class="nav-scroller bg-white text-dark shadow-sm">
+            <div class="container px-0">
+                <nav class="nav nav-underline">
+                    <router-link to="/overview" class="nav-link">
+                        <icon name="dashboard" />&nbsp;Dashboard
+                    </router-link>
+                </nav>
+            </div>
+        </div>
+
+        <portal-target name="portal"></portal-target>
+
+        <div class="container pt-3 px-0">
+            <router-view></router-view>
+
+            <div class="text-center mt-3 mb-5 text-muted">
+                <small>&copy; {{getYear}} PeeK &bull; Project Management</small>
             </div>
         </div>
 
@@ -24,20 +75,15 @@
     export default {
         name: "App",
         components: { navigation },
-        data(){
-            return {
-            	state: []
-            }
-        },
         computed: {
             getYear(){
             	return new Date().getFullYear();
             }
         },
         mounted(){
-			axios.get('api/state')
+			this.$http.get('api/state')
 				.then(response => {
-					this.state = response.data;
+                    this.$store.commit( 'setUser', response.data.user);
 				});
         }
     }

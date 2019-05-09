@@ -29,5 +29,12 @@ class Task extends Model
     	return $this->morphMany(Audit::class, 'auditable');
 	}
 
+	/**
+	 * Returns the company that the task is linked too
+	 * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+	 */
+	public function company(){
+		return $this->belongsTo(Company::class);
+	}
 
 }

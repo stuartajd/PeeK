@@ -4,18 +4,19 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 class User extends Authenticatable
 {
     use Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password', 'provider', 'provider_id'
+        'name', 'email', 'password', 'provider', 'provider_id', 'company_id', 'password_set_token'
     ];
 
 
     protected $hidden = [
-    	'email', 'provider', 'provider_id', 'password', 'remember_token'
+    	'provider', 'provider_id', 'password', 'remember_token', 'role_id'
     ];
 
 	/**
@@ -23,6 +24,22 @@ class User extends Authenticatable
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
     public function tasks(){
-        return $this->belongsToMany('App\Models\Task', 'tasks_users');
+        return $this->belongsToMany(Task::class, 'tasks_users');
     }
+
+	/**
+	* Returns the company that the user is linked too
+	* @return \Illuminate\Database\Eloquent\Relations\belongsTo
+	*/
+	public function company(){
+		return $this->belongsTo(Company::class ,'company_id', 'id');
+	}
+
+	/**
+	 * Returns the role information for the specific user
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function role(){
+		return $this->belongsTo(Role::class);
+	}
 }

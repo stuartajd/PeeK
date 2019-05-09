@@ -19,4 +19,12 @@ class Audit extends Model
 	public function user(){
 		return $this->belongsTo(User::class);
 	}
+
+	/**
+	 * Returns the company that the audit log is linked too
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function company(){
+		return $this->belongsTo(Company::class);
+	}
 }

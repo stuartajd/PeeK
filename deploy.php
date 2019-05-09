@@ -25,7 +25,7 @@ add('writable_dirs', []);
 
 host('68.183.35.202')
     ->user('deployer')
-    ->set('branch', 'master')
+//    ->set('branch', 'master')
     ->identityFile('~/.ssh/deployerkey')
     ->set('deploy_path', '/var/www/html');
 
@@ -40,6 +40,5 @@ task('build', function () {
 after('deploy:failed', 'deploy:unlock');
 
 // Migrate database before symlink new release.
-
 before('deploy:symlink', 'artisan:migrate');
 

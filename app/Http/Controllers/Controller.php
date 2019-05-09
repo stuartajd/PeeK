@@ -17,4 +17,9 @@ class Controller extends BaseController
         return auth()->user();
     }
 
+	protected function getCompany()
+	{
+		return auth()->user()->company;
+	}
+
 }

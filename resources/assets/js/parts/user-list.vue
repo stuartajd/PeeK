@@ -1,25 +1,21 @@
 <template>
     <div>
-        <div v-if="selected.length">
-            <p class="text-right"><strong>Selected Users</strong></p>
+        <div>
+            <div class="border" style="height: 300px;">
+                <input v-model="searchTerm" class="form-control w-100 border-top-0 border-left-0 border-right-0 border-bottom" placeholder="Search Users"/>
 
-            <div class="row">
-                <div class="col-md-4 cursor-pointer" v-for="user in selected" @click.prevent="removeUser(user)">
-                    <div class="row align-items-center">
-                        <div class="col-md-6 text-right"><img :src="user.profile_picture" :alt="user.name" class="rounded img-fluid"></div>
-                        <div class="col-md-6">{{user.name}}</div>
-                    </div>
+                <div v-if="!filteredUsers.length" class="pt-3 text-center">
+                    There are no users to select.
+                </div>
+                <div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item list-group-item-action cursor-pointer" :class="{ 'list-group-item-success' : user.selected }"
+                            @click="selectUser(user)" v-for="user in filteredUsers">
+                            {{user.name}}
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div>
-        <div v-if="!selected.length">No users have been selected</div>
-        <hr>
-        <div>
-            <p v-if="remainingUsers.length" class="text-right"><strong>Select Users</strong></p>
-            <div class="list-group scroll-group" v-if="remainingUsers.length">
-                <div class="list-group-item list-group-item-action cursor-pointer not-selectable" v-for="user in remainingUsers" @click.prevent="selectUser(user)">{{user.name}}</div>
-            </div>
-            <div v-if="!remainingUsers.length" class="text-center">There are no users to select</div>
         </div>
     </div>
 </template>
@@ -31,13 +27,14 @@
         props: [],
         data(){
 		    return {
-		    	users: [],
-                selected: []
+		        searchTerm: "",
+		    	users: []
             }
         },
         computed: {
-			remainingUsers(){
-				return this.users.filter(el => this.selected.indexOf(el) === -1);
+			filteredUsers(){
+			    if(!this.searchTerm.length) return this.users;
+				return this.users.filter(el => el.name.indexOf(searchTerm) !== -1);
             }
         },
         mounted(){
@@ -54,15 +51,8 @@
         },
         methods: {
             selectUser(user){
-            	if(this.selected.indexOf(user) !== -1) return;
-            	this.selected.push(user);
-            	this.$emit('updateUsers', this.selected);
-            },
-            removeUser(user){
-				var index = this.selected.indexOf(user);
-				if(index === -1) return;
-				this.selected.splice(index, 1);
-				this.$emit('updateUsers', this.selected);
+                this.$set(user, 'selected', !user.selected);
+                this.$emit('updateUsers', this.users);
             }
         }
 	}
