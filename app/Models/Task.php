@@ -13,9 +13,9 @@ class Task extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function users(){
-        return $this->hasMany(TaskUser::class)->with('user');
-    }
+	public function users(){
+		return $this->belongsToMany('App\Models\User', 'tasks_users');
+	}
 
     public function account(){
     	return $this->belongsTo(Account::class);

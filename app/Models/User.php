@@ -16,7 +16,7 @@ class User extends Authenticatable
 
 
     protected $hidden = [
-    	'provider', 'provider_id', 'password', 'remember_token', 'role_id'
+    	'provider', 'provider_id', 'password', 'remember_token'
     ];
 
 	/**
@@ -24,7 +24,7 @@ class User extends Authenticatable
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
     public function tasks(){
-        return $this->belongsToMany(Task::class, 'tasks_users');
+        return $this->belongsToMany('App\Models\Task', 'tasks_users');
     }
 
 	/**
@@ -32,7 +32,7 @@ class User extends Authenticatable
 	* @return \Illuminate\Database\Eloquent\Relations\belongsTo
 	*/
 	public function company(){
-		return $this->belongsTo(Company::class ,'company_id', 'id');
+		return $this->belongsTo(Company::class);
 	}
 
 	/**

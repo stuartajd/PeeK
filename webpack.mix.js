@@ -1,5 +1,3 @@
-let mix = require('laravel-mix');
-
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,12 +9,13 @@ let mix = require('laravel-mix');
  |
  */
 
+let mix = require('laravel-mix');
+
 mix.webpackConfig({
 	devServer: {
 		disableHostCheck: true
 	}
-})
+});
 
 mix.js('resources/assets/js/app.js', 'public/js')
-	.sourceMaps();
-mix.sass('resources/assets/sass/app.scss', 'public/css');
+	.sass('resources/assets/sass/app.scss', 'public/css');

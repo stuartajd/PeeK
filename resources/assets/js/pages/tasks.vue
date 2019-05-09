@@ -199,7 +199,7 @@
             }
         },
 		mounted() {
-			this.$http.get('api/tasks')
+			this.$http.get('/api/tasks')
 				.then(response => {
 					this.tasks.loaded = true;
 					this.tasks.data = response.data.tasks;

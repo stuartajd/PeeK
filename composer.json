@@ -13,7 +13,8 @@
         "laravel/tinker": "^1.0",
         "sentry/sentry-laravel": "^0.11.0",
         "socialiteproviders/google": "^3.0",
-        "socialiteproviders/microsoft-azure": "^3.0"
+        "socialiteproviders/microsoft-azure": "^3.0",
+        "doctrine/dbal": "~2.3"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.5",
