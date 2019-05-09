@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     protected $table = 'company_roles';
-    protected $hidden = ['created_at', 'updated_at', 'id', 'company_id'];
+    protected $hidden = ['created_at', 'updated_at', 'company_id'];
 }

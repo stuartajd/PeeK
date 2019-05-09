@@ -24,8 +24,14 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function(){
 		Route::get('/', 'TaskController@getUserTasks');
 		Route::get('/{tid}', 'TaskController@getTask');
 
-		Route::put('/{tid}', 'TaskController@updateTask');
-		Route::post('/', 'TaskController@createTask');
+		Route::put('/update/{tid}', 'TaskController@updateTask');
+		Route::post('/create', 'TaskController@createTask');
+	});
+
+	/** Task Routes */
+	Route::group(['prefix'=>'settings'], function(){
+		Route::get('/role', 'RoleController@getAllRoles');
+		Route::get('/role/update/{rid}', 'RoleController@updateRole');
 	});
 
 	/** Task Routes */

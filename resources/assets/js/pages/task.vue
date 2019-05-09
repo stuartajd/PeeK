@@ -70,7 +70,7 @@
 
                     <card class="mb-3">
                         <h6 class="page-title">Assigned Users</h6>
-                        <div v-for="assigned in task.data.users"><router-link :to="`/users/${assigned.user.id}`">{{assigned.user.name}}</router-link></div>
+                        <div v-for="assigned in task.data.users"><router-link :to="`/users/${assigned.id}`">{{assigned.name}}</router-link></div>
                     </card>
                 </div>
             </div>
@@ -110,7 +110,7 @@
 		    	if(!task || !state) return false;
 				axios.put('api/tasks/'+ this.$route.params.tid, { status: state })
                     .then(response => {
-                        this.task.data = response.data.tasks[0];
+                        this.task.data = response.data;
                         this.$notify({
                             title: 'Update complete',
                             text: 'Task status has been updated',
@@ -127,15 +127,18 @@
             }
         },
 		mounted() {
-			axios.get('api/tasks/'+ this.$route.params.tid)
+			this.$http.get('api/tasks/'+ this.$route.params.tid)
 				.then(response => {
 					this.task.loaded = true;
-					this.task.data = response.data.tasks[0];
+					this.task.data = response.data;
 
 					if(!this.task.data){
 						this.$router.push({ name: '404' })
                     }
-				});
+				})
+                .catch(err => {
+                    console.error("Error");
+                });
 		}
 	}
 </script>

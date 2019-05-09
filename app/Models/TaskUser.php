@@ -10,10 +10,10 @@ class TaskUser extends Model
     protected $table = 'tasks_users';
 
     public function task(){
-        return $this->belongsTo('App\Models\Task');
+        return $this->hasMany(Task::class);
     }
 
     public function user(){
-        return new TaskResource($this->belongsTo('App\Models\User', 'user_id'));
+        return new TaskResource($this->hasMany(User::class));
     }
 }

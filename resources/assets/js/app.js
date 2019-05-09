@@ -32,7 +32,7 @@ import modal from './parts/modal';
 Vue.component('modal', modal);
 
 import PortalVue from 'portal-vue'
-Vue.use(PortalVue)
+Vue.use(PortalVue);
 
 import SvgIcon from 'vue-svgicon'
 Vue.use(SvgIcon, {
@@ -40,6 +40,32 @@ Vue.use(SvgIcon, {
 });
 
 Vue.use(require('vue-moment'));
+
+/**
+ * Permissions
+ */
+class Permission {
+    install(vue, options) {
+        vue.mixin(this.mixin());
+    }
+
+    mixin() {
+        return {
+            computed: {
+                isAdmin() {
+                    if (typeof this.$store.state.user.role === 'undefined') return null;
+                    return this.$store.state.user.role.role_type === 'administrator';
+                },
+                isDeveloper() {
+                    if (typeof this.$store.state.user.role === 'undefined') return null;
+                    return this.$store.state.user.role.role_type === 'developer';
+                }
+            },
+        };
+    }
+}
+
+Vue.use(new Permission());
 
 /** Routes **/
 import {routes} from './routes';
