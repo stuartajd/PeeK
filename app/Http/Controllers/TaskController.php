@@ -14,7 +14,7 @@ class TaskController extends Controller
     //
     function getUserTasks(){
 	    $user = $this->user();
-        $tasks = $user->tasks()->with(['creator', 'account'])->get();
+        $tasks = $user->tasks()->with(['creator', 'account'])->where('due_date', '>=', date('Y-m-d'))->get();
 
         return response()->json([
             'tasks' => $tasks
@@ -75,8 +75,8 @@ class TaskController extends Controller
 	    if(isset($update['users'])){
 	    	$task->users()->detach();
 
-		    foreach($request->get('users') as $user){
-			    $saveUser = User::where('id', $user['id'])->first();
+		    foreach($request->get('users') as $u){
+			    $saveUser = User::where('id', $u['id'])->first();
 			    $task->users()->attach($saveUser);
 		    }
 	    }

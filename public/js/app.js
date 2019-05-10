@@ -2494,17 +2494,17 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     completedTasks: function completedTasks() {
       return this.tasks.data.filter(function (el) {
-        return el.status == 'completed';
+        return el.status == 'complete';
       });
     },
     incompleteTasks: function incompleteTasks() {
       return this.tasks.data.filter(function (el) {
-        return el.status !== 'completed';
+        return el.status !== 'complete';
       });
     },
     awaitingTasks: function awaitingTasks() {
       return this.tasks.data.filter(function (el) {
-        return el.status == 'awaiting';
+        return el.status == 'quality';
       });
     }
   },
@@ -2780,6 +2780,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuedraggable */ "./node_modules/vuedraggable/dist/vuedraggable.js");
 /* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vuedraggable__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _parts_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../parts/modal */ "./resources/assets/js/parts/modal.vue");
+/* harmony import */ var _parts_breakdown_item__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../parts/breakdown-item */ "./resources/assets/js/parts/breakdown-item.vue");
 //
 //
 //
@@ -2849,6 +2850,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -2857,7 +2859,8 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     card: _parts_card__WEBPACK_IMPORTED_MODULE_0__["default"],
     draggable: vuedraggable__WEBPACK_IMPORTED_MODULE_1___default.a,
-    modal: _parts_modal__WEBPACK_IMPORTED_MODULE_2__["default"]
+    modal: _parts_modal__WEBPACK_IMPORTED_MODULE_2__["default"],
+    breakdown: _parts_breakdown_item__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
     return {
@@ -2877,10 +2880,26 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    editBreakdown: function editBreakdown(element) {
+      console.log("Test");
+    },
+    deleteBreakdown: function deleteBreakdown(element) {
+      console.log("Test");
+    },
+    showDetails: function showDetails(element) {
+      this.$set(element, "showMore", !element.showMore);
+    },
+    updateList: function updateList(element) {
+      var id = element.item.id;
+      var status = element.to.id;
+      this.$http.post('/api/tasks/breakdown/' + this.$route.params.tid + '/' + id + '/update', {
+        status: status
+      });
+    },
     createItem: function createItem() {
       var _this = this;
 
-      this.$http.post('/api/tasks/breakdown/' + this.$route.params.tid + '/create', this.create).resp(function (resp) {
+      this.$http.post('/api/tasks/breakdown/' + this.$route.params.tid + '/create', this.create).then(function (resp) {
         _this.$notify({
           title: 'Breakdown item created successfully',
           type: 'success'
@@ -3004,6 +3023,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3016,6 +3041,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      errors: null,
       accounts: [],
       task: {
         title: "",
@@ -3041,8 +3067,13 @@ __webpack_require__.r(__webpack_exports__);
         });
 
         _this.$router.push("/tasks/view/".concat(resp.data.id));
-      })["catch"](function (error) {
-        console.log(error);
+      })["catch"](function (err) {
+        _this.$notify({
+          title: 'Task could not be created.',
+          type: 'error'
+        });
+
+        _this.errors = err.response.data.errors;
       });
     }
   },
@@ -3204,6 +3235,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3225,6 +3263,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
+      errors: null,
       task: {
         edit: {},
         data: {},
@@ -3261,6 +3300,8 @@ __webpack_require__.r(__webpack_exports__);
           text: 'Could not update the task, please try again.',
           type: 'error'
         });
+
+        _this.errors = error.response.data.errors;
       });
     },
     setStatus: function setStatus(task, state) {
@@ -3546,6 +3587,42 @@ __webpack_require__.r(__webpack_exports__);
       _this.tasks.loaded = true;
       _this.tasks.data = response.data.tasks;
     });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/parts/breakdown-item.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/parts/breakdown-item.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "breakdown",
+  components: {},
+  props: ['element'],
+  data: function data() {
+    return {
+      expanded: false
+    };
   }
 });
 
@@ -3940,11 +4017,8 @@ __webpack_require__.r(__webpack_exports__);
     filteredUsers: function filteredUsers() {
       var _this = this;
 
-      var excludedCurrentUser = this.users.filter(function (el) {
-        return el.name !== _this.$store.getters.user.name;
-      });
-      if (!this.searchTerm.length) return excludedCurrentUser;
-      return excludedCurrentUser.filter(function (el) {
+      if (!this.searchTerm.length) return this.users;
+      return this.users.filter(function (el) {
         return el.name.indexOf(_this.searchTerm) !== -1;
       });
     },
@@ -48575,7 +48649,7 @@ var render = function() {
     _c("div", { staticClass: "row" }, [
       _c(
         "div",
-        { staticClass: "col-md-3 " },
+        { staticClass: "col-md-3" },
         [
           _c(
             "card",
@@ -48589,15 +48663,15 @@ var render = function() {
                     "draggable",
                     {
                       staticClass: "droparea",
-                      attrs: { options: { group: "draggable" } },
+                      attrs: {
+                        id: "awaiting",
+                        options: { group: "draggable" }
+                      },
                       on: {
                         start: function($event) {
                           _vm.drag = true
                         },
-                        end: function($event) {
-                          _vm.drag = false
-                          _vm.updateLists()
-                        }
+                        end: _vm.updateList
                       },
                       model: {
                         value: _vm.list.awaiting,
@@ -48608,11 +48682,11 @@ var render = function() {
                       }
                     },
                     _vm._l(_vm.list.awaiting, function(element) {
-                      return _c(
-                        "card",
-                        { key: element.id, staticClass: "mb-3" },
-                        [_vm._v(_vm._s(element.title))]
-                      )
+                      return _c("breakdown", {
+                        key: element.id,
+                        staticClass: "mb-3",
+                        attrs: { element: element, id: element.id }
+                      })
                     }),
                     1
                   )
@@ -48641,15 +48715,15 @@ var render = function() {
                     "draggable",
                     {
                       staticClass: "droparea",
-                      attrs: { options: { group: "draggable" } },
+                      attrs: {
+                        id: "progress",
+                        options: { group: "draggable" }
+                      },
                       on: {
                         start: function($event) {
                           _vm.drag = true
                         },
-                        end: function($event) {
-                          _vm.drag = false
-                          _vm.updateList()
-                        }
+                        end: _vm.updateList
                       },
                       model: {
                         value: _vm.list.progress,
@@ -48660,11 +48734,11 @@ var render = function() {
                       }
                     },
                     _vm._l(_vm.list.progress, function(element) {
-                      return _c(
-                        "card",
-                        { key: element.id, staticClass: "mb-3" },
-                        [_vm._v(_vm._s(element.title))]
-                      )
+                      return _c("breakdown", {
+                        key: element.id,
+                        staticClass: "mb-3",
+                        attrs: { element: element, id: element.id }
+                      })
                     }),
                     1
                   )
@@ -48693,15 +48767,12 @@ var render = function() {
                     "draggable",
                     {
                       staticClass: "droparea",
-                      attrs: { options: { group: "draggable" } },
+                      attrs: { id: "testing", options: { group: "draggable" } },
                       on: {
                         start: function($event) {
                           _vm.drag = true
                         },
-                        end: function($event) {
-                          _vm.drag = false
-                          _vm.updateList()
-                        }
+                        end: _vm.updateList
                       },
                       model: {
                         value: _vm.list.testing,
@@ -48712,11 +48783,11 @@ var render = function() {
                       }
                     },
                     _vm._l(_vm.list.testing, function(element) {
-                      return _c(
-                        "card",
-                        { key: element.id, staticClass: "mb-3" },
-                        [_vm._v(_vm._s(element.title))]
-                      )
+                      return _c("breakdown", {
+                        key: element.id,
+                        staticClass: "mb-3",
+                        attrs: { element: element, id: element.id }
+                      })
                     }),
                     1
                   )
@@ -48745,15 +48816,15 @@ var render = function() {
                     "draggable",
                     {
                       staticClass: "droparea",
-                      attrs: { options: { group: "draggable" } },
+                      attrs: {
+                        id: "complete",
+                        options: { group: "draggable" }
+                      },
                       on: {
                         start: function($event) {
                           _vm.drag = true
                         },
-                        end: function($event) {
-                          _vm.drag = false
-                          _vm.updateList()
-                        }
+                        end: _vm.updateList
                       },
                       model: {
                         value: _vm.list.complete,
@@ -48764,11 +48835,11 @@ var render = function() {
                       }
                     },
                     _vm._l(_vm.list.complete, function(element) {
-                      return _c(
-                        "card",
-                        { key: element.id, staticClass: "mb-3" },
-                        [_vm._v(_vm._s(element.title))]
-                      )
+                      return _c("breakdown", {
+                        key: element.id,
+                        staticClass: "mb-3",
+                        attrs: { element: element, id: element.id }
+                      })
                     }),
                     1
                   )
@@ -48829,6 +48900,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
+                class: { "is-invalid": _vm.errors && _vm.errors.title.length },
                 attrs: {
                   type: "text",
                   id: "taskName",
@@ -48843,7 +48915,13 @@ var render = function() {
                     _vm.$set(_vm.task, "title", $event.target.value)
                   }
                 }
-              })
+              }),
+              _vm._v(" "),
+              _vm.errors && _vm.errors.title.length
+                ? _c("div", { staticClass: "text-danger" }, [
+                    _vm._v(_vm._s(_vm.errors.title[0]))
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
@@ -48861,6 +48939,9 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
+                class: {
+                  "is-invalid": _vm.errors && _vm.errors.description.length
+                },
                 attrs: {
                   id: "taskDescription",
                   placeholder: "Task Description",
@@ -48875,7 +48956,13 @@ var render = function() {
                     _vm.$set(_vm.task, "description", $event.target.value)
                   }
                 }
-              })
+              }),
+              _vm._v(" "),
+              _vm.errors && _vm.errors.description.length
+                ? _c("div", { staticClass: "text-danger" }, [
+                    _vm._v(_vm._s(_vm.errors.description[0]))
+                  ])
+                : _vm._e()
             ])
           ])
         ],
@@ -48907,6 +48994,9 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
+                    class: {
+                      "is-invalid": _vm.errors && _vm.errors.priority.length
+                    },
                     attrs: { name: "", id: "" },
                     on: {
                       change: function($event) {
@@ -48945,7 +49035,13 @@ var render = function() {
                       _vm._v("Urgent Priority")
                     ])
                   ]
-                )
+                ),
+                _vm._v(" "),
+                _vm.errors && _vm.errors.priority.length
+                  ? _c("div", { staticClass: "text-danger" }, [
+                      _vm._v(_vm._s(_vm.errors.priority[0]))
+                    ])
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _c(
@@ -48957,6 +49053,9 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("datepicker", {
+                    class: {
+                      "is-invalid": _vm.errors && _vm.errors.due_date.length
+                    },
                     attrs: {
                       "input-class": "form-control",
                       format: "dsu MMM yyyy"
@@ -48968,7 +49067,13 @@ var render = function() {
                       },
                       expression: "task.due_date"
                     }
-                  })
+                  }),
+                  _vm._v(" "),
+                  _vm.errors && _vm.errors.due_date.length
+                    ? _c("div", { staticClass: "text-danger" }, [
+                        _vm._v(_vm._s(_vm.errors.due_date[0]))
+                      ])
+                    : _vm._e()
                 ],
                 1
               ),
@@ -48990,6 +49095,9 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
+                    class: {
+                      "is-invalid": _vm.errors && _vm.errors.account_id.length
+                    },
                     attrs: { name: "", id: "" },
                     on: {
                       change: function($event) {
@@ -49023,7 +49131,13 @@ var render = function() {
                     })
                   ],
                   2
-                )
+                ),
+                _vm._v(" "),
+                _vm.errors && _vm.errors.account_id.length
+                  ? _c("div", { staticClass: "text-danger" }, [
+                      _vm._v(_vm._s(_vm.errors.account_id[0]))
+                    ])
+                  : _vm._e()
               ])
             ]
           ),
@@ -49249,6 +49363,11 @@ var render = function() {
                                           }
                                         ],
                                         staticClass: "form-control",
+                                        class: {
+                                          "is-invalid":
+                                            _vm.errors &&
+                                            _vm.errors.title.length
+                                        },
                                         attrs: {
                                           type: "text",
                                           id: "taskName",
@@ -49269,7 +49388,19 @@ var render = function() {
                                             )
                                           }
                                         }
-                                      })
+                                      }),
+                                      _vm._v(" "),
+                                      _vm.errors && _vm.errors.title.length
+                                        ? _c(
+                                            "div",
+                                            { staticClass: "text-danger" },
+                                            [
+                                              _vm._v(
+                                                _vm._s(_vm.errors.title[0])
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e()
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "form-group" }, [
@@ -49289,6 +49420,11 @@ var render = function() {
                                           }
                                         ],
                                         staticClass: "form-control",
+                                        class: {
+                                          "is-invalid":
+                                            _vm.errors &&
+                                            _vm.errors.description.length
+                                        },
                                         attrs: {
                                           id: "taskDescription",
                                           placeholder: "Task Description",
@@ -49309,7 +49445,22 @@ var render = function() {
                                             )
                                           }
                                         }
-                                      })
+                                      }),
+                                      _vm._v(" "),
+                                      _vm.errors &&
+                                      _vm.errors.description.length
+                                        ? _c(
+                                            "div",
+                                            { staticClass: "text-danger" },
+                                            [
+                                              _vm._v(
+                                                _vm._s(
+                                                  _vm.errors.description[0]
+                                                )
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e()
                                     ])
                                   ]
                                 )
@@ -49347,6 +49498,11 @@ var render = function() {
                                             }
                                           ],
                                           staticClass: "form-control",
+                                          class: {
+                                            "is-invalid":
+                                              _vm.errors &&
+                                              _vm.errors.priority.length
+                                          },
                                           attrs: { name: "", id: "" },
                                           on: {
                                             change: function($event) {
@@ -49401,7 +49557,19 @@ var render = function() {
                                             [_vm._v("Urgent Priority")]
                                           )
                                         ]
-                                      )
+                                      ),
+                                      _vm._v(" "),
+                                      _vm.errors && _vm.errors.priority.length
+                                        ? _c(
+                                            "div",
+                                            { staticClass: "text-danger" },
+                                            [
+                                              _vm._v(
+                                                _vm._s(_vm.errors.priority[0])
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e()
                                     ]),
                                     _vm._v(" "),
                                     _c(
@@ -49415,6 +49583,11 @@ var render = function() {
                                         ),
                                         _vm._v(" "),
                                         _c("datepicker", {
+                                          class: {
+                                            "is-invalid":
+                                              _vm.errors &&
+                                              _vm.errors.due_date.length
+                                          },
                                           attrs: {
                                             "input-class": "form-control",
                                             format: "dsu MMM yyyy"
@@ -49430,7 +49603,19 @@ var render = function() {
                                             },
                                             expression: "task.edit.due_date"
                                           }
-                                        })
+                                        }),
+                                        _vm._v(" "),
+                                        _vm.errors && _vm.errors.due_date.length
+                                          ? _c(
+                                              "div",
+                                              { staticClass: "text-danger" },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(_vm.errors.due_date[0])
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e()
                                       ],
                                       1
                                     ),
@@ -49454,6 +49639,11 @@ var render = function() {
                                             }
                                           ],
                                           staticClass: "form-control",
+                                          class: {
+                                            "is-invalid":
+                                              _vm.errors &&
+                                              _vm.errors.account_id.length
+                                          },
                                           attrs: { name: "", id: "" },
                                           on: {
                                             change: function($event) {
@@ -49496,7 +49686,19 @@ var render = function() {
                                             [_vm._v("Test")]
                                           )
                                         ]
-                                      )
+                                      ),
+                                      _vm._v(" "),
+                                      _vm.errors && _vm.errors.account_id.length
+                                        ? _c(
+                                            "div",
+                                            { staticClass: "text-danger" },
+                                            [
+                                              _vm._v(
+                                                _vm._s(_vm.errors.account_id[0])
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e()
                                     ])
                                   ]
                                 ),
@@ -49811,10 +50013,7 @@ var render = function() {
                         _c("div", { staticClass: "col-md-6" }, [
                           _c("ul", { staticClass: "list-inline mb-0" }, [
                             _c("li", { staticClass: "list-inline-item" }, [
-                              _vm._v(
-                                _vm._s(_vm.tasks.data.length) +
-                                  " Incomplete Tasks"
-                              )
+                              _vm._v(_vm._s(_vm.tasks.data.length) + " Tasks")
                             ])
                           ])
                         ]),
@@ -50202,6 +50401,53 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/parts/breakdown-item.vue?vue&type=template&id=0ca7fe80&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/assets/js/parts/breakdown-item.vue?vue&type=template&id=0ca7fe80& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "card-body" }, [
+      _c(
+        "div",
+        {
+          class: { "text-center": _vm.expanded },
+          on: {
+            click: function($event) {
+              _vm.expanded = !_vm.expanded
+            }
+          }
+        },
+        [_vm._v("\n            " + _vm._s(_vm.element.title) + "\n        ")]
+      ),
+      _vm._v(" "),
+      _vm.expanded
+        ? _c("div", { staticClass: "border-top mt-3 pt-3" }, [
+            _vm._v(
+              "\n            " + _vm._s(_vm.element.description) + "\n        "
+            )
+          ])
+        : _vm._e()
+    ])
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -76002,6 +76248,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/assets/js/parts/breakdown-item.vue":
+/*!******************************************************!*\
+  !*** ./resources/assets/js/parts/breakdown-item.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _breakdown_item_vue_vue_type_template_id_0ca7fe80___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./breakdown-item.vue?vue&type=template&id=0ca7fe80& */ "./resources/assets/js/parts/breakdown-item.vue?vue&type=template&id=0ca7fe80&");
+/* harmony import */ var _breakdown_item_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./breakdown-item.vue?vue&type=script&lang=js& */ "./resources/assets/js/parts/breakdown-item.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _breakdown_item_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _breakdown_item_vue_vue_type_template_id_0ca7fe80___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _breakdown_item_vue_vue_type_template_id_0ca7fe80___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/assets/js/parts/breakdown-item.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/assets/js/parts/breakdown-item.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/assets/js/parts/breakdown-item.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_breakdown_item_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./breakdown-item.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/parts/breakdown-item.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_breakdown_item_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/assets/js/parts/breakdown-item.vue?vue&type=template&id=0ca7fe80&":
+/*!*************************************************************************************!*\
+  !*** ./resources/assets/js/parts/breakdown-item.vue?vue&type=template&id=0ca7fe80& ***!
+  \*************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_breakdown_item_vue_vue_type_template_id_0ca7fe80___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./breakdown-item.vue?vue&type=template&id=0ca7fe80& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/assets/js/parts/breakdown-item.vue?vue&type=template&id=0ca7fe80&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_breakdown_item_vue_vue_type_template_id_0ca7fe80___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_breakdown_item_vue_vue_type_template_id_0ca7fe80___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/parts/button-popup.vue":
 /*!****************************************************!*\
   !*** ./resources/assets/js/parts/button-popup.vue ***!
@@ -76908,7 +77223,7 @@ var varStatus = {
     name: 'progress'
   },
   "quality": {
-    title: 'Quality Assurance',
+    title: 'Ready for QA',
     name: 'quality'
   },
   "complete": {

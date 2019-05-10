@@ -36,7 +36,7 @@
                         <div class="row align-items-center">
                             <div class="col-md-6">
                                 <ul class="list-inline mb-0">
-                                    <li class="list-inline-item">{{tasks.data.length}} Incomplete Tasks</li>
+                                    <li class="list-inline-item">{{tasks.data.length}} Tasks</li>
                                 </ul>
                             </div>
                             <div class="col-md-6 text-right">
