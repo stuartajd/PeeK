@@ -27,6 +27,7 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function(){
 	    Route::get('/{tid}', 'TaskController@getTask');
 	    Route::get('/breakdown/{tid}', 'TaskController@getBreakdown');
 	    Route::post('/breakdown/{tid}/create', 'TaskController@createBreakdown');
+	    Route::post('/breakdown/{tid}/{bid}/update', 'TaskController@updateBreakdown');
 
 	    Route::put('/update/{tid}', 'TaskController@updateTask');
 		Route::post('/create', 'TaskController@createTask');
