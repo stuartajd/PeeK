@@ -43,6 +43,7 @@ class SetPassword extends Notification
     {
         return (new MailMessage)
                     ->line('You have been signed up for an account with PeeK, the project management tool.')
+	                ->line('Please set your account password to begin using the platform.')
                     ->action('Set Password', url('/set-password/'. $this->user->password_set_token))
                     ->line('Thank you for using PeeK.');
     }

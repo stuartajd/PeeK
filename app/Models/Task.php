@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
-	protected $fillable = ['title', 'description', 'priority', 'due_date', 'account_id'];
+	protected $fillable = ['title', 'description', 'priority', 'due_date', 'account_id', 'status'];
     protected $hidden = ['created_by'];
 
     public function creator(){
@@ -15,6 +15,10 @@ class Task extends Model
 
 	public function users(){
 		return $this->belongsToMany('App\Models\User', 'tasks_users');
+	}
+
+	public function breakdown(){
+    	return $this->hasMany(TaskBreakdown::class);
 	}
 
     public function account(){

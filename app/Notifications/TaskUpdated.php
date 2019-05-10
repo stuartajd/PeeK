@@ -7,18 +7,20 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class HelloUser extends Notification
+class TaskUpdated extends Notification
 {
     use Queueable;
-
+    protected $task;
+    protected $user;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user, $task)
     {
-        //
+    	$this->user = $user;
+        $this->task = $task;
     }
 
     /**
@@ -40,10 +42,12 @@ class HelloUser extends Notification
      */
     public function toMail($notifiable)
     {
+    	$status = array("awaiting"=>"Awaiting Assignment", "assigned"=>"Assigned", "progress"=>"In Progress", "complete"=>"Complete", "quality"=>"Ready for QA");
+
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+	        ->greeting('Hi '. $this->user->name)
+            ->line('The task status for '. $this->task->title .' has been changed to '. $status[$this->task->status].'.')
+            ->action('View Task', url('/tasks/view/' . $this->task->id));
     }
 
     /**

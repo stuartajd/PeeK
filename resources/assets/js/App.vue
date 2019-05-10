@@ -84,6 +84,7 @@
 				.then(response => {
                     this.$store.commit( 'setUser', response.data.user);
                     this.$store.commit( 'setCompany', response.data.company);
+                    this.$store.commit( 'setRoles', response.data.roles);
 				});
         }
     }

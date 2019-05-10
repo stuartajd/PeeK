@@ -24,7 +24,7 @@
 	export default {
 		name: "user-list",
         components: {  },
-        props: [],
+        props: [ ],
         data(){
 		    return {
                 searchTerm: "",
@@ -37,12 +37,12 @@
                 if(!this.searchTerm.length) return excludedCurrentUser;
 				return excludedCurrentUser.filter(el => el.name.indexOf(this.searchTerm) !== -1);
             },
-            selectedUsers(){
+            selectedUsersList(){
                 return this.users.filter(el => el.selected);
             }
         },
         mounted(){
-            axios.get('/api/users/getAllUsers')
+            this.$http.get('/api/users/getAllUsers')
                 .then(response => {
                 	this.users = response.data;
                 })
@@ -56,7 +56,7 @@
         methods: {
             selectUser(user){
                 this.$set(user, 'selected', !user.selected);
-                this.$emit('updateUsers', this.selectedUsers);
+                this.$emit('updateUsers', this.selectedUsersList);
             }
         }
 	}

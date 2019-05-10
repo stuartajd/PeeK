@@ -138,8 +138,17 @@ a.no-style {
     .droparea {
         min-height: 60vh;
         max-height: 60vh;
+        padding: 0 1.25rem;
         height: auto;
         overflow-y: scroll;
+    }
+
+    &>.card-body {
+        padding: 0 !important;
+
+        & > div > .card-title {
+            padding: 1.25rem 1.25rem 0 !important;
+        }
     }
 }
 

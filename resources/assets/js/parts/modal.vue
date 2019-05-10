@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="modalOpen" class="btn btn-outline-primary">{{button}}</button>
+        <button @click="modalOpen" :class="buttonclass" class="btn">{{button}}</button>
         <portal to="portal" v-if="showModal">
             <div class="bg-overlay-darken" @click="modalOpen"></div>
 
@@ -14,8 +14,8 @@
                     <div class="content p-3">
                         <slot />
                     </div>
-                    <div class="footer" v-if="footer">
-
+                    <div class="footer text-right" v-if="submit">
+                        <button @click="$emit('submit');" class="btn btn-outline-success">{{submit}}</button>
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
 <script>
 	export default {
 		name: "modal",
-	    props: ['title', 'button'],
+	    props: ['title', 'button', 'buttonclass', 'submit'],
         data(){
 		    return {
 		        showModal: false
@@ -34,6 +34,12 @@
         },
         methods: {
 		    modalOpen(){
+		        if(!this.showModal){
+		            this.$emit('opened');
+                } else {
+                    this.$emit('closed');
+                }
+
 		        this.showModal = !this.showModal;
             }
         }

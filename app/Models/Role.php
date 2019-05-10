@@ -8,4 +8,8 @@ class Role extends Model
 {
     protected $table = 'company_roles';
     protected $hidden = ['created_at', 'updated_at', 'company_id'];
+
+	public function users(){
+		return $this->hasMany(User::class);
+	}
 }
