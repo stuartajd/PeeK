@@ -15,16 +15,11 @@
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link to="/search" class="nav-link">
-                                <icon name="list" />&nbsp;Search
-                            </router-link>
-                        </li>
-                        <li class="nav-item">
                             <router-link to="/tasks" class="nav-link">
                                 <icon name="list" />&nbsp;Tasks
                             </router-link>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" v-if="this.isAdmin">
                             <router-link to="/admin" class="nav-link">
                                 <icon name="cog" />&nbsp;Settings
                             </router-link>
@@ -70,11 +65,15 @@
 </template>
 
 <script>
-    import navigation from './parts/navigation.vue';
+    import './icons/logo';
+    import './icons/dashboard';
+    import './icons/search';
+    import './icons/list';
+    import './icons/cog';
 
     export default {
         name: "App",
-        components: { navigation },
+        components: {  },
         computed: {
             getYear(){
             	return new Date().getFullYear();
@@ -84,6 +83,8 @@
 			this.$http.get('api/state')
 				.then(response => {
                     this.$store.commit( 'setUser', response.data.user);
+                    this.$store.commit( 'setCompany', response.data.company);
+                    this.$store.commit( 'setRoles', response.data.roles);
 				});
         }
     }

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
 {
+	protected $table = 'companies';
+
 	/**
 	 * Returns the users that are members of the company
 	 * @return \Illuminate\Database\Eloquent\Relations\hasMany

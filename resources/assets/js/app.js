@@ -9,6 +9,9 @@ Vue.use(VueRouter);
 import axios from 'axios';
 Vue.prototype.$http = axios;
 
+Vue.config.productionTip = false;
+Vue.config.debug = true;
+
 /** Sentry Debug Code **/
 import Raven from 'raven-js';
 import RavenVue from 'raven-js/plugins/vue';
@@ -32,7 +35,7 @@ import modal from './parts/modal';
 Vue.component('modal', modal);
 
 import PortalVue from 'portal-vue'
-Vue.use(PortalVue)
+Vue.use(PortalVue);
 
 import SvgIcon from 'vue-svgicon'
 Vue.use(SvgIcon, {
@@ -40,6 +43,34 @@ Vue.use(SvgIcon, {
 });
 
 Vue.use(require('vue-moment'));
+
+/**
+ * Permissions
+ */
+class Permission {
+    install(vue, options) {
+        vue.mixin(this.mixin());
+    }
+
+    mixin() {
+        return {
+            computed: {
+                isAdmin() {
+                    let role = this.$store.state.roles.filter(el => el.id == this.$store.state.user.role_id)[0];
+                    if(!role) return false;
+                    return role.role_type === 'administrator';
+                },
+                isDeveloper() {
+                    let role = this.$store.state.roles.filter(el => el.id == this.$store.state.user.role_id)[0];
+                    if(!role) return false;
+                    return role.role_type === 'developer';
+                }
+            }
+        };
+    }
+}
+
+Vue.use(new Permission());
 
 /** Routes **/
 import {routes} from './routes';

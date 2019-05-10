@@ -24,21 +24,25 @@
 	export default {
 		name: "user-list",
         components: {  },
-        props: [],
+        props: [ ],
         data(){
 		    return {
-		        searchTerm: "",
+                searchTerm: "",
 		    	users: []
             }
         },
         computed: {
 			filteredUsers(){
-			    if(!this.searchTerm.length) return this.users;
-				return this.users.filter(el => el.name.indexOf(searchTerm) !== -1);
+                let excludedCurrentUser = this.users.filter(el => el.name !== this.$store.getters.user.name);
+                if(!this.searchTerm.length) return excludedCurrentUser;
+				return excludedCurrentUser.filter(el => el.name.indexOf(this.searchTerm) !== -1);
+            },
+            selectedUsersList(){
+                return this.users.filter(el => el.selected);
             }
         },
         mounted(){
-            axios.get('/api/users/getAllUsers')
+            this.$http.get('/api/users/getAllUsers')
                 .then(response => {
                 	this.users = response.data;
                 })
@@ -52,7 +56,7 @@
         methods: {
             selectUser(user){
                 this.$set(user, 'selected', !user.selected);
-                this.$emit('updateUsers', this.users);
+                this.$emit('updateUsers', this.selectedUsersList);
             }
         }
 	}

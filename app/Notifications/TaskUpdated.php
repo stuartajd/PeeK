@@ -7,19 +7,20 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class SetPassword extends Notification
+class TaskUpdated extends Notification
 {
     use Queueable;
-
+    protected $task;
     protected $user;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($user, $task)
     {
-        $this->user = $user;
+    	$this->user = $user;
+        $this->task = $task;
     }
 
     /**
@@ -41,12 +42,26 @@ class SetPassword extends Notification
      */
     public function toMail($notifiable)
     {
+    	$status = array("awaiting"=>"Awaiting Assignment", "assigned"=>"Assigned", "progress"=>"In Progress", "complete"=>"Complete", "quality"=>"Ready for QA");
+
         return (new MailMessage)
-                    ->line('You have been signed up for an account with PeeK, the project management tool.')
-	                ->line('Please set your account password to begin using the platform.')
-                    ->action('Set Password', url('/set-password/'. $this->user->password_set_token))
-                    ->line('Thank you for using PeeK.');
+	        ->greeting('Hi '. $this->user->name)
+            ->line('The task status for '. $this->task->title .' has been changed to '. $status[$this->task->status].'.')
+            ->action('View Task', url('/tasks/view/' . $this->task->id));
     }
+	/**
+	 * Get the Slack representation of the notification.
+	 *
+	 * @param  mixed  $notifiable
+	 * @return SlackMessage
+	 */
+	public function toSlack($notifiable)
+	{
+		$status = array("awaiting"=>"Awaiting Assignment", "assigned"=>"Assigned", "progress"=>"In Progress", "complete"=>"Complete", "quality"=>"Ready for QA");
+
+		return (new SlackMessage)
+	        ->content('The task status for '. $this->task->title .' has been changed to '. $status[$this->task->status].'.');
+	}
 
     /**
      * Get the array representation of the notification.

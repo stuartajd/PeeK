@@ -40,13 +40,29 @@ class UserController extends Controller
 			'email' => $request->get('email'),
 			'provider_id' => '',
 			'provider' => 'registration',
+			'role_id' => $request->get('role_id'),
 			'company_id' => $this->user()->company_id,
 			'password_set_token' => $passwordSetToken
 		]);
 
 		$user->notify(new SetPassword($user));
 
-		return response()->json($user);
+		return $this->getAllUsers();
+	}
+
+	public function updateUser(Request $request){
+		$this->validate($request, [
+			'name' => 'required|string|max:255',
+			'email' => 'required|string|email|max:255'
+		]);
+
+		$user = User::where('id', $request->get('id'))->first();
+		$user->name = $request->get('name');
+		$user->email = $request->get('email');
+		$user->role_id = $request->get('role_id');
+		$user->save();
+
+		return $this->getAllUsers();
 	}
 
 	public function getSetPassword(Request $request, $token){

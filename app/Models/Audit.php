@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Audit extends Model
 {
     protected $hidden = ['id', 'auditable_id', 'auditable_type', 'updated_at', 'user_id'];
-
+	protected $fillable = ['user_id', 'audit', 'company_id'];
 	/**
 	 * @return \Illuminate\Database\Eloquent\Relations\MorphTo
 	 */

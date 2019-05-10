@@ -29,7 +29,7 @@
                     </div>
                     <div class="form-group">
                         <label for="taskDescription">Task Due Date</label>
-                        <datepicker input-class="form-control" v-model="task.due_date"></datepicker>
+                        <datepicker input-class="form-control" format="dsu MMM yyyy" v-model="task.due_date"></datepicker>
                     </div>
                     <div class="form-group">
                         <label for="taskDescription">Account</label>
@@ -70,7 +70,6 @@
                     description: "",
                     priority: "",
                     due_date: "",
-                    created_by: "",
                     account_id: "",
                     users: []
                 }
@@ -81,15 +80,14 @@
 			    this.task.users = users;
             },
 		    createTask(){
-				this.task.due_date = moment(this.task.due_date, "YYYY-MM-DD");
-
-		    	axios.post('/api/tasks/', this.task)
-                    .then(response => {
-                    	console.log('Submitted');
+		    	this.$http.post('/api/tasks/create', this.task)
+                    .then(resp => {
                     	this.$notify({
                             title: 'Task Created',
                             type: 'success'
                         });
+
+                    	this.$router.push(`/tasks/view/${resp.data.id}`);
                     })
                     .catch(error => {
                     	console.log(error);
