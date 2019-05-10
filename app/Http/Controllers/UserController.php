@@ -40,7 +40,7 @@ class UserController extends Controller
 			'email' => $request->get('email'),
 			'provider_id' => '123456',
 			'provider' => 'registration',
-			'role_id' => $request->get('role'),
+			'role_id' => $request->get('role_id'),
 			'company_id' => $this->user()->company_id,
 			'password_set_token' => $passwordSetToken
 		]);
