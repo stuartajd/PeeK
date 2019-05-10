@@ -52,6 +52,6 @@ Route::group(['middleware' => 'auth'], function() {
     {
         return view('router');
     })->where("path", ".+");
-})->name('overview');
+});
 
 Auth::routes();

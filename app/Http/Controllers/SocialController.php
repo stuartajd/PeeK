@@ -19,9 +19,9 @@ class SocialController extends Controller
 		$user = User::where('email', $userSocial->getEmail())->first();
 		if ($user) {
 			Auth::login($user, true);
-			return redirect('overview');
+			return redirect('/');
 		} else {
-			return redirect('no-account');
+			return redirect()->route('no-account');
 		}
 	}
 }
