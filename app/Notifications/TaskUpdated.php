@@ -49,6 +49,19 @@ class TaskUpdated extends Notification
             ->line('The task status for '. $this->task->title .' has been changed to '. $status[$this->task->status].'.')
             ->action('View Task', url('/tasks/view/' . $this->task->id));
     }
+	/**
+	 * Get the Slack representation of the notification.
+	 *
+	 * @param  mixed  $notifiable
+	 * @return SlackMessage
+	 */
+	public function toSlack($notifiable)
+	{
+		$status = array("awaiting"=>"Awaiting Assignment", "assigned"=>"Assigned", "progress"=>"In Progress", "complete"=>"Complete", "quality"=>"Ready for QA");
+
+		return (new SlackMessage)
+	        ->content('The task status for '. $this->task->title .' has been changed to '. $status[$this->task->status].'.');
+	}
 
     /**
      * Get the array representation of the notification.

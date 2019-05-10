@@ -10,6 +10,11 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+	public function routeNotificationForSlack($notification)
+	{
+		return 'https://hooks.slack.com/services/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';
+	}
+
     protected $fillable = [
         'name', 'email', 'password', 'provider', 'provider_id', 'company_id', 'password_set_token'
     ];
