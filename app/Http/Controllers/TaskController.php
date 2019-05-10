@@ -39,6 +39,12 @@ class TaskController extends Controller
 	    return response()->json($task);
     }
 
+	function updateBreakdown(Request $request, $tid, $bid){
+		$task = Task::where('id', $tid)->with(['breakdown'])->first();
+		$task->breakdown()->where('id', $bid)->update($request->all());
+		return $this->getBreakdown($tid);
+	}
+
     function createBreakdown(Request $request, $tid){
 	    $request->validate([
 		    'title' => 'required',
