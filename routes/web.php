@@ -22,7 +22,8 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function(){
     /** Task Routes */
     Route::group(['prefix'=>'tasks'], function(){
 		Route::get('/', 'TaskController@getUserTasks');
-		Route::get('/{tid}', 'TaskController@getTask');
+	    Route::get('/company', 'TaskController@getAllTasks');
+	    Route::get('/{tid}', 'TaskController@getTask');
 	    Route::get('/breakdown/{tid}', 'TaskController@getBreakdown');
 	    Route::post('/breakdown/{tid}/create', 'TaskController@createBreakdown');
 
@@ -32,6 +33,8 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function(){
 
 	/** Task Routes */
 	Route::group(['prefix'=>'settings'], function(){
+		Route::get('/accounts', 'StateController@getAccounts');
+
 		Route::get('/role', 'RoleController@getAllRoles');
 		Route::post('/role/update', 'RoleController@updateRoles');
 	});

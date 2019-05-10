@@ -1,6 +1,6 @@
 <template>
     <div class="container-fluid">
-        <h5 class="page-title">Your Tasks</h5>
+        <h5 class="page-title">All Tasks</h5>
 
         <loading :loading="tasks.loaded" message="Loading Tasks.." />
 
@@ -36,7 +36,7 @@
                         <div class="row align-items-center">
                             <div class="col-md-6">
                                 <ul class="list-inline mb-0">
-                                    <li class="list-inline-item">{{tasks.data.length}} Incomplete Tasks</li>
+                                    <li class="list-inline-item">{{tasks.data.length}} Tasks</li>
                                 </ul>
                             </div>
                             <div class="col-md-6 text-right">
@@ -52,13 +52,13 @@
                                                 Due Date <icon name="arrow_right"/>
                                             </span>
                                             <span
-                                                @click.prevent="sortFiltered('due_date', 'desc')"
-                                                v-if="sort.type == 'due_date' && sort.mode == 'asc'">
+                                                    @click.prevent="sortFiltered('due_date', 'desc')"
+                                                    v-if="sort.type == 'due_date' && sort.mode == 'asc'">
                                                 Due Date <icon name="arrow_down" /></span>
 
                                             <span
-                                                @click.prevent="sortFiltered('due_date', 'asc')"
-                                                v-if="sort.type == 'due_date' && sort.mode == 'desc'">
+                                                    @click.prevent="sortFiltered('due_date', 'asc')"
+                                                    v-if="sort.type == 'due_date' && sort.mode == 'desc'">
                                                 Due Date <icon name="arrow_up" /></span>
                                         </div>
                                     </li>
@@ -126,83 +126,83 @@
 </template>
 
 <script>
-	import card from '../parts/card';
-	import priority from '../parts/priority';
-	import status from '../parts/status';
-	import loading from '../parts/loading';
-	import buttonPopup from '../parts/button-popup';
+    import card from '../parts/card';
+    import priority from '../parts/priority';
+    import status from '../parts/status';
+    import loading from '../parts/loading';
+    import buttonPopup from '../parts/button-popup';
 
-	import '../icons/arrow_down';
-	import '../icons/arrow_up';
-	import '../icons/arrow_right';
+    import '../icons/arrow_down';
+    import '../icons/arrow_up';
+    import '../icons/arrow_right';
 
-	export default {
-		name: "tasks",
-		components: { card, loading, priority, status, buttonPopup },
-		data() {
-			return {
-				tasks: {
-					data: [],
-					loaded: false,
-				},
+    export default {
+        name: "tasks",
+        components: { card, loading, priority, status, buttonPopup },
+        data() {
+            return {
+                tasks: {
+                    data: [],
+                    loaded: false,
+                },
                 filterTerm: "",
                 sort: {
-					type: 'id',
+                    type: 'id',
                     mode: 'asc'
                 }
-			}
-		},
+            }
+        },
         computed: {
-		    filteredTasks(){
-		    	/** Can filter by the following:
+            filteredTasks(){
+                /** Can filter by the following:
                  * #id
                  * status:**
                  * priority:**
                  * **/
-		    	var filters = [
+                var filters = [
                     { selector: "status:", element: "status" },
                     { selector: "priority:", element: "priority" }
                 ];
 
                 let self = this;
-		    	let filtered = this.tasks.data.filter(function(el){
-		    		for(var filter of filters){
-		    			if(this.filterTerm.toLowerCase().indexOf(filter.selector) !== -1){
-		    				// They are filtering on a specific thing
-							if(el[filter.element].toLowerCase().indexOf(this.filterTerm.split(filter.selector)[1].toLowerCase()) !== -1) return true;
-						}
+                let filtered = this.tasks.data.filter(function(el){
+                    for(var filter of filters){
+                        if(this.filterTerm.toLowerCase().indexOf(filter.selector) !== -1){
+                            // They are filtering on a specific thing
+                            if(el[filter.element].toLowerCase().indexOf(this.filterTerm.split(filter.selector)[1].toLowerCase()) !== -1) return true;
+                        }
                     }
-					if(el.id == this.filterTerm) return true;
-		    		if(el.title.toLowerCase().indexOf(this.filterTerm.toLowerCase()) !== -1) return true;
-				}, this).sort(function(fir, sec){
-					if(fir[self.sort.type] > sec[self.sort.type]) { return 1; }
-					if(fir[self.sort.type] < sec[self.sort.type]) { return -1; }
-					if(fir[self.sort.type] == sec[self.sort.type]) { return 0; }
-				});
+                    if(el.id == this.filterTerm) return true;
+                    if(el.title.toLowerCase().indexOf(this.filterTerm.toLowerCase()) !== -1) return true;
+                }, this).sort(function(fir, sec){
+                    if(fir[self.sort.type] > sec[self.sort.type]) { return 1; }
+                    if(fir[self.sort.type] < sec[self.sort.type]) { return -1; }
+                    if(fir[self.sort.type] == sec[self.sort.type]) { return 0; }
+                });
 
-		    	if(self.sort.mode == 'asc') {
-		    		return filtered;
-				} else {
-		    		return filtered.reverse();
+                if(self.sort.mode == 'asc') {
+                    return filtered;
+                } else {
+                    return filtered.reverse();
                 }
             }
         },
         methods: {
             sortFiltered(type, mode){
-            	this.sort = {
-            		type: type,
+                this.sort = {
+                    type: type,
                     mode: mode
                 };
             }
         },
-		mounted() {
-			this.$http.get('/api/tasks')
-				.then(response => {
-					this.tasks.loaded = true;
-					this.tasks.data = response.data.tasks;
-				});
-		}
-	}
+        mounted() {
+            this.$http.get('/api/tasks/company')
+                    .then(response => {
+                        this.tasks.loaded = true;
+                        this.tasks.data = response.data.tasks;
+                    });
+        }
+    }
 </script>
 
 <style>

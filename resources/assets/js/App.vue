@@ -15,6 +15,11 @@
                             </router-link>
                         </li>
                         <li class="nav-item">
+                            <router-link to="/search" class="nav-link">
+                                <icon name="search" />&nbsp;Search
+                            </router-link>
+                        </li>
+                        <li class="nav-item">
                             <router-link to="/tasks" class="nav-link">
                                 <icon name="list" />&nbsp;Tasks
                             </router-link>
@@ -31,7 +36,6 @@
                                 Logged in as: {{this.$store.getters.user.name}}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <router-link class="dropdown-item" to="profile">Profile</router-link>
                                 <a class="dropdown-item" href="/logout">Logout</a>
                             </div>
                         </li>
