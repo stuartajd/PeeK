@@ -4,7 +4,7 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::get('login/{provider}', 'SocialController@redirect');
 Route::post('login/{provider}/callback','SocialController@callback');
-Route::get('no-account', function() { return view('auth.missing'); });
+Route::get('no-account', function() { return view('auth.missing'); })->name('no-account');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('logout', 'Auth\LoginController@logout');
 Route::get('register-18f8f39c9c', 'Auth\RegisterController@showRegistrationForm')->name('register');
@@ -52,9 +52,6 @@ Route::group(['middleware' => 'auth'], function() {
     {
         return view('router');
     })->where("path", ".+");
-});
+})->name('overview');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
