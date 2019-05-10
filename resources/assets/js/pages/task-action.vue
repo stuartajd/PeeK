@@ -30,25 +30,7 @@
                 <card title="Awaiting" class="dropzone">
                     <div class="list-group">
                         <draggable id="awaiting" class="droparea" v-model="list.awaiting" :options="{group:'draggable'}" @start="drag=true" @end="updateList">
-<<<<<<< HEAD
-                            <card v-for="element in list.awaiting" @click.native="showDetails(element)" class="mb-3" :id="element.id" :key="element.id">
-                                <div :class="{'text-center':element.showMore}">
-                                    {{element.title}}
-                                </div>
-
-                                <div v-if="element.showMore" class="border-top mt-3 pt-3">
-                                    {{element.description}}
-
-                                    <div class="text-right mt-3">
-                                        <button type="button" class="btn btn-sm btn-outline-success">Edit</button>
-                                        <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
-                                    </div>
-
-                                </div>
-                            </card>
-=======
                             <breakdown v-for="element in list.awaiting" :element="element" class="mb-3" :id="element.id" :key="element.id"></breakdown>
->>>>>>> 2a8d895b43f8f781429e8536616f9fe6bb1948ad
                         </draggable>
                     </div>
                 </card>
@@ -58,25 +40,7 @@
                 <card title="In Progress" class="dropzone">
                     <div class="list-group">
                         <draggable id="progress" class='droparea' v-model="list.progress" :options="{group:'draggable'}" @start="drag=true" @end="updateList">
-<<<<<<< HEAD
-                            <card v-for="element in list.progress" @click.native="showDetails(element)" class="mb-3" :id="element.id" :key="element.id">
-                                <div :class="{'text-center':element.showMore}">
-                                    {{element.title}}
-                                </div>
-
-                                <div v-if="element.showMore" class="border-top mt-3 pt-3">
-                                    {{element.description}}
-
-                                    <div class="text-right mt-3">
-                                        <button type="button" class="btn btn-sm btn-outline-success">Edit</button>
-                                        <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
-                                    </div>
-
-                                </div>
-                            </card>
-=======
                             <breakdown v-for="element in list.progress" :element="element" class="mb-3" :id="element.id" :key="element.id"></breakdown>
->>>>>>> 2a8d895b43f8f781429e8536616f9fe6bb1948ad
                         </draggable>
                     </div>
                 </card>
@@ -86,25 +50,7 @@
                 <card title="Ready for Testing" class="dropzone">
                     <div class="list-group">
                         <draggable id="testing" class='droparea' v-model="list.testing" :options="{group:'draggable'}" @start="drag=true" @end="updateList">
-<<<<<<< HEAD
-                            <card v-for="element in list.testing" @click.native="showDetails(element)" class="mb-3" :id="element.id" :key="element.id">
-                                <div :class="{'text-center':element.showMore}">
-                                    {{element.title}}
-                                </div>
-
-                                <div v-if="element.showMore" class="border-top mt-3 pt-3">
-                                    {{element.description}}
-
-                                    <div class="text-right mt-3">
-                                        <button type="button" class="btn btn-sm btn-outline-success">Edit</button>
-                                        <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
-                                    </div>
-
-                                </div>
-                            </card>
-=======
                             <breakdown v-for="element in list.testing" :element="element" class="mb-3" :id="element.id" :key="element.id"></breakdown>
->>>>>>> 2a8d895b43f8f781429e8536616f9fe6bb1948ad
                         </draggable>
                     </div>
                 </card>
@@ -113,25 +59,7 @@
                 <card title="Complete" class="dropzone">
                     <div class="list-group">
                         <draggable id="complete" class='droparea' v-model="list.complete" :options="{group:'draggable'}" @start="drag=true" @end="updateList">
-<<<<<<< HEAD
-                            <card v-for="element in list.complete" @click.native="showDetails(element)" class="mb-3" :id="element.id" :key="element.id">
-                                <div :class="{'text-center':element.showMore}">
-                                    {{element.title}}
-                                </div>
-
-                                <div v-if="element.showMore" class="border-top mt-3 pt-3">
-                                    {{element.description}}
-
-                                    <div class="text-right mt-3">
-                                        <button type="button" class="btn btn-sm btn-outline-success">Edit</button>
-                                        <button type="button" class="btn btn-sm btn-outline-danger">Delete</button>
-                                    </div>
-
-                                </div>
-                            </card>
-=======
                             <breakdown v-for="element in list.complete" :element="element" class="mb-3" :id="element.id" :key="element.id"></breakdown>
->>>>>>> 2a8d895b43f8f781429e8536616f9fe6bb1948ad
                         </draggable>
                     </div>
                 </card>
@@ -162,15 +90,6 @@
             }
         },
         methods: {
-<<<<<<< HEAD
-=======
-		    editBreakdown(element){
-                console.log("Test");
-            },
-            deleteBreakdown(element){
-                console.log("Test");
-            },
->>>>>>> 2a8d895b43f8f781429e8536616f9fe6bb1948ad
 		    showDetails(element){
 		        this.$set(element, "showMore", !element.showMore);
             },
@@ -222,7 +141,3 @@
 		}
 	}
 </script>
-
-<style>
-
-</style>
