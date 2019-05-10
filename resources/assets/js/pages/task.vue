@@ -37,11 +37,14 @@
                                     <card title="Task Details" class="shadow-0">
                                         <div class="form-group">
                                             <label for="taskName">Task Name</label>
-                                            <input type="text" class="form-control" id="taskName" v-model='task.edit.title' placeholder="Task Name">
+                                            <input type="text" class="form-control" :class="{ 'is-invalid' : errors && errors.title.length}"
+                                                   id="taskName" v-model='task.edit.title' placeholder="Task Name">
+                                            <div v-if="errors && errors.title.length" class="text-danger">{{errors.title[0]}}</div>
                                         </div>
                                         <div class="form-group">
                                             <label for="taskDescription">Task Description</label>
-                                            <textarea class="form-control" id="taskDescription" placeholder="Task Description" v-model='task.edit.description' rows="10"></textarea>
+                                            <textarea class="form-control" id="taskDescription" :class="{ 'is-invalid' : errors && errors.description.length}" placeholder="Task Description" v-model='task.edit.description' rows="10"></textarea>
+                                            <div v-if="errors && errors.description.length" class="text-danger">{{errors.description[0]}}</div>
                                         </div>
                                     </card>
                                 </div>
@@ -49,23 +52,27 @@
                                     <card title="Task Options" class="mb-3">
                                         <div class="form-group">
                                             <label for="taskName">Task Priority</label>
-                                            <select name="" id="" class="form-control" v-model="task.edit.priority">
+                                            <select name="" id="" class="form-control" v-model="task.edit.priority" :class="{ 'is-invalid' : errors && errors.priority.length}">
                                                 <option value="" disabled>Select Priority</option>
                                                 <option value="low">Low Priority</option>
                                                 <option value="normal">Normal Priority</option>
                                                 <option value="urgent">Urgent Priority</option>
                                             </select>
+                                            <div v-if="errors && errors.priority.length" class="text-danger">{{errors.priority[0]}}</div>
                                         </div>
                                         <div class="form-group">
                                             <label for="taskDescription">Task Due Date</label>
-                                            <datepicker input-class="form-control" format="dsu MMM yyyy" v-model="task.edit.due_date"></datepicker>
+                                            <datepicker input-class="form-control" format="dsu MMM yyyy" v-model="task.edit.due_date"
+                                                        :class="{ 'is-invalid' : errors && errors.due_date.length}"></datepicker>
+                                            <div v-if="errors && errors.due_date.length" class="text-danger">{{errors.due_date[0]}}</div>
                                         </div>
                                         <div class="form-group">
                                             <label for="taskDescription">Account</label>
-                                            <select name="" id="" class="form-control" v-model="task.edit.account_id">
+                                            <select name="" id="" class="form-control" v-model="task.edit.account_id" :class="{ 'is-invalid' : errors && errors.account_id.length}">
                                                 <option value="" disabled>Select Account</option>
                                                 <option value="1">Test</option>
                                             </select>
+                                            <div v-if="errors && errors.account_id.length" class="text-danger">{{errors.account_id[0]}}</div>
                                         </div>
                                     </card>
 
@@ -144,7 +151,9 @@
 		components: { card, loading, priority, status, scrollGroup, userList, Datepicker },
 		data() {
 			return {
-				task: {
+                errors: null,
+
+                task: {
                     edit: {},
 					data: {},
 					loaded: false,
@@ -179,6 +188,8 @@
                                 text: 'Could not update the task, please try again.',
                                 type: 'error'
                             })
+
+                            this.errors = error.response.data.errors;
                         });
             },
 		    setStatus(task, state){

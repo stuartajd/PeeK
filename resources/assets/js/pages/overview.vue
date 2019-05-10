@@ -65,13 +65,13 @@
         },
         computed: {
             completedTasks(){
-            	return this.tasks.data.filter(el => el.status == 'completed');
+            	return this.tasks.data.filter(el => el.status == 'complete');
             },
             incompleteTasks(){
-                return this.tasks.data.filter(el => el.status !== 'completed');
+                return this.tasks.data.filter(el => el.status !== 'complete');
             },
             awaitingTasks(){
-            	return this.tasks.data.filter(el => el.status == 'awaiting');
+            	return this.tasks.data.filter(el => el.status == 'quality');
             }
         },
         mounted() {

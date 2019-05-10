@@ -33,7 +33,7 @@ let varStatus = {
 		name: 'progress'
 	},
 	"quality": {
-		title: 'Quality Assurance',
+		title: 'Ready for QA',
 		name: 'quality'
 	},
 	"complete": {
