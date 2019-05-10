@@ -3,8 +3,9 @@
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::get('login/{provider}', 'SocialController@redirect');
+Route::get('login/{provider}/callback','SocialController@callback');
 Route::post('login/{provider}/callback','SocialController@callback');
-Route::get('no-account', function() { return view('auth.missing'); });
+Route::get('no-account', function() { return view('auth.missing'); })->name('no-account');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('logout', 'Auth\LoginController@logout');
 Route::get('register-18f8f39c9c', 'Auth\RegisterController@showRegistrationForm')->name('register');
@@ -22,7 +23,8 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function(){
     /** Task Routes */
     Route::group(['prefix'=>'tasks'], function(){
 		Route::get('/', 'TaskController@getUserTasks');
-		Route::get('/{tid}', 'TaskController@getTask');
+	    Route::get('/company', 'TaskController@getAllTasks');
+	    Route::get('/{tid}', 'TaskController@getTask');
 	    Route::get('/breakdown/{tid}', 'TaskController@getBreakdown');
 	    Route::post('/breakdown/{tid}/create', 'TaskController@createBreakdown');
 
@@ -32,6 +34,8 @@ Route::group(['prefix' => 'api', 'middleware' => ['auth']], function(){
 
 	/** Task Routes */
 	Route::group(['prefix'=>'settings'], function(){
+		Route::get('/accounts', 'StateController@getAccounts');
+
 		Route::get('/role', 'RoleController@getAllRoles');
 		Route::post('/role/update', 'RoleController@updateRoles');
 	});
@@ -52,6 +56,3 @@ Route::group(['middleware' => 'auth'], function() {
 });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-

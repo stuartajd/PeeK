@@ -35,7 +35,7 @@
                         <label for="taskDescription">Account</label>
                         <select name="" id="" class="form-control" v-model="task.account_id">
                             <option value="" disabled>Select Account</option>
-                            <option value="1">Test</option>
+                            <option v-for="account in accounts" :value="account.id">{{account.name}}</option>
                         </select>
                     </div>
                 </card>
@@ -65,6 +65,7 @@
 		components: { card, Datepicker, userList },
         data() {
 			return {
+			    accounts: [],
 				task: {
 					title: "",
                     description: "",
@@ -95,7 +96,10 @@
             }
         },
 		mounted() {
-
+            this.$http.get('/api/settings/accounts')
+                .then(resp => {
+                    this.accounts = resp.data;
+                });
 		}
 	}
 </script>

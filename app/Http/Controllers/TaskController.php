@@ -21,6 +21,14 @@ class TaskController extends Controller
         ]);
     }
 
+	function getAllTasks(){
+		$tasks = Task::where('company_id', $this->user()->company->id)->with(['creator', 'users', 'account', 'audit', 'audit.user'])->get();
+
+		return response()->json([
+			'tasks' => $tasks
+		]);
+	}
+
     function getTask($tid){
     	$task = Task::where('id', $tid)->with(['creator', 'users', 'account', 'audit', 'audit.user'])->first();
         return response()->json($task);
@@ -100,8 +108,7 @@ class TaskController extends Controller
 			'title' => 'required',
 			'description' => 'required',
 			'due_date' => 'required',
-			'priority' => 'required',
-			'users' => 'required'
+			'priority' => 'required'
 		]);
 
 		$task = new Task();

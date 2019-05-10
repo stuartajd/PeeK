@@ -33,9 +33,8 @@
         },
         computed: {
 			filteredUsers(){
-                let excludedCurrentUser = this.users.filter(el => el.name !== this.$store.getters.user.name);
-                if(!this.searchTerm.length) return excludedCurrentUser;
-				return excludedCurrentUser.filter(el => el.name.indexOf(this.searchTerm) !== -1);
+                if(!this.searchTerm.length) return this.users;
+				return this.users.filter(el => el.name.indexOf(this.searchTerm) !== -1);
             },
             selectedUsersList(){
                 return this.users.filter(el => el.selected);

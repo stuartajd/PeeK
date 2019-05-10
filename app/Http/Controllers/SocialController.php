@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Socialite;
+use Auth;
 use App\Models\User;
 
 class SocialController extends Controller
@@ -15,13 +16,14 @@ class SocialController extends Controller
 
 	public function callback($provider)
 	{
-		$userSocial = Socialite::driver($provider)->stateless()->user();
-		$user = User::where(['email' => $userSocial->getEmail()])->first();
+		$userSocial = Socialite::driver($provider)->user();
+		$user = User::where('email', $userSocial->getEmail())->first();
+
 		if ($user) {
-			Auth::login($user);
-			return redirect('/overview');
+			Auth::login($user, true);
+			return redirect('/');
 		} else {
-			return redirect('/no-account');
+			return redirect()->route('no-account');
 		}
 	}
 }

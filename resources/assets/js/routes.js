@@ -1,7 +1,7 @@
 export const routes = [
 	{ path: '/', redirect: '/overview' },
 	{ path:'/overview', component: require('./pages/overview').default },
-	{ path:'/example', component: require('./pages/example').default },
+	{ path:'/search', component: require('./pages/search').default },
 
 	{ path:'/tasks', component: require('./pages/tasks').default },
 	{ path:'/tasks/create', component: require('./pages/task-create').default },
