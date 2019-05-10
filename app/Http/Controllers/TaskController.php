@@ -100,8 +100,7 @@ class TaskController extends Controller
 			'title' => 'required',
 			'description' => 'required',
 			'due_date' => 'required',
-			'priority' => 'required',
-			'users' => 'required'
+			'priority' => 'required'
 		]);
 
 		$task = new Task();

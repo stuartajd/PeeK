@@ -38,7 +38,7 @@ class UserController extends Controller
 		$user = User::create([
 			'name' => $request->get('name'),
 			'email' => $request->get('email'),
-			'provider_id' => '',
+			'provider_id' => '123456',
 			'provider' => 'registration',
 			'role_id' => $request->get('role_id'),
 			'company_id' => $this->user()->company_id,
