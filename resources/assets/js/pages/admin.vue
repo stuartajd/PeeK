@@ -8,7 +8,6 @@
                     <li><router-link to="#users">Users</router-link></li>
                     <li><router-link to="#roles">Roles</router-link></li>
                     <li><router-link to="#integrations">Integrations</router-link></li>
-                    <li><router-link to="#settings">Settings</router-link></li>
                 </ul>
             </div>
             <div class="col-md-8">
@@ -53,14 +52,18 @@
 
                             <div class="form-group">
                                 <label for="role">User Role</label>
-                                <select v-model="user.edit.role" class="form-control" id="role">
-                                    <option>Developer</option>
-                                    <option>Quality Assurance</option>
-                                    <option>Manager</option>
-                                    <option>System Administrator</option>
+                                <select v-model="user.edit.role_id" class="form-control" id="role">
+                                    <option selected disabled>Select role type</option>
+                                    <option v-for="role in roles.data" :value="role.id">{{role.role_name}}</option>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-outline-success">Update User</button>
+                            <div class="float-right">
+                                <button type="button" @click.prevent="user.editing = false; user.edit = {};" class="btn btn-outline-danger">
+                                    Clear
+                                </button>
+                            </div>
+                            <button type="button" @click.prevent="updateUser()" class="btn btn-outline-success">Update User</button>
+
                         </form>
                     </card>
 
@@ -79,11 +82,9 @@
 
                             <div class="form-group">
                                 <label for="role">User Role</label>
-                                <select v-model="user.create.role" class="form-control" id="role">
-                                    <option>Developer</option>
-                                    <option>Quality Assurance</option>
-                                    <option>Manager</option>
-                                    <option>System Administrator</option>
+                                <select v-model="user.create.role_id" class="form-control" id="role">
+                                    <option selected disabled>Select role type</option>
+                                    <option v-for="role in roles.data" :value="role.id">{{role.role_name}}</option>
                                 </select>
                             </div>
                             <button type="button" @click="createUser()" class="btn btn-outline-success">Create User</button>
@@ -112,11 +113,11 @@
                                     There are no configured roles.
                                 </td>
                             </tr>
-                            <tr v-for="(role, index) in roles.data">
+                            <tr v-for="role in roles.data" :class="{'table-danger':role.deleted}">
                                 <td>
                                     <input type="text" aria-label="First name" v-model="role.role_name" class="form-control">
                                 </td>
-                                <td>
+                                <td :colspan="{'2':role.deleted}">
                                     <select class="custom-select" v-model="role.role_type" id="inputGroupSelect01">
                                         <option selected disabled>Select role type</option>
                                         <option value="developer">Developer</option>
@@ -124,7 +125,7 @@
                                         <option value="administrator">Administrator</option>
                                     </select>
                                 </td>
-                                <td @click.prevent="removeRole(index)" style="vertical-align: middle;" class="cursor-pointer">
+                                <td v-if="!role.deleted" @click.prevent="removeRole(role)" style="vertical-align: middle;" class="cursor-pointer">
                                     X
                                 </td>
                             </tr>
@@ -166,12 +167,6 @@
                         </ul>
                     </card>
                 </expand>
-
-                <expand title="Settings">
-                    <card id="settings" title="Manage Settings" class="mb-3">
-                        // Form for settings
-                    </card>
-                </expand>
             </div>
         </div>
     </div>
@@ -199,6 +194,7 @@
                         email: "",
                         role: ""
                     },
+                    createErrors: {},
                     editing: false,
                     edit: {
                         name: "",
@@ -216,6 +212,7 @@
                     this.user.loaded = true;
                 });
 
+            // Set roles
             this.$http.get('/api/settings/role')
                     .then(resp => {
                         this.roles.data = resp.data;
@@ -223,20 +220,41 @@
                     });
         },
         methods: {
-		    removeRole(index){
-		        this.roles.data = this.roles.data.splice(index+1, 1);
+		    removeRole(role){
+                this.$set(role, 'deleted', true);
             },
 		    addRole(){
 		        this.roles.data.push({ role_name: "", role_type: "" });
             },
             saveRoles(){
-                this.$http.put('/api/role/update', this.roles.data)
+                this.$http.post('/api/settings/role/update', this.roles.data)
                     .then(resp => {
                         this.$notify({
                             type: 'success',
                             text: 'Roles have been saved successfully'
-                        })
+                        });
+
+                        this.roles.data = resp.data;
                     });
+            },
+            updateUser(){
+                this.$http.post('/api/users/update', this.user.edit)
+                        .then(resp => {
+                            this.$notify({
+                                type: 'success',
+                                text: 'User account has been updated successfully'
+                            });
+
+                            this.user.edit = {name: "",email: "",role_id: ""};
+                            this.user.editing = false;
+                            this.user.users = resp.data;
+                        })
+                        .catch(err => {
+                            this.$notify({
+                                type: 'error',
+                                text: 'User account could not be created'
+                            })
+                        })
             },
 		    createUser(){
 		          this.$http.post('/api/users/create', this.user.create)
@@ -244,7 +262,10 @@
                           this.$notify({
                               type: 'success',
                               text: 'User account has been registered successfully'
-                          })
+                          });
+
+                          this.user.create = {name: "",email: "",role_id: ""};
+                          this.user.users = resp.data;
                       })
                       .catch(err => {
                         this.$notify({
@@ -253,12 +274,9 @@
                           })
                       })
             },
-		    editUser(user, submit){
+		    editUser(user){
 		        this.user.editing = true;
-
-		        if(!submit){
-                    this.user.edit = user;
-                }
+		        this.user.edit = user;
             }
         }
 	}

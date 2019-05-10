@@ -9,6 +9,9 @@ Vue.use(VueRouter);
 import axios from 'axios';
 Vue.prototype.$http = axios;
 
+Vue.config.productionTip = false;
+Vue.config.debug = true;
+
 /** Sentry Debug Code **/
 import Raven from 'raven-js';
 import RavenVue from 'raven-js/plugins/vue';
@@ -53,14 +56,16 @@ class Permission {
         return {
             computed: {
                 isAdmin() {
-                    if (typeof this.$store.state.user.role === 'undefined') return null;
-                    return this.$store.state.user.role.role_type === 'administrator';
+                    let role = this.$store.state.roles.filter(el => el.id == this.$store.state.user.role_id)[0];
+                    if(!role) return false;
+                    return role.role_type === 'administrator';
                 },
                 isDeveloper() {
-                    if (typeof this.$store.state.user.role === 'undefined') return null;
-                    return this.$store.state.user.role.role_type === 'developer';
+                    let role = this.$store.state.roles.filter(el => el.id == this.$store.state.user.role_id)[0];
+                    if(!role) return false;
+                    return role.role_type === 'developer';
                 }
-            },
+            }
         };
     }
 }

@@ -12,13 +12,15 @@
                     <div class="row">
                         <div class="col-md-6">
                             <card title="Attachments" class="mb-3">
-                                <div>Attachments</div>
+                                <div class="text-center">There are currently no files attached to this task.</div>
                             </card>
                         </div>
                         <div class="col-md-6">
                             <card title="Audit Logs" class="mb-3">
                                 <scroll-group>
-                                    <div v-for="action in task.data.audit" class="list-group-item list-group-item-action not-selectable cursor-pointer">{{action.audit}}</div>
+                                    <div v-for="action in task.data.audit" class="list-group-item list-group-item-action not-selectable cursor-pointer">{{action.audit}}<br />
+                                        <small>{{action.user.name}} at {{action.created_at}}</small>
+                                    </div>
                                 </scroll-group>
                             </card>
                         </div>
@@ -27,7 +29,53 @@
                 <div class="col-md-3">
                     <h6 class="page-title text-right">Project Actions</h6>
                     <div class="mb-3">
-                        <button type="button" @click.prevent="$router.push(`/tasks/actions/${task.data.id}`)" class="btn btn-brand btn-sm btn-block mb-3">Open Actions</button>
+                        <button type="button" @click.prevent="$router.push(`/tasks/actions/${task.data.id}`)" class="btn btn-brand btn-sm btn-block mb-3">Open Breakdown</button>
+
+                        <modal button="Edit Task" @opened="setEditable" buttonclass="btn btn-outline-success btn-sm btn-block mb-3" submit="Update Task" @submit="updateTask">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <card title="Task Details" class="shadow-0">
+                                        <div class="form-group">
+                                            <label for="taskName">Task Name</label>
+                                            <input type="text" class="form-control" id="taskName" v-model='task.edit.title' placeholder="Task Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="taskDescription">Task Description</label>
+                                            <textarea class="form-control" id="taskDescription" placeholder="Task Description" v-model='task.edit.description' rows="10"></textarea>
+                                        </div>
+                                    </card>
+                                </div>
+                                <div class="col-md-4">
+                                    <card title="Task Options" class="mb-3">
+                                        <div class="form-group">
+                                            <label for="taskName">Task Priority</label>
+                                            <select name="" id="" class="form-control" v-model="task.edit.priority">
+                                                <option value="" disabled>Select Priority</option>
+                                                <option value="low">Low Priority</option>
+                                                <option value="normal">Normal Priority</option>
+                                                <option value="urgent">Urgent Priority</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="taskDescription">Task Due Date</label>
+                                            <datepicker input-class="form-control" format="dsu MMM yyyy" v-model="task.edit.due_date"></datepicker>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="taskDescription">Account</label>
+                                            <select name="" id="" class="form-control" v-model="task.edit.account_id">
+                                                <option value="" disabled>Select Account</option>
+                                                <option value="1">Test</option>
+                                            </select>
+                                        </div>
+                                    </card>
+
+                                    <card title="Task Users" class="mb-3">
+                                        <user-list @updateUsers="updateEditUsers"></user-list>
+                                    </card>
+
+                                </div>
+                            </div>
+                        </modal>
 
                         <div class="btn-group d-block" role="group">
                             <button id="btnGroupDrop1" type="button" class="btn btn-secondary btn-sm btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -86,15 +134,18 @@
 	import priority from '../parts/priority';
 	import status from '../parts/status';
 	import scrollGroup from '../parts/scroll-group';
+    import userList from '../parts/user-list';
+    import Datepicker from 'vuejs-datepicker';
 
 	import {varStatus} from '../variables';
 
 	export default {
 		name: "task",
-		components: { card, loading, priority, status, scrollGroup },
+		components: { card, loading, priority, status, scrollGroup, userList, Datepicker },
 		data() {
 			return {
 				task: {
+                    edit: {},
 					data: {},
 					loaded: false,
 				}
@@ -106,9 +157,33 @@
             }
         },
         methods: {
+		    updateEditUsers(users){
+		        this.task.edit.users = users;
+            },
+            setEditable(){
+		        this.task.edit = this.task.data;
+            },
+            updateTask(){
+                this.$http.put('api/tasks/update/'+ this.$route.params.tid, this.task.edit)
+                        .then(response => {
+                            this.task.data = response.data;
+                            this.$notify({
+                                title: 'Update complete',
+                                text: 'Task has been updated',
+                                type: 'success'
+                            })
+                        })
+                        .catch(error => {
+                            this.$notify({
+                                title: 'Failed update',
+                                text: 'Could not update the task, please try again.',
+                                type: 'error'
+                            })
+                        });
+            },
 		    setStatus(task, state){
 		    	if(!task || !state) return false;
-				axios.put('api/tasks/'+ this.$route.params.tid, { status: state })
+				this.$http.put('api/tasks/update/'+ this.$route.params.tid, { status: state })
                     .then(response => {
                         this.task.data = response.data;
                         this.$notify({

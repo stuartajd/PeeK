@@ -10889,8 +10889,17 @@ a.no-style {
 .card.dropzone .droparea {
   min-height: 60vh;
   max-height: 60vh;
+  padding: 0 1.25rem;
   height: auto;
   overflow-y: scroll;
+}
+
+.card.dropzone > .card-body {
+  padding: 0 !important;
+}
+
+.card.dropzone > .card-body > div > .card-title {
+  padding: 1.25rem 1.25rem 0 !important;
 }
 
 .btn-secondary {
