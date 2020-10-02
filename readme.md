@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://u.stuartd.co.uk/images/YzJkOGE0ZjA2NjA.jpeg" width="300px">
+    <img src="https://raw.githubusercontent.com/stuartajd/PeeK/master/public/PeeK.svg" width="100">
 </p>
 
 <h1 align="center">PeeK - Project Management</h1>
